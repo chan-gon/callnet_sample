@@ -15,6 +15,7 @@
             <input type="password" name="password" id="password" class="login-form-field" placeholder="비밀번호">
             <input type="submit" value="로그인" id="login-form-submit">
             <input type="button" value="회원가입" id="signup" onclick="location.href='signup.php'">
+            <input type="button" value="테스트" id="signup" onclick="location.href='./config/db.php'">
         </form>
     </main>
 </body>
