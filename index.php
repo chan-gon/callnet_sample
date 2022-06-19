@@ -5,8 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>로그인</title>
-    <link rel="stylesheet" type="text/css" href="./css/login.css"/>
+    <link rel="stylesheet" type="text/css" href="./css/index.css"/>
 </head>
+<?php
+    include('./config/db.php');
+    $id = $_POST['id'];
+    $password = $_POST['password'];
+
+    $login_query = "SELECT * FROM member WERE member_id = '$id' AND member_pwd = '$password'";
+
+?>
 <body>
     <main id="main-holder">
         <h1 id="login-header">로그인</h1>
@@ -15,7 +23,6 @@
             <input type="password" name="password" id="password" class="login-form-field" placeholder="비밀번호">
             <input type="submit" value="로그인" id="login-form-submit">
             <input type="button" value="회원가입" id="signup" onclick="location.href='signup.php'">
-            <input type="button" value="테스트" id="signup" onclick="location.href='./config/db.php'">
         </form>
     </main>
 </body>
