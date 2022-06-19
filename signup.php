@@ -25,10 +25,10 @@
                         아이디
                     </li>
                     <li class="item">
-                        <input type="text" placeholder="아이디를 입력하세요." required>
+                        <input type="text" value="changon" id="memberId" name="memberId" placeholder="아이디" required>
                     </li>
                     <li class="item">
-                        <button class="idcheck">중복확인</button>
+                        <button class="idcheck" id="idcheck" name="idcheck">중복확인</button>
                     </li>
                 </ul>
                 <ul class="container">
@@ -36,7 +36,7 @@
                         비밀번호
                     </li>
                     <li class="item">
-                        <input type="password" placeholder="비밀번호를 입력하세요." required>
+                        <input type="password" id="memberPwd" name="memberPwd" placeholder="비밀번호" required>
                     </li>
                     <li class="item">
                         
@@ -44,10 +44,10 @@
                 </ul>
                 <ul class="container">
                     <li class="item center">
-                        비밀번호 확인
+                        이름
                     </li>
                     <li class="item">
-                        <input type="password" placeholder="비밀번호를 입력하세요." required>
+                        <input type="password" id="memberName" name="memberName" placeholder="이름" required>
                     </li>
                     <li class="item">
                         
@@ -58,7 +58,7 @@
                         등급
                     </li>
                     <li class="item">
-                        <select name="gender" id="">
+                        <select id="memberGrade" name="memberGrade">
                             <option value="선택" selected>선택</option>
                             <option value="일반">일반</option>
                             <option value="매니저">매니저</option>
@@ -73,7 +73,7 @@
                         
                     </li>
                     <li class="item">
-                        <button class="submit">가입하기</button>
+                        <button class="submit" id="submitBtn">가입하기</button>
                     </li>
                     <li class="item">
                         
@@ -83,11 +83,51 @@
         </form>
     </div>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
-        var memberId = document.querySelector('#member_id');
-        var memberPwd = document.querySelector('#member_pwd');
-        var memberId = document.querySelector('#member_id');
-        var memberId = document.querySelector('#member_id');
+
+        $(function() {
+            $("#submitBtn").click(function() {
+                var isSignable = true;
+
+                const memberId = document.querySelector('#memberId');
+                const memberPwd = document.querySelector('#memberPwd');
+                const memberName = document.querySelector('#memberName');
+                
+                const elementArr = [
+                    memberId, memberPwd, memberName
+                ];
+
+                // 아이디, 비밀번호, 이름 빈칸 체크
+                elementArr.forEach(function(inputTag) {
+                    if (inputTag.value == null || inputTag.value == "") {
+                        alert(inputTag.placeholder + " 입력하세요.");
+                        isSignable = false;
+                        return false;
+                    }
+                });
+                // 등급 미선택 체크
+                const memberGradeVal = $("#memberGrade option:selected").text();
+                if (memberGradeVal == "선택") {
+                    alert("등급을 선택하세요.");
+                    isSignable = false;
+                    return false;
+                } 
+            });
+        });
+
+        // 아이디 중복 체크
+        $('#idcheck').on('click', function() {
+            const memberId = $('#memberId').val();
+            if (memberId == null || memberId == "") {
+                alert("아이디를 입력하세요.");
+                return;
+            }
+            $.ajax({
+                
+            });
+        });
+
     </script>
 </body>
 </html>
