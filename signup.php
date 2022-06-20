@@ -25,7 +25,7 @@
                         아이디
                     </li>
                     <li class="item">
-                        <input type="text" value="changon" id="memberId" name="memberId" placeholder="아이디" required>
+                        <input type="text" id="memberId" name="memberId" placeholder="아이디" required>
                     </li>
                     <li class="item">
                         <button class="idcheck" id="idcheck" name="idcheck">중복확인</button>
@@ -47,7 +47,7 @@
                         이름
                     </li>
                     <li class="item">
-                        <input type="password" id="memberName" name="memberName" placeholder="이름" required>
+                        <input type="text" id="memberName" name="memberName" placeholder="이름" required>
                     </li>
                     <li class="item">
                         
@@ -124,7 +124,8 @@
                 return;
             }
             $.ajax({
-                
+                type: "POST",
+                url: ""
             });
         });
 
