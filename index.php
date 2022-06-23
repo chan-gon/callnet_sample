@@ -8,12 +8,11 @@
     <link rel="stylesheet" type="text/css" href="./css/index.css"/>
 </head>
 <?php
-    include('./config/db.php');
-    $id = $_POST['id'];
-    $password = $_POST['password'];
-
-    $login_query = "SELECT * FROM member WERE member_id = '$id' AND member_pwd = '$password'";
-
+//    include('./config/db.php');
+//    $id = $_POST['id'];
+//    $password = $_POST['password'];
+//
+//    $login_query = "SELECT * FROM member WERE member_id = '$id' AND member_pwd = '$password'";
 ?>
 <body>
     <main id="main-holder">
