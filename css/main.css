@@ -1,3 +1,4 @@
+/* nav bar */
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
@@ -45,4 +46,49 @@ body {
         left: 0;
         transform: none;
     }
+}
+
+/* 메인 */
+.main-container {
+    display: grid;
+    border: 1px solid black;
+    border-radius: 30px;
+    margin: 10px 10px 10px 10px;
+}
+
+table {
+    width: 100%;
+}
+
+td {
+    text-align: center;
+}
+
+table, td, td {
+    border: 1px solid black;
+}
+
+input[type=text], input[type=date] {
+    width: 95%;
+}
+
+select {
+    width: 95%;
+}
+
+.section-main-button {
+    float: right;
+    margin: 20px 10px 10px 10px;
+}
+
+.section-main-title {
+    float: left;
+}
+
+textarea {
+    width: 100%;
+}
+
+.section-four-table {
+    margin: 10px 0 10px 0;
 }
