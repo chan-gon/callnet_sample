@@ -57,7 +57,7 @@ body {
 }
 
 table {
-    width: 100%;
+    width: calc(100% - 1em);
 }
 
 td {
@@ -91,4 +91,12 @@ textarea {
 
 .section-four-table {
     margin: 10px 0 10px 0;
+}
+
+.section-four-table > tbody > tr:first-child > td {
+    background: #D5D8DC;
+}
+
+.input-title {
+    background: #D5D8DC;
 }
