@@ -1,7 +1,3 @@
-<?php
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +10,7 @@
 <body>
 <div class="register">
         <h3>회원가입</h3>
-        <form action="">
+        <form>
             <div class="flex">
                 <ul class="container">
                     <li class="item center">
@@ -69,7 +65,7 @@
                         
                     </li>
                     <li class="item">
-                        <button class="submit" id="submitBtn">가입하기</button>
+                        <button class="submit" type="button" id="submitBtn">가입하기</button>
                     </li>
                     <li class="item">
                         
@@ -108,7 +104,32 @@
                     alert("등급을 선택하세요.");
                     isSignable = false;
                     return false;
-                } 
+                }
+
+                isSignable = true;
+
+                if (isSignable == true) {
+
+                    const formData = {
+                        memberId : memberId.value,
+                        memberPwd : memberPwd.value,
+                        memberName : memberName.value,
+                        memberGrade : memberGradeVal
+                    }
+
+                    $.ajax({
+                        url: "./user/signup_proc.php",
+                        type: "post",
+                        data: formData,
+                        dataType: "text",
+                        success: function (data) {
+                            alert(data);
+                        },
+                        error: function (err) {
+                            alert(err);
+                        }
+                    });
+                }
             });
         });
 
@@ -120,8 +141,15 @@
                 return;
             }
             $.ajax({
-                type: "GET",
-                url: ""
+                url: "./user/id_check.php?memberId="+memberId,
+                type: "post",
+                dataType: "text",
+                success: function (data) {
+                    alert(data);
+                },
+                error: function (err) {
+                    alert(err);
+                }
             });
         });
 
