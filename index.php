@@ -7,22 +7,38 @@
     <title>로그인</title>
     <link rel="stylesheet" type="text/css" href="./css/index.css"/>
 </head>
-<?php
-//    include('./config/db.php');
-//    $id = $_POST['id'];
-//    $password = $_POST['password'];
-//
-//    $login_query = "SELECT * FROM member WERE member_id = '$id' AND member_pwd = '$password'";
-?>
 <body>
     <main id="main-holder">
         <h1 id="login-header">로그인</h1>
-        <form id="login-form">
-            <input type="text" name="id" id="id" class="login-form-field" placeholder="아이디">
+        <form role="form" id="login-form" name="login-form" method="post" action="/user/login_proc.php" onsubmit="return checkInput()">
+            <input type="text" name="id" id="id" class="login-form-field" placeholder="아이디" autofocus>
             <input type="password" name="password" id="password" class="login-form-field" placeholder="비밀번호">
             <input type="submit" value="로그인" id="login-form-submit">
-            <input type="button" value="회원가입" id="signup" onclick="location.href='signup.php'">
+            <input type="button" value="회원가입" id="signup" onclick="location.replace('signup.php')">
         </form>
     </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+        function checkInput() {
+            const memberId = document.querySelector("#id");
+            const memberPwd = document.querySelector("#password");
+
+            if (memberId.value == "") {
+                alert("아이디 입력하세요.");
+                memberId.focus();
+                return false;
+            } else if (memberPwd.value == "") {
+                alert("비밀번호 입력하세요.");
+                memberPwd.focus();
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+
+
+    </script>
 </body>
 </html>
