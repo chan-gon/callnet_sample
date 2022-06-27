@@ -10,15 +10,19 @@
 <body>
     <main id="main-holder">
         <h1 id="login-header">로그인</h1>
-        <form role="form" id="login-form" name="login-form" method="post" action="/user/login_proc.php" onsubmit="return checkInput()">
+        <form role="form" id="login-form" name="login-form" onsubmit="return checkInput()">
             <input type="text" name="id" id="id" class="login-form-field" placeholder="아이디" autofocus>
             <input type="password" name="password" id="password" class="login-form-field" placeholder="비밀번호">
-            <input type="submit" value="로그인" id="login-form-submit">
-            <input type="button" value="회원가입" id="signup" onclick="location.replace('signup.php')">
+            <input type="button" value="로그인" id="login-form-submit">
+            <input type="button" value="회원가입" id="signup" onclick="location.href='signup.php'">
         </form>
     </main>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript">
+
+        $("#login-form-submit").click(function () {
+            checkInput();
+        });
 
         function checkInput() {
             const memberId = document.querySelector("#id");
@@ -33,12 +37,26 @@
                 memberPwd.focus();
                 return false;
             } else {
-                return true;
+                return loginProc();
             }
         }
 
-
-
+        function loginProc() {
+            let id = $("#id").val();
+            let password = $("#password").val();
+            $.ajax({
+                url: "./user/login_proc.php",
+                type: "post",
+                data: {id : id, password : password},
+                success: function (data) {
+                    console.log(data);
+                    //console.log(data[0].success + " / " + data[0].userId);
+                },
+                error: function (err) {
+                    alert(err);
+                }
+            });
+        }
     </script>
 </body>
 </html>
