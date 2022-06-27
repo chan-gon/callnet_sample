@@ -123,7 +123,13 @@
                         data: formData,
                         dataType: "text",
                         success: function (data) {
-                            alert(data);
+                            if (data == 1) {
+                                alert("회원 가입 완료");
+                                location.replace("../index.php");
+                            } else {
+                                alert("회원 가입 실패");
+                                location.replace("../signup.php");
+                            }
                         },
                         error: function (err) {
                             alert(err);
