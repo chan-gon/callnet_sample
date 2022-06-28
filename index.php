@@ -51,6 +51,7 @@
                 success: function (data) {
                     if (data[0].result) {
                         alert(data[0].msg);
+                        location.replace("/main.php");
                     } else {
                         alert(data[0].msg);
                     }
