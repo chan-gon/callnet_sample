@@ -49,8 +49,11 @@
                 type: "post",
                 data: {id : id, password : password},
                 success: function (data) {
-                    console.log(data);
-                    //console.log(data[0].success + " / " + data[0].userId);
+                    if (data[0].result) {
+                        alert(data[0].msg);
+                    } else {
+                        alert(data[0].msg);
+                    }
                 },
                 error: function (err) {
                     alert(err);
