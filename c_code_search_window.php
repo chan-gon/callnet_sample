@@ -11,13 +11,14 @@
     <title>고객코드 검색</title>
 </head>
 <body>
-<h1>검색 결과</h1>
+<h1>고객코드 검색 결과</h1>
 <p>
     <input type="text" id="childValue">
+
 </p>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-    const customerCode = window.opener.document.getElementById( "customer-code" ).value;
+    const customerCode = window.opener.document.getElementById( "customerCode" ).value;
     $(document).ready(function () {
        $.ajax({
            type: "post",
