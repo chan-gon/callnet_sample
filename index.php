@@ -45,7 +45,7 @@
             let id = $("#id").val();
             let password = $("#password").val();
             $.ajax({
-                url: "./user/login_proc.php",
+                url: "controller/user/login_proc.php",
                 type: "post",
                 data: {id : id, password : password},
                 success: function (data) {

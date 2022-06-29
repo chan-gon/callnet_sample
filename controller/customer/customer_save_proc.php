@@ -1,6 +1,6 @@
 <?php
 header("Content-Type:text/html; charset:utf-8");
-require_once dirname(__DIR__) . '/config/db.php';
+require_once '../../config/db.php';
 
 $code = $_POST['customerCode'];
 $id = $_POST['customerId'];

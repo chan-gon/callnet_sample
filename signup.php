@@ -118,7 +118,7 @@
                     }
 
                     $.ajax({
-                        url: "/controller/user/signup_proc.php",
+                        url: "controller/user/signup_proc.php",
                         type: "post",
                         data: formData,
                         dataType: "text",
@@ -147,7 +147,7 @@
                 return;
             }
             $.ajax({
-                url: "/controller/user/id_check.php?memberId="+memberId,
+                url: "controller/user/id_check.php?memberId="+memberId,
                 type: "get",
                 dataType: "text",
                 success: function (data) {
