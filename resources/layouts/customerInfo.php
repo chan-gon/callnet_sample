@@ -4,12 +4,12 @@
     <div>
         <table>
             <tr>
-                <td class="input-title">고객코드</td>
+                <td class="input-title">* 고객코드</td>
                 <td style="display: flex">
                     <input type="text" id="customerCode">
                     <input type="button" value="검색" id="customer-code-search">
                 </td>
-                <td class="input-title">고객명</td>
+                <td class="input-title">* 고객명</td>
                 <td>
                     <input type="text" id="customerName">
                 </td>
@@ -17,7 +17,7 @@
                 <td>
                     <input type="text" id="customerId">
                 </td>
-                <td class="input-title">회원등급</td>
+                <td class="input-title">* 회원등급</td>
                 <td>
                     <select id="customerGrade">
                         <option value="">-- 선택 --</option>
