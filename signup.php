@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원가입</title>
-    <link rel="stylesheet" type="text/css" href="./css/signup.css"/>
+    <link rel="stylesheet" type="text/css" href="resources/css/signup.css"/>
 </head>
 <body>
 <div class="register">
@@ -118,7 +118,7 @@
                     }
 
                     $.ajax({
-                        url: "./user/signup_proc.php",
+                        url: "/controller/user/signup_proc.php",
                         type: "post",
                         data: formData,
                         dataType: "text",
@@ -147,8 +147,8 @@
                 return;
             }
             $.ajax({
-                url: "./user/id_check.php?memberId="+memberId,
-                type: "post",
+                url: "/controller/user/id_check.php?memberId="+memberId,
+                type: "get",
                 dataType: "text",
                 success: function (data) {
                     alert(data);

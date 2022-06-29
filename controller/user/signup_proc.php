@@ -1,7 +1,7 @@
 <?php
 header("Content-Type:text/html; charset:utf-8");
 
-require_once dirname(__DIR__) . '/config/db.php';
+require_once dirname(__DIR__) . '../config/db.php';
 
 $memberId = $_POST['memberId'];
 $memberPwd = password_hash($_POST['memberPwd'], PASSWORD_BCRYPT);

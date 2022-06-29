@@ -22,7 +22,7 @@
     $(document).ready(function () {
        $.ajax({
            type: "post",
-           url: "./customer/c_code_search.php",
+           url: "/controller/customer/c_code_search.php",
            data: {customerCode : customerCode},
            success: function (data) {
                if (data[0].result) {
