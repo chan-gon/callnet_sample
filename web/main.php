@@ -15,9 +15,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <!-- 고객정보 JS -->
-    <script src="resources/js/customerInfoJS.js"></script>
+    <script src="../resources/js/customerInfoJS.js"></script>
     <!-- 상담기록 JS -->
-    <script src="resources/js/consultRecordJS.js"></script>
+    <script src="../resources/js/consultRecordJS.js"></script>
 
 </body>
 </html>

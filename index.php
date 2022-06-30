@@ -14,53 +14,10 @@
             <input type="text" name="id" id="id" class="login-form-field" placeholder="아이디" autofocus>
             <input type="password" name="password" id="password" class="login-form-field" placeholder="비밀번호">
             <input type="button" value="로그인" id="login-form-submit">
-            <input type="button" value="회원가입" id="signup" onclick="location.href='signup.php'">
+            <input type="button" value="회원가입" id="signup" onclick="location.href='web/signupForm.php'">
         </form>
     </main>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type="text/javascript">
-
-        $("#login-form-submit").click(function () {
-            checkInput();
-        });
-
-        function checkInput() {
-            const memberId = document.querySelector("#id");
-            const memberPwd = document.querySelector("#password");
-
-            if (memberId.value == "") {
-                alert("아이디 입력하세요.");
-                memberId.focus();
-                return false;
-            } else if (memberPwd.value == "") {
-                alert("비밀번호 입력하세요.");
-                memberPwd.focus();
-                return false;
-            } else {
-                return loginProc();
-            }
-        }
-
-        function loginProc() {
-            let id = $("#id").val();
-            let password = $("#password").val();
-            $.ajax({
-                url: "controller/user/login_proc.php",
-                type: "post",
-                data: {id : id, password : password},
-                success: function (data) {
-                    if (data[0].result) {
-                        alert(data[0].msg);
-                        location.replace("/main.php");
-                    } else {
-                        alert(data[0].msg);
-                    }
-                },
-                error: function (err) {
-                    alert(err);
-                }
-            });
-        }
-    </script>
+    <script src="resources/js/login.js"></script>
 </body>
 </html>
