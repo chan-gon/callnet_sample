@@ -1,28 +1,33 @@
 <div style="padding-left:16px">
     <h3 class="section-main-title">&#9654; 상담기록 *  필수입력 사항</h3>
-    <input class="section-main-button" type="button" value="상담기록 저장">
+    <input class="section-main-button" id="consultRecordSaveBtn" type="button" value="상담기록 저장">
     <div>
         <table>
             <tr>
-                <td class="input-title">CID</td>
+                <td class="input-title">* CID</td>
                 <td>
                     <input type="text" id="customerCID">
                 </td>
-                <td class="input-title">상담일자</td>
+                <td class="input-title">* 고객코드</td>
+                <td style="display: flex">
+                    <input type="text" id="customerCode">
+                    <input type="button" value="검색" id="customer-code-search">
+                </td>
+                <td class="input-title">* 상담일자</td>
                 <td>
                     <input type="date" id="consultDate">
                 </td>
-                <td class="input-title">상담원</td>
+                <td class="input-title">* 상담원</td>
                 <td>
                     <input type="text" id="consultantName">
                 </td>
                 <td class="input-title">상담경로</td>
                 <td>
-                    <input type="radio" name="consultRoot">IN
-                    <input type="radio" name="consultRoot">OUT
-                    <input type="radio" name="consultRoot">홈페이지
-                    <input type="radio" name="consultRoot">매장
-                    <input type="radio" name="consultRoot">기타
+                    <input type="radio" name="consultRoot" value="IN">IN
+                    <input type="radio" name="consultRoot" value="OUT">OUT
+                    <input type="radio" name="consultRoot" value="홈페이지">홈페이지
+                    <input type="radio" name="consultRoot" value="매장">매장
+                    <input type="radio" name="consultRoot" value="기타">기타
                 </td>
             </tr>
             <tr>
@@ -36,21 +41,13 @@
                         <option value="d">기타</option>
                     </select>
                 </td>
-                <td class="input-title">* 중분류</td>
+                <td class="input-title">중분류</td>
                 <td>
-                    <select id="categoryMedium" onchange="catMedium(this)" />
+                    <select id="categoryMedium" />
                 </td>
                 <td class="input-title">* 소분류</td>
                 <td>
-                    <select id="categorySmall" />
-                </td>
-                <td class="input-title">담당DM</td>
-                <td>
-                    <select id="">
-                        <option value="">-- 선택 --</option>
-                        <option value=""></option>
-                        <option value=""></option>
-                    </select>
+                    <select id="categorySmall" disabled />
                 </td>
                 <td class="input-title">* 상담결과</td>
                 <td>

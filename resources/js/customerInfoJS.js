@@ -48,7 +48,7 @@ $("#customerEmail").change(function () {
 });
 
 // 고객정보 저장
-$(".section-main-button").click(function () {
+$("#customerInfoSaveBtn").click(function () {
     const customerCode = $("#customerCode").val();
     const customerId = $("#customerId").val();
     const customerName = $("#customerName").val();
@@ -72,7 +72,7 @@ $(".section-main-button").click(function () {
     }
 
     $.ajax({
-        url:  "/customer/customer_save_proc.php",
+        url:  "../../controller/customer/customer_save_proc.php",
         type: "post",
         data: formData,
         success: function (data) {

@@ -147,9 +147,10 @@
                 return;
             }
             $.ajax({
-                url: "controller/user/id_check.php?memberId="+memberId,
-                type: "get",
+                url: "controller/user/id_check.php",
+                type: "post",
                 dataType: "text",
+                data: {memberId : memberId},
                 success: function (data) {
                     alert(data);
                 },

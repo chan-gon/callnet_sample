@@ -1,6 +1,6 @@
 <?php
 header("Content-Type: application/json; charset=utf-8");
-require_once '../../config/db.php';
+require_once '../../config/db_connect.php';
 
 $id = $_POST['id'];
 $password = $_POST['password'];

@@ -1,21 +1,28 @@
 <?php
-
-header("Content-Type:text/html; charset:utf-8");
-
-require_once '../../config/db.php';
-
-$memberId = $_REQUEST['memberId'];
-$request = "SELECT member_id FROM member WHERE member_id = '$memberId'";
-$response = pg_query($GLOBALS['DB_CONNECTION'], $request);
-$data = pg_fetch_array($response);
-
-$returnStr = "";
-if ($memberId != $data['member_id']) {
-    $returnStr = "사용할 수 있는 아이디입니다.";
+require_once '../../config/db_connect.php';
+/*$memberId = $_POST['memberId'];
+$stmt = $pdo->prepare("SELECT COUNT(*) FROM member WHERE member_id = ?");
+$stmt->execute([$memberId]);
+if ($stmt->fetchColumn() > 0) {
+    echo "사용할 수 없는 아이디입니다.";
 } else {
-    $returnStr = "사용할 수 없는 아이디입니다.";
+    echo "사용할 수 있는 아이디입니다.";
 }
+$pdo = null;*/
 
-echo $returnStr;
+try {
+    $db = new db_connect();
+    $pdo = $db->getPdo();
+    $stmt = $pdo->prepare("SELECT COUNT(*) FROM member WHERE member_id = ?");
+    $memberId = $_POST['memberId'];
+    $stmt->execute([$memberId]);
+    if ($stmt->fetchColumn() > 0) {
+        echo "사용할 수 없는 아이디입니다.";
+    } else {
+        echo "사용할 수 있는 아이디입니다.";
+    }
+} catch (Exception $e) {
+    echo $e->getMessage();
+}
 
 ?>
