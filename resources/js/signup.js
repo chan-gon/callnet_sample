@@ -38,17 +38,18 @@ $(function() {
             }
 
             $.ajax({
-                url: "controller/user/signup_proc.php",
-                type: "post",
+                url: "signup.php",
+                type: "POST",
                 data: formData,
-                dataType: "text",
+                dataType: "json",
                 success: function (data) {
-                    if (data == 1) {
-                        alert("회원 가입 완료");
-                        location.replace("../index.php");
+                    if (data.result == 0) {
+                        alert("회원가입 완료");
+                        location.replace('../../index.php');
+                    } else if (data.result == 2) {
+                        alert("입력된 값이 없습니다.");
                     } else {
-                        alert("회원 가입 실패");
-                        location.replace("../signup.php");
+                        alert("회원가입 실패. 다시 시도해 주세요.");
                     }
                 },
                 error: function (err) {
@@ -68,7 +69,7 @@ $('#idcheck').on('click', function() {
     }
     $.ajax({
         url: "idCheck.php",
-        type: "post",
+        type: "POST",
         dataType: "json",
         data: {memberId : memberId},
         success: function (data) {

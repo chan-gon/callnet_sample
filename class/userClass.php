@@ -11,5 +11,40 @@ class userClass extends dbConClass {
             return false;
         }
     }
+
+    // 회원가입
+    public function signUpUser($memberId, $memberPwd, $memberName, $memberGrade) {
+        $encrypted_pwd = password_hash($memberPwd, PASSWORD_DEFAULT);
+        try {
+            /*
+             * 자동 커밋 모드 해제하여 PDO::commit()을 호출하여 트랜잭션을 종료할 때까지
+             * PDO 개체 인스턴스를 통해 DB 변경 내용이 커밋되지 않도록 설정
+             *  */
+            $this->db->beginTransaction();
+            $sql = "INSERT INTO member(member_num, member_id, member_pwd, member_name, member_grade)
+                    VALUES(gen_random_uuid(), :memberId, :memberPwd, :memberName, :memberGrade)";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindValue(':memberId', $memberId, PDO::PARAM_STR);
+            $stmt->bindValue(':memberPwd', $encrypted_pwd, PDO::PARAM_STR);
+            $stmt->bindValue(':memberName', $memberName, PDO::PARAM_STR);
+            $stmt->bindValue(':memberGrade', $memberGrade, PDO::PARAM_STR);
+            $result = $stmt->execute();
+            $this->db->commit();
+        } catch (PDOException $e) {
+            $this->db->rollBack();
+            echo "에러 : ".$e->getMessage();
+        }
+        // 제대로 저장 되었는지 확인
+        if ($result) {
+            $stmt = $this->db->prepare("SELECT * FROM member WHERE member_id = :memberId");
+            $stmt->bindValue(':memberId', $memberId, PDO::PARAM_STR);
+            $stmt->execute();
+            $member = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $member;
+        } else {
+            return false;
+        }
+    }
+
 }
 ?>
