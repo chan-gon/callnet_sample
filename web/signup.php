@@ -12,8 +12,7 @@ if (isset($_POST)) {
             if (!isset($_SESSION)) {
                 session_start();
             }
-            $_SESSION['member_id'] = $member['memberId'];
-            $_SESSION['member_grade'] = $member['memberGrade'];
+            $_SESSION['member_id'] = $member['member_id'];
             echo json_encode(array('result'=>'0'));
         } else {
             // 회원 등록 실패

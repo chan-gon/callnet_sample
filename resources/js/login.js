@@ -3,8 +3,8 @@ $("#login-form-submit").click(function () {
 });
 
 function checkInput() {
-    const memberId = document.querySelector("#id");
-    const memberPwd = document.querySelector("#password");
+    const memberId = document.querySelector("#memberId");
+    const memberPwd = document.querySelector("#memberPwd");
 
     if (memberId.value == "") {
         alert("아이디 입력하세요.");
@@ -20,18 +20,22 @@ function checkInput() {
 }
 
 function loginProc() {
-    let id = $("#id").val();
-    let password = $("#password").val();
+    let memberId = $("#memberId").val();
+    let memberPwd = $("#memberPwd").val();
     $.ajax({
-        url: "controller/user/login_proc.php",
-        type: "post",
-        data: {id : id, password : password},
+        url: "web/loginChk.php",
+        type: "POST",
+        data: {memberId : memberId, memberPwd : memberPwd},
+        dataType: "json",
         success: function (data) {
-            if (data[0].result) {
-                alert(data[0].msg);
-                location.replace("/main.php");
+            console.log(data);
+            if (data.result == 0) {
+                alert("로그인 성공");
+                location.replace('../main.php');
+            } else if (data.result == 2) {
+                alert("입력된 값이 없습니다.");
             } else {
-                alert(data[0].msg);
+                alert("로그인 실패. 다시 시도해 주세요.");
             }
         },
         error: function (err) {

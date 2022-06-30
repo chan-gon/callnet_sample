@@ -46,5 +46,22 @@ class userClass extends dbConClass {
         }
     }
 
+    // 로그인 체크
+    public function getUser($memberId, $memberPwd) {
+        $sql = "SELECT * FROM member WHERE member_id = :memberId";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':memberId', $memberId);
+        $stmt->execute();
+
+        if ($member=$stmt->fetch()) {
+            $encrypted_pwd = $member['member_pwd'];
+            if (password_verify($memberPwd, $encrypted_pwd)) {
+                return $member;
+            } else {
+                return NULL;
+            }
+        }
+    }
+
 }
 ?>

@@ -11,8 +11,8 @@
     <main id="main-holder">
         <h1 id="login-header">로그인</h1>
         <form role="form" id="login-form" name="login-form" onsubmit="return checkInput()">
-            <input type="text" name="id" id="id" class="login-form-field" placeholder="아이디" autofocus>
-            <input type="password" name="password" id="password" class="login-form-field" placeholder="비밀번호">
+            <input type="text" name="memberId" id="memberId" class="login-form-field" placeholder="아이디" autofocus>
+            <input type="password" name="memberPwd" id="memberPwd" class="login-form-field" placeholder="비밀번호">
             <input type="button" value="로그인" id="login-form-submit">
             <input type="button" value="회원가입" id="signup" onclick="location.href='web/signupForm.php'">
         </form>
