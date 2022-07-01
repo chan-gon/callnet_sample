@@ -43,9 +43,8 @@
                } else if (data.result == 'DATA-NOTFOUND') {
                    $("#notice").html("데이터가 제대로 전송되지 않았습니다.");
                } else {
-                   $("#customerNum").html(data.result.customer_num);
                    $.each(data.result, function (key, value) {
-                        $("#customerInfo").append("<td>" + value +"</td>");
+                        $("#customerInfo").append("<td style='cursor: pointer' onclick='sendCustomerInfo()' id='"+key+"'>" + value +"</td>");
                    });
                }
            },
@@ -54,6 +53,25 @@
            }
        })
     });
+
+    function sendCustomerInfo() {
+        const customerNum = document.getElementById("customer_num").innerHTML;
+        const customerName = document.getElementById("customer_name").innerHTML;
+        const customerId = document.getElementById("customer_id").innerHTML;
+        const customerGrade = document.getElementById("customer_grade").innerHTML;
+        const customerTel = document.getElementById("customer_tel").innerHTML;
+        const customerPhone = document.getElementById("customer_phone").innerHTML;
+        const customerAddr = document.getElementById("customer_address").innerHTML;
+
+        window.opener.document.getElementById("customer-num").value = customerNum;
+        window.opener.document.getElementById("customer-name").value = customerName;
+        window.opener.document.getElementById("customer-id").value = customerId;
+        window.opener.document.getElementById("customer-grade").value = customerGrade;
+        window.opener.document.getElementById("customer-tel").value = customerTel;
+        window.opener.document.getElementById("customer-phone").value = customerPhone;
+        window.opener.document.getElementById("zonecode").value = customerAddr;
+        window.close();
+    }
 </script>
 </body>
 </html>

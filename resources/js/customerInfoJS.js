@@ -20,7 +20,7 @@ $("#customer-num-search").click(function () {
         alert("숫자만 입력 가능합니다.");
         return false;
     } else {
-        window.open("../../web/customerNumSearchForm.php", "고객 코드 검색 결과", 'width=900px,height=500px');
+        window.open("../../web/customerNumSearchForm.php", "customerInfo", 'width=900px,height=500px');
     }
 
 });
