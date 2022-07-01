@@ -16,9 +16,13 @@ $("#customer-num-search").click(function () {
     } else if (special_pattern.test(customerNum) == true) {
         alert("특수문자가 포함될 수 없습니다.");
         return false;
+    } else if (only_number.test(customerNum) == true) {
+        alert("숫자만 입력 가능합니다.");
+        return false;
     } else {
-        window.open("./c_code_search_window.php", "고객 코드 검색 결과", 'width=700px,height=500px');
+        window.open("../../web/customerNumSearchForm.php", "고객 코드 검색 결과", 'width=900px,height=500px');
     }
+
 });
 
 // 고객정보 주소 검색
@@ -119,7 +123,7 @@ $("#customerInfoSaveBtn").click(function () {
     }
 
     $.ajax({
-        url:  "web/customerInfo.php",
+        url:  "web/addCustomerInfo.php",
         type: "POST",
         data: formData,
         dataType: "json",

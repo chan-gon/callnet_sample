@@ -1,0 +1,12 @@
+table, td {
+    border: 1px solid black;
+}
+td {
+    text-align: center;
+}
+
+#customerInfoTable > tbody > tr:first-child {
+    background: #D5D8DC;
+}
+
+

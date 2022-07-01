@@ -1,7 +1,7 @@
 <?php
 class customerClass extends dbConClass {
     // 고객정보 등록
-    public function addCustomerInfo($customerNum, $customerId, $customerName, $customerGrade, $customerGradeDate, $customerTel, $customerPhone, $customerEmailAddr, $customerAddr) {
+    public function addCustomerInfo($customerNum, $customerId, $customerName, $customerGrade, $customerTel, $customerPhone, $customerEmailAddr, $customerAddr) {
         try {
             $this->db->beginTransaction();
             $sql = "INSERT INTO customer(customer_num, customer_id, customer_name, customer_tel, customer_phone, customer_email, customer_address, customer_grade, customer_grade_date)
@@ -11,7 +11,6 @@ class customerClass extends dbConClass {
             $stmt->bindValue(':customerId', $customerId, PDO::PARAM_STR);
             $stmt->bindValue(':customerName', $customerName, PDO::PARAM_STR);
             $stmt->bindValue(':customerGrade', $customerGrade, PDO::PARAM_STR);
-            //$stmt->bindValue(':customerGradeDate', date("Y-m-d H:i:s", strtotime($customerGradeDate)), PDO::PARAM_STR);
             $stmt->bindValue(':customerTel', $customerTel, PDO::PARAM_STR);
             $stmt->bindValue(':customerPhone', $customerPhone, PDO::PARAM_STR);
             $stmt->bindValue(':customerEmailAddr', $customerEmailAddr, PDO::PARAM_STR);
@@ -30,6 +29,19 @@ class customerClass extends dbConClass {
             return $stmt->fetch(PDO::FETCH_ASSOC);
         } else {
             return false;
+        }
+    }
+
+    // 고객 번호 확인
+    public function isCustomerExisted($customerNum) {
+        $stmt = $this->db->prepare("SELECT * FROM customer WHERE customer_num = :customerNum");
+        $stmt->bindValue(':customerNum', $customerNum, PDO::PARAM_STR);
+        $stmt->execute();
+        $customerInfo = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($stmt->rowCount() > 0) {
+            return $customerInfo;
+        } else {
+            return NULL;
         }
     }
 }

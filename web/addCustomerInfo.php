@@ -3,7 +3,7 @@ extract($_POST);
 if (isset($_POST)) {
     require_once '../config.php';
     $c = new customerClass();
-    $customer = $c->addCustomerInfo($customerNum, $customerId, $customerName, $customerGrade, $customerGradeDate, $customerTel, $customerPhone, $customerEmailAddr, $customerAddr);
+    $customer = $c->addCustomerInfo($customerNum, $customerId, $customerName, $customerGrade, $customerTel, $customerPhone, $customerEmailAddr, $customerAddr);
     if ($customer) {
         // 고객정보 등록 성공
         echo json_encode(array('result'=>'SUCCESS'));

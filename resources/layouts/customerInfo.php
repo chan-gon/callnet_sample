@@ -26,10 +26,6 @@
                         <option value="">VIP</option>
                     </select>
                 </td>
-                <td class="input-title">등급 진입일</td>
-                <td>
-                    <input type="date" id="customer-grade-date">
-                </td>
             </tr>
             <tr>
                 <td class="input-title">전화번호</td>
