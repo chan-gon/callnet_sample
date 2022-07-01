@@ -39,8 +39,7 @@ class userClass extends dbConClass {
             $stmt = $this->db->prepare("SELECT * FROM member WHERE member_id = :memberId");
             $stmt->bindValue(':memberId', $memberId, PDO::PARAM_STR);
             $stmt->execute();
-            $member = $stmt->fetch(PDO::FETCH_ASSOC);
-            return $member;
+            return $stmt->fetch(PDO::FETCH_ASSOC);
         } else {
             return false;
         }

@@ -4,22 +4,22 @@
     <div>
         <table>
             <tr>
-                <td class="input-title">* 고객코드</td>
+                <td class="input-title">* 고객번호</td>
                 <td style="display: flex">
-                    <input type="text" id="customerCode">
-                    <input type="button" value="검색" id="customer-code-search">
+                    <input type="text" id="customer-num">
+                    <input type="button" value="검색" id="customer-num-search">
                 </td>
                 <td class="input-title">* 고객명</td>
                 <td>
-                    <input type="text" id="customerName">
+                    <input type="text" id="customer-name">
                 </td>
-                <td class="input-title">ID</td>
+                <td class="input-title">* 고객 ID</td>
                 <td>
-                    <input type="text" id="customerId">
+                    <input type="text" id="customer-id">
                 </td>
                 <td class="input-title">* 회원등급</td>
                 <td>
-                    <select id="customerGrade">
+                    <select id="customer-grade">
                         <option value="">-- 선택 --</option>
                         <option value="">일반</option>
                         <option value="">우수</option>
@@ -28,28 +28,28 @@
                 </td>
                 <td class="input-title">등급 진입일</td>
                 <td>
-                    <input type="date" id="customerGradeSetDate">
+                    <input type="date" id="customer-grade-date">
                 </td>
             </tr>
             <tr>
                 <td class="input-title">전화번호</td>
                 <td style="display: flex">
-                    <input type="text" id="customerTel">
+                    <input type="text" id="customer-tel" placeholder="숫자만 입력하세요.">
                     <input type="button" value="&#9743;">
                 </td>
                 <td class="input-title">* 핸드폰</td>
                 <td style="display: flex">
-                    <input type="text" id="customerPhone" placeholder="필수 입력 사항">
+                    <input type="text" id="customer-phone" placeholder="필수 입력 사항">
                     <input type="button" value="&#9743;">
                     <input type="button" value="SMS">
                 </td>
-                <td class="input-title">e메일</td>
+                <td class="input-title">* e메일</td>
                 <td style="display: flex; padding: 5px;">
                     <input type="text" id="email-input-one">
                     &nbsp;@&nbsp;
                     <input type="text" id="email-input-two" disabled>
                     &nbsp;
-                    <select id="customerEmail">
+                    <select id="customer-email">
                         <option value="0">-- 선택 --</option>
                         <option value="naver.com">naver.com</option>
                         <option value="hanmail.net">hanmail.net</option>
