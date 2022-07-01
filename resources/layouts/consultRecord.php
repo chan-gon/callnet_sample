@@ -8,11 +8,6 @@
                 <td>
                     <input type="text" id="customerCID">
                 </td>
-                <td class="input-title">* 고객코드</td>
-                <td style="display: flex">
-                    <input type="text" id="customerCode">
-                    <input type="button" value="검색" id="customer-code-search">
-                </td>
                 <td class="input-title">* 상담일자</td>
                 <td>
                     <input type="date" id="consultDate">

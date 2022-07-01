@@ -51,101 +51,83 @@ function catMedium(e) {
 
 $("#consultRecordSaveBtn").click(function () {
 
-   let flag = true;
-   const customerNum = $("#customerCode");
    const customerCID = $("#customerCID");
    const consultDate = $("#consultDate");
    const consultantName = $("#consultantName");
-   const consultRoot = radioChked();
-   const categoryLarge = $("#categoryLarge option:selected").text();
-   const categoryMedium = $("#categoryMedium option:selected").text();
-   const consultResult = $("#consultantName option:selected").text();
+   const consultRoot = $("input[type='radio']");
+   const categoryLarge = $("#categoryLarge option:selected");
+   const categoryMedium = $("#categoryMedium option:selected");
+   const consultResult = $("#consultResult option:selected");
    const consultContent = $("#consultContent");
 
    const formData = {
-       customerNum : customerNum.val(),
        customerCID : customerCID.val(),
        consultDate : consultDate.val(),
        consultantName : consultantName.val(),
-       consultRoot : consultRoot,
-       categoryLarge : categoryLarge,
-       categoryMedium : categoryMedium,
-       consultResult : consultResult,
+       consultRoot : consultRoot.is(':checked'),
+       categoryLarge : categoryLarge.val(),
+       categoryMedium : categoryMedium.val(),
+       consultResult : consultResult.val(),
        consultContent : consultContent.val()
    }
 
-   // 빈칸 체크
-    if (customerCID.val() == '' || customerNum.val() == '' || consultDate.val() == '' || consultantName.val() == '') {
-        alert("빈칸을 입력해주세요.");
+    if (customerCID.val() == '') {
+        alert("고객 CID를 입력해주세요.");
+        customerCID.focus();
         return false;
-    } else {
-        return true;
+    }
+    if (consultDate.val() == '') {
+        alert("상담일자를 선택하세요.");
+        consultDate.focus();
+        return false;
+    }
+    if (consultantName.val() == '') {
+        alert("상담원을 입력하세요.");
+        consultantName.focus();
+        return false;
+    }
+    if (!consultRoot.is(':checked')) {
+        alert("상담경로를 체크하세요.");
+        return false;
+    }
+    if (categoryLarge.text() == '-- 선택 --') {
+        alert("대분류를 선택하세요.");
+        return false;
+    }
+    if (categoryMedium.text() == '-- 선택 --') {
+        alert("중분류를 선택하세요.");
+        return false;
+    }
+    if (consultResult.val() == '') {
+        alert("상담결과를 선택하세요.");
+        return false;
+    }
+    if (consultContent.val().length == 0) {
+        alert("상담내용을 입력하세요.");
+        return false;
     }
 
-    flag = isConsultRootChecked();
-    flag = isConsultContentNull();
-    flag = isCategoryLargeSelected();
-    flag = isCategoryMediumSelected();
-
    $.ajax({
-      url: "../../controller/consult/consult_record_save_proc.php",
-       type: "post",
+       url: "web/addConsultRecord.php",
+       type: "POST",
        data: formData,
+       dataType: "json",
        success: function (data) {
-           alert(data[0].result);
+           if (data.result == 'SUCCESS') {
+               alert("고객정보 등록 완료");
+               location.reload();
+           } else if (data.result == 'DATA-NOTFOUND') {
+               alert("데이터가 제대로 전송되지 않았습니다.");
+           } else {
+               alert("상담기록 등록 실패. 다시 시도해 주세요.");
+           }
        },
-       error: function (err) {
-          alert(err);
+       error: function (jqXHR, textStatus, errorThrown) {
+           alert("error : " + textStatus + "\n" + errorThrown);
        }
    });
 });
 
 
-// 상담경로 체크 값
-function radioChked() {
-    $("input[type='radio']").click(function () {
-        const chkedValue = $("input[name='consultRoot']:checked").val();
-        return chkedValue;
-    });
-}
-// 상담경로 체크 유무
-function isConsultRootChecked() {
-    const consultRoot = $("input[type='radio']");
-    if (!consultRoot.is(':checked')) {
-        alert("상담경로를 체크하세요.");
-        return false;
-    } else {
-        return true;
-    }
-}
-// 상담내용 작성 유무
-function isConsultContentNull() {
-    const consultContent = $("#consultContent");
-    if (consultContent.val().length == 0) {
-        alert("상담내용을 입력하세요.");
-        return false;
-    } else {
-        return true;
-    }
-}
-// 대분류 체크
-function isCategoryLargeSelected() {
-    const categoryLarge = $("#categoryLarge option:selected").val();
-    if (categoryLarge == '') {
-        alert("대분류를 선택하세요.");
-        return false;
-    } else {
-        return true;
-    }
-}
-// 중분류 체크
-function isCategoryMediumSelected() {
-    const categoryMedium = $("#categoryMedium option:selected").val();
-    if (categoryMedium == '0') {
-        alert("중분류를 선택하세요.");
-        return false;
-    } else {
-        return true;
-    }
-}
+
 

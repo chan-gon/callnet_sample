@@ -15,4 +15,5 @@ define('class_dir', config_dir.'/class/');
 require_once class_dir.'dbConClass.php'; // DB 연결 클래스
 require_once class_dir.'userClass.php';
 require_once class_dir.'customerClass.php';
+require_once class_dir.'consultClass.php';
 ?>
