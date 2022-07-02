@@ -5,9 +5,9 @@ if (isset($_POST)) {
     $c = new customerClass();
     $customerInfo = $c->isCustomerNumExisted($customerNum);
     if ($customerInfo) {
-        echo json_encode(array('result'=>$customerInfo));
+        echo json_encode(array('result'=>'EXISTED'));
     } else {
-        echo json_encode(array('result'=>'FAIL'));
+        echo json_encode(array('result'=>'NOT_EXISTED'));
     }
 } else {
     // 입력받은 데이터에 문제가 있을 경우

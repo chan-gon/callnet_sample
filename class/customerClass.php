@@ -5,7 +5,7 @@ class customerClass extends dbConClass {
         try {
             $this->db->beginTransaction();
             $sql = "INSERT INTO customer(customer_num, customer_id, customer_name, customer_tel, customer_phone, customer_email, customer_address, customer_grade, customer_grade_date)
-                    VALUES(:customerNum, :customerId, :customerName, :customerTel, :customerPhone, :customerEmailAddr, :customerAddr, :customerGrade, current_timestamp)";
+                    VALUES(:customerNum, :customerId, :customerName, :customerTel, :customerPhone, :customerEmailAddr, :customerAddr, :customerGrade, to_char(current_timestamp, 'YYYY-mm-dd'))";
             $stmt = $this->db->prepare($sql);
             $stmt->bindValue(':customerNum', $customerNum, PDO::PARAM_STR);
             $stmt->bindValue(':customerId', $customerId, PDO::PARAM_STR);
@@ -33,7 +33,7 @@ class customerClass extends dbConClass {
     }
 
     // 고객 번호 확인
-    public function isCustomerExisted($customerNum) {
+    public function isCustomerNumExisted($customerNum) {
         $stmt = $this->db->prepare("SELECT * FROM customer WHERE customer_num = :customerNum");
         $stmt->bindValue(':customerNum', $customerNum, PDO::PARAM_STR);
         $stmt->execute();

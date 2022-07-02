@@ -58,7 +58,6 @@ $("#customerInfoSaveBtn").click(function () {
     const customerId = $("#customer-id");
     const customerName = $("#customer-name");
     const customerGrade = $("#customer-grade option:selected");
-    const customerGradeDate = $("#customer-grade-date");
     const customerTel = $("#customer-tel");
     const customerPhone = $("#customer-phone");
     const customerEmailAddr = $("#email-input-one");
@@ -83,6 +82,11 @@ $("#customerInfoSaveBtn").click(function () {
     if (customerGrade.text() == '-- 선택 --') {
         alert("회원등급을 선택하세요.");
         customerGrade.focus();
+        return false;
+    }
+    if (only_number.test(customerTel.val())) {
+        alert("전화번호는 숫자만 입력할 수 있습니다.");
+        customerTel.focus();
         return false;
     }
     if (customerPhone.val() == '') {
@@ -115,30 +119,61 @@ $("#customerInfoSaveBtn").click(function () {
         customerId :customerId.val(),
         customerName : customerName.val(),
         customerGrade : customerGrade.text(),
-        customerGradeDate : customerGradeDate.val(),
         customerTel : customerTel.val(),
         customerPhone : customerPhone.val(),
         customerEmailAddr : customerEmailAddr.val() + "@" + customerEmailDomain.val(),
         customerAddr : customerAddr
     }
 
+    if (isCustomerNumExisted()) {
+        // 고객 정보 등록
+        $.ajax({
+            url:  "web/addCustomerInfo.php",
+            type: "POST",
+            data: formData,
+            dataType: "json",
+            success: function (data) {
+                if (data.result == 'SUCCESS') {
+                    alert("고객정보 등록 완료");
+                    $("#customer-info-form")[0].reset();
+                } else if (data.result == 'DATA-NOTFOUND') {
+                    alert("데이터가 제대로 전송되지 않았습니다.");
+                } else {
+                    alert("고객정보 등록 실패. 다시 시도해 주세요.");
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert("error : " + textStatus + "\n" + errorThrown);
+            }
+        });
+    } else {
+        alert("이미 존재하는 고객번호");
+        customerNum.focus();
+    }
+
+});
+
+function isCustomerNumExisted() {
+    const customerNum = $("#customer-num").val();
+    let result;
     $.ajax({
-        url:  "web/addCustomerInfo.php",
+        url: "web/customerNumChk.php",
         type: "POST",
-        data: formData,
+        data: {customerNum : customerNum},
         dataType: "json",
+        async: false, // 처리 방식을 동기식으로 처리하도록 설정(return 값을 받아야 하기 때문에)
         success: function (data) {
-            if (data.result == 'SUCCESS') {
-                alert("고객정보 등록 완료");
-                location.reload();
-            } else if (data.result == 'DATA-NOTFOUND') {
-                alert("데이터가 제대로 전송되지 않았습니다.");
+            if (data.result == 'EXISTED') {
+                result = false;
+            } else if (data.result == 'NOT_EXISTED') {
+                result = true;
             } else {
-                alert("고객정보 등록 실패. 다시 시도해 주세요.");
+                alert("데이터가 제대로 전송되지 않았습니다.");
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {
             alert("error : " + textStatus + "\n" + errorThrown);
         }
     });
-});
+    return result;
+}
