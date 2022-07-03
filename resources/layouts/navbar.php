@@ -1,3 +1,8 @@
+<?php
+if(!isset($_SESSION['member_id'])){ //if login in session is not set
+    header("Location: /index.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

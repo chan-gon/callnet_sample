@@ -62,7 +62,7 @@ $("#customerInfoSaveBtn").click(function () {
     const customerPhone = $("#customer-phone");
     const customerEmailAddr = $("#email-input-one");
     const customerEmailDomain = $("#email-input-two");
-    const customerAddr = $("#zonecode").val() + " " + $("#roadAddress").val() + " " + $("#jibunAddress").val();
+    const customerAddr = $("#zonecode").val() + " " + $("#roadAddress").val() + " " + $("#jibunAddress").val() + " " + $("#specificAddress").val();
 
     if (customerNum.val() == '') {
         alert("고객코드를 입력하세요.");
