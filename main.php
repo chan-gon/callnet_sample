@@ -18,6 +18,8 @@
     <script src="resources/js/customerInfoJS.js"></script>
     <!-- 상담기록 JS -->
     <script src="resources/js/consultRecordJS.js"></script>
+    <!-- 상담이력 JS -->
+    <script src="resources/js/consultHistory.js"></script>
 
 </body>
 </html>

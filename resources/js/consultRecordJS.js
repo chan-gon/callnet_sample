@@ -52,6 +52,7 @@ function catMedium(e) {
 $("#consultRecordSaveBtn").click(function () {
 
    const customerCID = $("#customerCID");
+   const customerNum = $("#customerNum");
    const consultDate = $("#consultDate");
    const consultantName = $("#consultantName");
    const consultRoot = $("input[type='radio']");
@@ -62,6 +63,7 @@ $("#consultRecordSaveBtn").click(function () {
 
    const formData = {
        customerCID : customerCID.val(),
+       customerNum : customerNum.val(),
        consultDate : consultDate.val(),
        consultantName : consultantName.val(),
        consultRoot : consultRoot.is(':checked'),
@@ -74,6 +76,11 @@ $("#consultRecordSaveBtn").click(function () {
     if (customerCID.val() == '') {
         alert("고객 CID를 입력해주세요.");
         customerCID.focus();
+        return false;
+    }
+    if (customerNum.val() == '') {
+        alert("고객번호를 입력해주세요.");
+        customerNum.focus();
         return false;
     }
     if (consultDate.val() == '') {
@@ -107,27 +114,58 @@ $("#consultRecordSaveBtn").click(function () {
         return false;
     }
 
-   $.ajax({
-       url: "web/addConsultRecord.php",
-       type: "POST",
-       data: formData,
-       dataType: "json",
-       success: function (data) {
-           if (data.result == 'SUCCESS') {
-               alert("고객정보 등록 완료");
-               location.reload();
-           } else if (data.result == 'DATA-NOTFOUND') {
-               alert("데이터가 제대로 전송되지 않았습니다.");
-           } else {
-               alert("상담기록 등록 실패. 다시 시도해 주세요.");
-           }
-       },
-       error: function (jqXHR, textStatus, errorThrown) {
-           alert("error : " + textStatus + "\n" + errorThrown);
-       }
-   });
+    if (customerNumChk()) {
+        // 고객번호가 존재하면 상담기록 저장
+        $.ajax({
+            url: "web/addConsultRecord.php",
+            type: "POST",
+            data: formData,
+            dataType: "json",
+            success: function (data) {
+                if (data.result == 'SUCCESS') {
+                    alert("상담기록 등록 완료");
+                    $("#custom-record-form")[0].reset();
+                } else if (data.result == 'DATA-NOTFOUND') {
+                    alert("데이터가 제대로 전송되지 않았습니다.");
+                } else {
+                    alert("상담기록 등록 실패. 다시 시도해 주세요.");
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert("error : " + textStatus + "\n" + errorThrown);
+            }
+        });
+    } else {
+        // 고객번호가 존재하지 않음
+        alert("고객번호를 찾을 수 없습니다.");
+        customerNum.focus();
+    }
+
+
 });
 
-
-
-
+// 고객번호 유무 확인
+function customerNumChk() {
+    const customerNum = $("#customerNum").val();
+    let result;
+    $.ajax({
+        url: "web/customerNumChk.php",
+        type: "POST",
+        data: {customerNum : customerNum},
+        dataType: "json",
+        async: false, // 처리 방식을 동기식으로 처리하도록 설정(return 값을 받아야 하기 때문에)
+        success: function (data) {
+            if (data.result == 'EXISTED') {
+                result = true;
+            } else if (data.result == 'NOT_EXISTED') {
+                result = false;
+            } else {
+                alert("데이터가 제대로 전송되지 않았습니다.");
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert("error : " + textStatus + "\n" + errorThrown);
+        }
+    });
+    return result;
+}
