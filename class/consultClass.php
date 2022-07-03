@@ -45,7 +45,7 @@ class consultClass extends dbConClass {
             }
             $stmt = $this->db->prepare($sql);
             $stmt->execute();
-            $consultHistory = $stmt->fetch(PDO::FETCH_ASSOC);
+            $consultHistory = $stmt->fetchAll(PDO::FETCH_ASSOC);
             if ($stmt->rowCount() > 0) {
                 return $consultHistory;
             } else {
