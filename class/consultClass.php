@@ -32,6 +32,25 @@ class consultClass extends dbConClass {
             return false;
         }
     }
-}
 
+    public function getConsultHistory($consultDateFrom, $consultDateTo, $customerCID, $customerName, $consultRoot, $categoryLarge, $categoryMedium, $consultResult) {
+        $conditions = [];
+        $sql = "SELECT b.consulting_root, a.customer_name, b.customer_cid, a.customer_phone, b.consulting_date, b.category_large, b.category_medium, b.consulting_result, b.consulting_rep_name
+                FROM customer a JOIN consulting b ON a.customer_num = b.customer_num";
+            if (!empty($consultDateFrom) && !empty($consultDateTo)) {
+                $conditions[] = "b.consulting_date BETWEEN".$consultDateFrom."TO".$consultDateTo;
+            }
+            if ($conditions) {
+                $sql."WHERE ".implode(" AND ", $conditions);
+            }
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute();
+            $consultHistory = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($stmt->rowCount() > 0) {
+                return $consultHistory;
+            } else {
+                return NULL;
+            }
+    }
+}
 ?>

@@ -55,7 +55,7 @@ $("#consultRecordSaveBtn").click(function () {
    const customerNum = $("#customerNum");
    const consultDate = $("#consultDate");
    const consultantName = $("#consultantName");
-   const consultRoot = $("input[type='radio']");
+   const consultRoot = $("input[name='consultRoot']");
    const categoryLarge = $("#categoryLarge option:selected");
    const categoryMedium = $("#categoryMedium option:selected");
    const consultResult = $("#consultResult option:selected");
@@ -66,9 +66,9 @@ $("#consultRecordSaveBtn").click(function () {
        customerNum : customerNum.val(),
        consultDate : consultDate.val(),
        consultantName : consultantName.val(),
-       consultRoot : consultRoot.is(':checked'),
-       categoryLarge : categoryLarge.val(),
-       categoryMedium : categoryMedium.val(),
+       consultRoot : $("input:radio[name='consultRoot']:checked").val(),
+       categoryLarge : categoryLarge.text(),
+       categoryMedium : categoryMedium.text(),
        consultResult : consultResult.val(),
        consultContent : consultContent.val()
    }
@@ -124,7 +124,7 @@ $("#consultRecordSaveBtn").click(function () {
             success: function (data) {
                 if (data.result == 'SUCCESS') {
                     alert("상담기록 등록 완료");
-                    $("#custom-record-form")[0].reset();
+                    $("#consult-record-form")[0].reset();
                 } else if (data.result == 'DATA-NOTFOUND') {
                     alert("데이터가 제대로 전송되지 않았습니다.");
                 } else {
