@@ -87,3 +87,19 @@ $("#consultHistorySearchBtn").click(function () {
         }
     });
 });
+
+// 엑셀 변환
+function convertExcel() {
+    if ($("#consultHistoryRow").length == 0) {
+        alert("변환할 데이터가 없습니다.");
+        return false;
+    }
+    $(".section-four-table").table2excel({
+        name: "상담이력",
+        filename: "상담이력" +'.xls', //확장자를 여기서 붙여줘야한다.
+        fileext: ".xls",
+        exclude_img: true,
+        exclude_links: true,
+        exclude_inputs: true
+    });
+};

@@ -1,7 +1,7 @@
 <div style="padding-left:16px">
     <h3 class="section-main-title">&#9654; 상담이력</h3>
     <input class="section-main-button" id="consultHistorySearchBtn" type="button" value="조회">
-    <input class="section-main-button" type="button" value="엑셀변환">
+    <input class="section-main-button" type="button" value="엑셀변환" onclick="convertExcel()">
     <div>
         <form id="consult-history-form">
             <table>
