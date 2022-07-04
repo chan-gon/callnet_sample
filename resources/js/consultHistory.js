@@ -66,9 +66,10 @@ $("#consultHistorySearchBtn").click(function () {
         success: function (data) {
             if (data.msg == 'SUCCESS') {
                 $("#noResult").remove();
-
+                $("#consultHistoryRow").remove();
                 for (let i = 0; i < data.result.length; i++) {
                     let tr = document.createElement("tr");
+                    tr.setAttribute("id", "consultHistoryRow");
                     $.each(data.result[i], function (key, value) {
                         let td = document.createElement("td");
                         td.setAttribute("id", key);

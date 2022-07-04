@@ -35,16 +35,23 @@ class consultClass extends dbConClass {
 
     public function getConsultHistory($consultDateFrom, $consultDateTo, $customerCID, $customerName, $consultRoot, $categoryLarge, $categoryMedium, $consultResult) {
         $sql = "SELECT b.consulting_root, a.customer_name, b.customer_cid, a.customer_phone, b.consulting_date, b.category_large, b.category_medium, b.consulting_result, b.consulting_rep_name
-                FROM customer a JOIN consulting b ON a.customer_num = b.customer_num WHERE a.customer_id IS NOT NULL ";
+                FROM customer a JOIN consulting b ON a.customer_num = b.customer_num WHERE a.customer_id IS NOT NULL";
+            //$stmt = $this->db->prepare($sql);
 
-            if ($consultDateFrom != null) {
-                $sql = $sql." AND b.consulting_date >= ".$consultDateFrom;
+            if (empty($consultDateFrom) && empty($consultDateTo) && empty($customerCID) && empty($customerName) && empty($consultRoot) && empty($categoryLarge) && empty($categoryMedium) && empty($consultResult)) {
+                //$stmt = $this->db->prepare($sql);
             }
-            if ($consultDateTo != null) {
-                $sql =$sql." AND b.consulting_date <= ".$consultDateTo;
-            }
-           //echo "<script>console.log($sql)</script>";
+            if (!empty($consultDateFrom) && !empty($consultDateTo)) { $sql .= " AND b.consulting_date BETWEEN :consultDateFrom AND :consultDateTo"; }
+            if (!empty($customerCID)) { $sql .= " AND b.customer_cid = :customerCID"; }
+
             $stmt = $this->db->prepare($sql);
+            if (!empty($consultDateFrom) && !empty($consultDateTo)) {
+                    $stmt->bindValue(':consultDateFrom', $consultDateFrom, PDO::PARAM_STR);
+                    $stmt->bindValue(':consultDateTo', $consultDateTo, PDO::PARAM_STR);
+            }
+
+            if (!empty($customerCID)) { $stmt->bindValue(':customerCID', $customerCID, PDO::PARAM_STR); }
+
             $stmt->execute();
             $consultHistory = $stmt->fetchAll(PDO::FETCH_ASSOC);
             if ($stmt->rowCount() > 0) {
