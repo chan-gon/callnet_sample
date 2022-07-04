@@ -1,11 +1,13 @@
-let searchResult = document.getElementById("search-result-area");
-if (searchResult.children.length == 0) {
-    let td = document.createElement("td");
-    td.innerHTML = "- NO RESULTS FOUND -";
-    td.setAttribute("colspan", "9");
-    td.setAttribute("id", "noResult");
-    searchResult.appendChild(td);
-}
+$(function () {
+    let searchResult = document.getElementById("search-result-area");
+    if (searchResult.children.length == 0) {
+        let td = document.createElement("td");
+        td.innerHTML = "- NO RESULTS FOUND -";
+        td.setAttribute("colspan", "9");
+        td.setAttribute("id", "noResult");
+        searchResult.appendChild(td);
+    }
+});
 
 function categorySort(e) {
     const a = ["-- 선택 --", "배송지연", "배송지변경", "배송오류", "기타"];
@@ -41,7 +43,6 @@ $("#consultHistorySearchBtn").click(function () {
     const customerCID = $('#consult-history-form').find("#customerCID");
     const customerName = $('#consult-history-form').find("#customerName");
     const consultantName = $('#consult-history-form').find("#consultantName");
-    const consultRoot = $('#consult-history-form').find("input[type='radio']");
     const categoryLarge = $('#consult-history-form').find("#categoryLarge option:selected");
     const categoryMedium = $('#consult-history-form').find("#categoryMedium option:selected");
     const consultResult = $('#consult-history-form').find("#consultResult option:selected");
@@ -66,10 +67,9 @@ $("#consultHistorySearchBtn").click(function () {
         success: function (data) {
             if (data.msg == 'SUCCESS') {
                 $("#noResult").remove();
-                $("#consultHistoryRow").remove();
                 for (let i = 0; i < data.result.length; i++) {
-                    let tr = document.createElement("tr");
-                    tr.setAttribute("id", "consultHistoryRow");
+                     let tr = document.createElement("tr");
+                     tr.setAttribute("id", "consultHistoryRow");
                     $.each(data.result[i], function (key, value) {
                         let td = document.createElement("td");
                         td.setAttribute("id", key);
@@ -80,6 +80,7 @@ $("#consultHistorySearchBtn").click(function () {
                 }
             } else {
                 alert("상담이력 정보가 존재하지 않습니다.");
+                $("#consult-history-search").load(location.href+" #consult-history-search");
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -93,13 +94,16 @@ function convertExcel() {
     if ($("#consultHistoryRow").length == 0) {
         alert("변환할 데이터가 없습니다.");
         return false;
+    } else {
+        const currentTime = new Date().toISOString().split('T')[0];
+        $(".section-four-table").table2excel({
+            exclude: ".noExl",
+            name: "Excel Document Name",
+            filename: "상담이력_" + currentTime +'.xls', //확장자를 여기서 붙여줘야한다.
+            fileext: ".xls",
+            exclude_img: true,
+            exclude_links: true,
+            exclude_inputs: true
+        });
     }
-    $(".section-four-table").table2excel({
-        name: "상담이력",
-        filename: "상담이력" +'.xls', //확장자를 여기서 붙여줘야한다.
-        fileext: ".xls",
-        exclude_img: true,
-        exclude_links: true,
-        exclude_inputs: true
-    });
 };

@@ -33,7 +33,7 @@ class consultClass extends dbConClass {
         }
     }
 
-    public function getConsultHistory($consultDateFrom, $consultDateTo, $customerCID, $customerName, $consultRoot, $categoryLarge, $categoryMedium, $consultResult) {
+/*    public function getConsultHistory($consultDateFrom, $consultDateTo, $customerCID, $customerName, $consultRoot, $categoryLarge, $categoryMedium, $consultResult) {
         $sql = "SELECT b.consulting_root, a.customer_name, b.customer_cid, a.customer_phone, b.consulting_date, b.category_large, b.category_medium, b.consulting_result, b.consulting_rep_name
                 FROM customer a JOIN consulting b ON a.customer_num = b.customer_num WHERE a.customer_id IS NOT NULL";
             //$stmt = $this->db->prepare($sql);
@@ -59,6 +59,6 @@ class consultClass extends dbConClass {
             } else {
                 return NULL;
             }
-    }
+    }*/
 }
 ?>

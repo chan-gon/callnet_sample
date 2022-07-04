@@ -54,20 +54,21 @@
                 </tr>
             </table>
         </form>
-
-        <table class="section-four-table">
-            <tr>
-                <td>상담경로</td>
-                <td>고객명</td>
-                <td>고객CID</td>
-                <td>고객HP</td>
-                <td>상담일자</td>
-                <td>대분류</td>
-                <td>중분류</td>
-                <td>상담결과</td>
-                <td>상담원</td>
-            </tr>
-            <tr id="search-result-area"></tr>
-        </table>
+        <form id="consult-history-search" action="../../web/excel.php" method="post">
+            <table class="section-four-table">
+                <tr>
+                    <td>상담경로</td>
+                    <td>고객명</td>
+                    <td>고객CID</td>
+                    <td>고객HP</td>
+                    <td>상담일자</td>
+                    <td>대분류</td>
+                    <td>중분류</td>
+                    <td>상담결과</td>
+                    <td>상담원</td>
+                </tr>
+                <tr id="search-result-area"></tr>
+            </table>
+        </form>
     </div>
 </div>
