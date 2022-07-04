@@ -4,6 +4,19 @@ const between_blank = /[\s]/g; // 문자열 사이에 공백
 const special_pattern = /[`~!@#$%^&*|\\\'\";:\/?]/gi; // 특수문자
 const only_number = /[^0-9]/g; // 숫자만 입력
 
+const customerNum = $("#customer-num");
+const customerId = $("#customer-id");
+const customerName = $("#customer-name");
+const customerGrade = $("#customer-grade option:selected");
+const customerTel = $("#customer-tel");
+const customerPhone = $("#customer-phone");
+const customerEmailAddr = $("#email-input-one");
+const customerEmailDomain = $("#email-input-two");
+const zonecode = $("#zonecode").val();
+const roadAddr = $("#roadAddress").val();
+const jibunAddr = $("#jibunAddress").val();
+const specificAddr = $("#specificAddress").val();
+
 // 고객정보 고객코드 검색
 $("#customer-num-search").click(function () {
     const customerNum = $("#customer-num").val();
@@ -54,19 +67,6 @@ $("#customer-email").change(function () {
 
 // 고객정보 저장
 $("#customerInfoSaveBtn").click(function () {
-    const customerNum = $("#customer-num");
-    const customerId = $("#customer-id");
-    const customerName = $("#customer-name");
-    const customerGrade = $("#customer-grade option:selected");
-    const customerTel = $("#customer-tel");
-    const customerPhone = $("#customer-phone");
-    const customerEmailAddr = $("#email-input-one");
-    const customerEmailDomain = $("#email-input-two");
-    const zonecode = $("#zonecode").val();
-    const roadAddr = $("#roadAddress").val();
-    const jibunAddr = $("#jibunAddress").val();
-    const specificAddr = $("#specificAddress").val();
-
     if (customerNum.val() == '') {
         alert("고객코드를 입력하세요.");
         customerNum.focus();
@@ -183,3 +183,37 @@ function isCustomerNumExisted() {
     });
     return result;
 }
+
+function updateUserInfo() {
+    if (confirm("고객정보를 수정하시겠습니까?")) {
+        const formData = {
+            customerNum : customerNum.val(),
+            customerId :customerId.val(),
+            customerName : customerName.val(),
+            customerGrade : customerGrade.text(),
+            customerTel : customerTel.val(),
+            customerPhone : customerPhone.val(),
+            customerEmailAddr : customerEmailAddr.val() + "@" + customerEmailDomain.val(),
+            zonecode : zonecode,
+            roadAddr : roadAddr,
+            jibunAddr : jibunAddr,
+            specificAddr : specificAddr
+        }
+
+        $.ajax({
+           url: "web/updateCustomerInfo.php",
+           type: "POST",
+           data: formData,
+           dataType: "json",
+           success: function (data) {
+
+           },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert("error : " + textStatus + "\n" + errorThrown);
+            }
+        });
+    } else {
+        return false;
+    }
+}
+

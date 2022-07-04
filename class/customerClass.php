@@ -47,5 +47,16 @@ class customerClass extends dbConClass {
             return NULL;
         }
     }
+
+    // 고객정보 수정
+    public function updateCustomerInfo($customerNum, $customerId, $customerName, $customerGrade, $customerTel, $customerPhone, $customerEmailAddr, $zonecode, $roadAddr, $jibunAddr, $specificAddr) {
+        try {
+            $this->db->beginTransaction();
+            $sql = "UPDATE customer SET ";
+        } catch (PDOException $e) {
+            $this->db->rollBack();
+            echo "에러 : ".$e->getMessage();
+        }
+    }
 }
 ?>

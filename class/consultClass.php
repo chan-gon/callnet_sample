@@ -34,15 +34,16 @@ class consultClass extends dbConClass {
     }
 
     public function getConsultHistory($consultDateFrom, $consultDateTo, $customerCID, $customerName, $consultRoot, $categoryLarge, $categoryMedium, $consultResult) {
-        $conditions = [];
         $sql = "SELECT b.consulting_root, a.customer_name, b.customer_cid, a.customer_phone, b.consulting_date, b.category_large, b.category_medium, b.consulting_result, b.consulting_rep_name
-                FROM customer a JOIN consulting b ON a.customer_num = b.customer_num";
-            if (!empty($consultDateFrom) && !empty($consultDateTo)) {
-                $conditions[] = "b.consulting_date BETWEEN".$consultDateFrom."TO".$consultDateTo;
+                FROM customer a JOIN consulting b ON a.customer_num = b.customer_num WHERE a.customer_id IS NOT NULL ";
+
+            if ($consultDateFrom != null) {
+                $sql = $sql." AND b.consulting_date >= ".$consultDateFrom;
             }
-            if ($conditions) {
-                $sql."WHERE ".implode(" AND ", $conditions);
+            if ($consultDateTo != null) {
+                $sql =$sql." AND b.consulting_date <= ".$consultDateTo;
             }
+           //echo "<script>console.log($sql)</script>";
             $stmt = $this->db->prepare($sql);
             $stmt->execute();
             $consultHistory = $stmt->fetchAll(PDO::FETCH_ASSOC);

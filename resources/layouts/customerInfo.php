@@ -1,5 +1,5 @@
 <div style="padding-left:16px">
-    <h3 class="section-main-title">&#9654; 고객정보 *  필수입력 사항</h3>
+    <h3 class="section-main-title" id="section-main-title">&#9654; 고객정보 *  필수입력 사항</h3>
     <input class="section-main-button" id="customerInfoSaveBtn" type="button" value="고객정보저장">
     <div>
         <form id="customer-info-form">

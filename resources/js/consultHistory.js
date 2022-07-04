@@ -52,7 +52,7 @@ $("#consultHistorySearchBtn").click(function () {
         customerCID : customerCID.val(),
         customerName : customerName.val(),
         consultantName : consultantName.val(),
-        consultRoot : consultRoot.is(":checked"),
+        consultRoot :  $("input:radio[name='consultRoot']:checked").val(),
         categoryLarge : categoryLarge.val(),
         categoryMedium : categoryMedium.val(),
         consultResult : consultResult.val()

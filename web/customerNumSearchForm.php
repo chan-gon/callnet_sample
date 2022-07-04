@@ -80,6 +80,7 @@
         window.opener.document.getElementById("customer-name").value = customerName;
         window.opener.document.getElementById("customer-id").value = customerId;
 
+        // 회원등급 입력값에 따른 option 태그 변경 설정
         if (customerGrade == '일반') {
             window.opener.document.getElementById("customer-grade").selectedIndex = 1;
         } else if (customerGrade == '우수') {
@@ -96,6 +97,17 @@
         window.opener.document.getElementById("roadAddress").value = roadAddr;
         window.opener.document.getElementById("jibunAddress").value = jibunAddr;
         window.opener.document.getElementById("specificAddress").value = specificAddr;
+
+        // 고객정보입력>고객정보수정으로 버튼 상태 변경
+        window.opener.document.getElementById("customerInfoSaveBtn").remove();
+        const updateBtn = document.createElement("input");
+        updateBtn.setAttribute("class", "section-main-button")
+        updateBtn.setAttribute("id", "customerInfoUpdateBtn");
+        updateBtn.setAttribute("type", "button");
+        updateBtn.setAttribute("value", "고객정보수정");
+        updateBtn.setAttribute("onclick", "updateUserInfo();");
+        window.opener.document.getElementById("section-main-title").after(updateBtn);
+
         window.close();
     }
 </script>
