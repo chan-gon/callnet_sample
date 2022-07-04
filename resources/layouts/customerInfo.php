@@ -68,7 +68,7 @@
                         <input type="text" placeholder="지번주소" id="jibunAddress">
                     </td>
                     <td colspan="4">
-                        <input type="text" id="specificAddress" placeholder="상세주소">
+                        <input type="text" placeholder="상세주소" id="specificAddress">
                     </td>
                 </tr>
             </table>

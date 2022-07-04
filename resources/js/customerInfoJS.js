@@ -20,7 +20,7 @@ $("#customer-num-search").click(function () {
         alert("숫자만 입력 가능합니다.");
         return false;
     } else {
-        window.open("../../web/customerNumSearchForm.php", "customerInfo", 'width=900px,height=500px');
+        window.open("../../web/customerNumSearchForm.php", "customerInfo", 'width=1550px,height=300px');
     }
 
 });
@@ -62,7 +62,10 @@ $("#customerInfoSaveBtn").click(function () {
     const customerPhone = $("#customer-phone");
     const customerEmailAddr = $("#email-input-one");
     const customerEmailDomain = $("#email-input-two");
-    const customerAddr = $("#zonecode").val() + " " + $("#roadAddress").val() + " " + $("#jibunAddress").val() + " " + $("#specificAddress").val();
+    const zonecode = $("#zonecode").val();
+    const roadAddr = $("#roadAddress").val();
+    const jibunAddr = $("#jibunAddress").val();
+    const specificAddr = $("#specificAddress").val();
 
     if (customerNum.val() == '') {
         alert("고객코드를 입력하세요.");
@@ -122,7 +125,10 @@ $("#customerInfoSaveBtn").click(function () {
         customerTel : customerTel.val(),
         customerPhone : customerPhone.val(),
         customerEmailAddr : customerEmailAddr.val() + "@" + customerEmailDomain.val(),
-        customerAddr : customerAddr
+        zonecode : zonecode,
+        roadAddr : roadAddr,
+        jibunAddr : jibunAddr,
+        specificAddr : specificAddr
     }
 
     if (isCustomerNumExisted()) {
