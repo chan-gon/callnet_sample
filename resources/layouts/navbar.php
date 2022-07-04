@@ -1,4 +1,5 @@
 <?php
+session_start();
 if(!isset($_SESSION['member_id'])){ //if login in session is not set
     header("Location: /index.php");
 }
@@ -26,6 +27,6 @@ if(!isset($_SESSION['member_id'])){ //if login in session is not set
         <a href="#about">매장 관리</a>
         <a href="#about">블랙리스트 관리</a>
         <a href="#about">통계</a>
-        <a href="#about">강제 로그아웃</a>
+        <a id="logout">로그아웃</a>
     </div>
 </div>

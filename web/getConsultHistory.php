@@ -5,9 +5,9 @@ if (isset($_POST)) {
     $c = new consultClass();
     $consultHistory = $c->getConsultHistory($consultDateFrom, $consultDateTo, $customerCID, $customerName, $consultRoot, $categoryLarge, $categoryMedium, $consultResult);
     if ($consultHistory) {
-        echo json_encode(array('result'=>$consultHistory));
+        echo json_encode(array('result'=>$consultHistory, 'msg'=>'SUCCESS'));
     } else {
-        echo json_encode(array('result'=>'DATA-NOTFOUND'));
+        echo json_encode(array('result'=>NULL, 'msg'=>'DATA-NOTFOUND'));
     }
 }
 ?>

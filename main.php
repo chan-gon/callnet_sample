@@ -20,6 +20,8 @@
     <script src="resources/js/consultRecordJS.js"></script>
     <!-- 상담이력 JS -->
     <script src="resources/js/consultHistory.js"></script>
+    <!-- 로그아웃 JS -->
+    <script src="resources/js/logout.js"></script>
 
 </body>
 </html>

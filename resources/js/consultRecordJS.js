@@ -137,7 +137,7 @@ $("#consultRecordSaveBtn").click(function () {
         });
     } else {
         // 고객번호가 존재하지 않음
-        alert("고객번호를 찾을 수 없습니다.");
+        alert("존재하지 않는 고객번호 입니다.");
         customerNum.focus();
     }
 

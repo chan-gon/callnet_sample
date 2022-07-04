@@ -64,7 +64,7 @@ $("#consultHistorySearchBtn").click(function () {
         data: formData,
         dataType: "json",
         success: function (data) {
-            if (data.result) {
+            if (data.msg == 'SUCCESS') {
                 $("#noResult").remove();
 
                 for (let i = 0; i < data.result.length; i++) {
@@ -77,8 +77,8 @@ $("#consultHistorySearchBtn").click(function () {
                     });
                     $(".section-four-table>tbody:last").append(tr);
                 }
-            } else if (data.result == 'DATA-NOTFOUND') {
-                alert("해당 조건에 만족하는 상담이력이 없습니다.");
+            } else {
+                alert("상담이력 정보가 존재하지 않습니다.");
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {
