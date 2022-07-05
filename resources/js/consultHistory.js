@@ -1,4 +1,8 @@
 $(function () {
+    createNoResultMsg();
+});
+
+function createNoResultMsg() {
     let searchResult = document.getElementById("search-result-area");
     if (searchResult.children.length == 0) {
         let td = document.createElement("td");
@@ -7,7 +11,7 @@ $(function () {
         td.setAttribute("id", "noResult");
         searchResult.appendChild(td);
     }
-});
+}
 
 function categorySort(e) {
     const a = ["-- 선택 --", "배송지연", "배송지변경", "배송오류", "기타"];
@@ -67,6 +71,7 @@ $("#consultHistorySearchBtn").click(function () {
         success: function (data) {
             if (data.msg == 'SUCCESS') {
                 $("#noResult").remove();
+                $("*").remove("#consultHistoryRow");
                 for (let i = 0; i < data.result.length; i++) {
                      let tr = document.createElement("tr");
                      tr.setAttribute("id", "consultHistoryRow");
@@ -79,8 +84,13 @@ $("#consultHistorySearchBtn").click(function () {
                     $(".section-four-table>tbody:last").append(tr);
                 }
             } else {
-                alert("상담이력 정보가 존재하지 않습니다.");
-                $("#consult-history-search").load(location.href+" #consult-history-search");
+                if ($("#consultHistoryRow").length > 0) {
+                    alert("상담이력 정보가 존재하지 않습니다.");
+                    $("*").remove("#consultHistoryRow");
+                    createNoResultMsg();
+                } else {
+                    alert("상담이력 정보가 존재하지 않습니다.");
+                }
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {

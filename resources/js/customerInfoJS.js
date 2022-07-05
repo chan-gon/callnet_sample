@@ -4,19 +4,6 @@ const between_blank = /[\s]/g; // 문자열 사이에 공백
 const special_pattern = /[`~!@#$%^&*|\\\'\";:\/?]/gi; // 특수문자
 const only_number = /[^0-9]/g; // 숫자만 입력
 
-const customerNum = $("#customer-num");
-const customerId = $("#customer-id");
-const customerName = $("#customer-name");
-const customerGrade = $("#customer-grade option:selected");
-const customerTel = $("#customer-tel");
-const customerPhone = $("#customer-phone");
-const customerEmailAddr = $("#email-input-one");
-const customerEmailDomain = $("#email-input-two");
-const zonecode = $("#zonecode").val();
-const roadAddr = $("#roadAddress").val();
-const jibunAddr = $("#jibunAddress").val();
-const specificAddr = $("#specificAddress").val();
-
 // 고객정보 고객코드 검색
 $("#customer-num-search").click(function () {
     const customerNum = $("#customer-num").val();
@@ -67,6 +54,20 @@ $("#customer-email").change(function () {
 
 // 고객정보 저장
 $("#customerInfoSaveBtn").click(function () {
+
+    const customerNum = $("#customer-num");
+    const customerId = $("#customer-id");
+    const customerName = $("#customer-name");
+    const customerGrade = $("#customer-grade option:selected");
+    const customerTel = $("#customer-tel");
+    const customerPhone = $("#customer-phone");
+    const customerEmailAddr = $("#email-input-one");
+    const customerEmailDomain = $("#email-input-two");
+    const zonecode = $("#zonecode");
+    const roadAddr = $("#roadAddress");
+    const jibunAddr = $("#jibunAddress");
+    const specificAddr = $("#specificAddress");
+
     if (customerNum.val() == '') {
         alert("고객코드를 입력하세요.");
         customerNum.focus();
@@ -125,10 +126,10 @@ $("#customerInfoSaveBtn").click(function () {
         customerTel : customerTel.val(),
         customerPhone : customerPhone.val(),
         customerEmailAddr : customerEmailAddr.val() + "@" + customerEmailDomain.val(),
-        zonecode : zonecode,
-        roadAddr : roadAddr,
-        jibunAddr : jibunAddr,
-        specificAddr : specificAddr
+        zonecode : zonecode.val(),
+        roadAddr : roadAddr.val(),
+        jibunAddr : jibunAddr.val(),
+        specificAddr : specificAddr.val()
     }
 
     if (isCustomerNumExisted()) {
@@ -186,6 +187,20 @@ function isCustomerNumExisted() {
 
 function updateUserInfo() {
     if (confirm("고객정보를 수정하시겠습니까?")) {
+
+        const customerNum = $("#customer-num");
+        const customerId = $("#customer-id");
+        const customerName = $("#customer-name");
+        const customerGrade = $("#customer-grade option:selected");
+        const customerTel = $("#customer-tel");
+        const customerPhone = $("#customer-phone");
+        const customerEmailAddr = $("#email-input-one");
+        const customerEmailDomain = $("#email-input-two");
+        const zonecode = $("#zonecode");
+        const roadAddr = $("#roadAddress");
+        const jibunAddr = $("#jibunAddress");
+        const specificAddr = $("#specificAddress");
+
         const formData = {
             customerNum : customerNum.val(),
             customerId :customerId.val(),
@@ -194,10 +209,10 @@ function updateUserInfo() {
             customerTel : customerTel.val(),
             customerPhone : customerPhone.val(),
             customerEmailAddr : customerEmailAddr.val() + "@" + customerEmailDomain.val(),
-            zonecode : zonecode,
-            roadAddr : roadAddr,
-            jibunAddr : jibunAddr,
-            specificAddr : specificAddr
+            zonecode : zonecode.val(),
+            roadAddr : roadAddr.val(),
+            jibunAddr : jibunAddr.val(),
+            specificAddr : specificAddr.val()
         }
 
         $.ajax({
