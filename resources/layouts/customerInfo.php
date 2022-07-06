@@ -1,15 +1,12 @@
 <div style="padding-left:16px">
     <h3 class="section-main-title" id="section-main-title">&#9654; 고객정보 *  필수입력 사항</h3>
-    <input class="section-main-button" id="customerInfoSaveBtn" type="button" value="고객정보저장">
+    <input class="section-main-button" type="button" value="검색" id="customer-num-search">
+    <input class="section-main-button" id="customerInfoSaveBtn" type="button" value="고객정보저장" onclick="saveUserInfo()">
     <div>
         <form id="customer-info-form">
+            <input type="hidden" id="customer-num">
             <table>
                 <tr>
-                    <td class="input-title">* 고객번호</td>
-                    <td style="display: flex">
-                        <input type="text" id="customer-num">
-                        <input type="button" value="검색" id="customer-num-search">
-                    </td>
                     <td class="input-title">* 고객명</td>
                     <td>
                         <input type="text" id="customer-name">
