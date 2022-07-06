@@ -6,15 +6,23 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="../resources/css/customerNumSearchForm.css" />
-    <title>고객코드 검색</title>
+    <title>고객정보 검색</title>
 </head>
 <body>
-<h1>고객코드 검색 결과</h1>
+<h1>고객정보 검색</h1>
 <p id="notice"></p>
+<div>
+    <form>
+        <input type="text" placeholder="아이디" id="customerId">
+        <input type="text" placeholder="전화번호" id="customerPhone">
+        <input type="button" id="customerSearchBtn" value="검색">
+    </form>
+</div>
+<h1>검색 결과</h1>
 <div>
     <table id="customerInfoTable">
         <tr>
-            <td>고객번호</td>
+            <td>고객 번호</td>
             <td>고객 ID</td>
             <td>고객 이름</td>
             <td>고객 전화번호</td>
@@ -27,14 +35,73 @@
             <td>지번주소</td>
             <td>상세주소</td>
         </tr>
-        <tr id="customerInfo"></tr>
+        <tr id="searchResult"></tr>
     </table>
-    <br>
-    <input type="button" value="닫기" onclick="window.close()">
 </div>
+<br>
+<input type="button" value="닫기" onclick="window.close()">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-    const customerNum = window.opener.document.getElementById( "customer-num" ).value;
+    $(function () {
+        createNoResultMsg();
+    });
+
+    function createNoResultMsg() {
+        let searchResult = document.getElementById("searchResult");
+        if (searchResult.children.length == 0) {
+            let td = document.createElement("td");
+            td.innerHTML = "- NO RESULTS FOUND -";
+            td.setAttribute("colspan", "12");
+            td.setAttribute("id", "noResult");
+            searchResult.appendChild(td);
+        }
+    }
+
+    $("#customerSearchBtn").click(function () {
+        const customerId = $("#customerId");
+        const customerPhone = $("#customerPhone");
+
+        if (customerId.val() == '' && customerPhone.val() == '') {
+            alert("아이디 또는 전화번호를 입력하세요.");
+            return false;
+        }
+
+        $.ajax({
+            url: "customerSearch.php",
+            type: "POST",
+            data: {customerId : customerId.val(), customerPhone : customerPhone.val()},
+            dataType: "json",
+            success: function (data) {
+                if (data.result == 'NOTHING_TO_SEARCH') {
+                    $("*").remove("#customerInfoRow");
+                    createNoResultMsg();
+                    alert("정보가 없습니다.");
+                } else {
+                    $("#noResult").remove();
+                    $("*").remove("#customerInfoRow");
+                    for (let i = 0; i < data.result.length; i++) {
+                        let tr = document.createElement("tr");
+                        tr.setAttribute("id", "customerInfoRow");
+                        tr.setAttribute("onclick", "sendCustomerInfo()");
+                        tr.setAttribute("style", "cursor: pointer");
+                        $.each(data.result[i], function (key, value) {
+                            let td = document.createElement("td");
+                            td.setAttribute("id", key);
+                            td.innerHTML = value;
+                            tr.appendChild(td);
+                        });
+                        $("#customerInfoTable>tbody:last").append(tr)
+                    }
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert("error : " + textStatus + "\n" + errorThrown);
+            }
+       });
+    });
+
+
+/*    const customerNum = window.opener.document.getElementById( "customer-num" ).value;
     $(document).ready(function () {
        $.ajax({
            url: "customerNumSearch.php",
@@ -57,7 +124,7 @@
                alert(err);
            }
        })
-    });
+    });*/
 
     function sendCustomerInfo() {
         const customerNum = document.getElementById("customer_num").innerHTML;
@@ -103,7 +170,6 @@
         saveBtn.setAttribute("value", "고객정보수정");
         saveBtn.setAttribute("onclick", "updateUserInfo();");
         //window.opener.document.getElementById("section-main-title").after(updateBtn);
-        window.opener.document.getElementById("customer-num").setAttribute("readonly", "readonly");
 
         window.close();
     }
