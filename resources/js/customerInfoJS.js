@@ -180,7 +180,7 @@ function isCustomerNumExisted() {
 function generateYearMonth() {
     const now = new Date();
     const year = now.getFullYear().toString().substring(2);
-    const month = now.getMonth();
+    const month = now.getMonth()+1;
     return year + "_" +month + "_";
 }
 
