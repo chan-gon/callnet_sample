@@ -43,3 +43,10 @@ function loginProc() {
         }
     });
 }
+
+// 키보드 엔터 키로 로그인
+$("#memberPwd").keypress(function (event) {
+   if (event.which == 13) {
+       loginProc();
+   }
+});
