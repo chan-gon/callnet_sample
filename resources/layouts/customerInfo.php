@@ -4,7 +4,6 @@
     <input class="section-main-button" id="customerInfoSaveBtn" type="button" value="고객정보저장" onclick="saveUserInfo()">
     <div>
         <form id="customer-info-form">
-            <input type="hidden" id="customer-num">
             <table>
                 <tr>
                     <td class="input-title">* 고객명</td>
@@ -26,11 +25,6 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="input-title">전화번호</td>
-                    <td style="display: flex">
-                        <input type="text" id="customer-tel" placeholder="숫자만 입력하세요.">
-                        <input type="button" value="&#9743;">
-                    </td>
                     <td class="input-title">* 핸드폰</td>
                     <td style="display: flex">
                         <input type="text" id="customer-phone" placeholder="필수 입력 사항">

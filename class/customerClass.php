@@ -1,17 +1,16 @@
 <?php
 class customerClass extends dbConClass {
     // 고객정보 등록
-    public function addCustomerInfo($customerNum, $customerId, $customerName, $customerGrade, $customerTel, $customerPhone, $customerEmailAddr, $zonecode, $roadAddr, $jibunAddr, $specificAddr) {
+    public function addCustomerInfo($customerNum, $customerId, $customerName, $customerGrade, $customerPhone, $customerEmailAddr, $zonecode, $roadAddr, $jibunAddr, $specificAddr) {
         try {
             $this->db->beginTransaction();
-            $sql = "INSERT INTO customer(customer_num, customer_id, customer_name, customer_tel, customer_phone, customer_email, customer_grade, customer_grade_date, zonecode, road_addr, jibun_addr, specific_addr)
-                    VALUES(:customerNum, :customerId, :customerName, :customerTel, :customerPhone, :customerEmailAddr, :customerGrade, to_char(current_timestamp, 'YYYY-mm-dd'), :zonecode, :roadAddr, :jibunAddr, :specificAddr)";
+            $sql = "INSERT INTO customer(customer_num, customer_id, customer_name, customer_phone, customer_email, customer_grade, customer_grade_date, zonecode, road_addr, jibun_addr, specific_addr)
+                    VALUES(:customerNum, :customerId, :customerName, :customerPhone, :customerEmailAddr, :customerGrade, to_char(current_timestamp, 'YYYY-mm-dd'), :zonecode, :roadAddr, :jibunAddr, :specificAddr)";
             $stmt = $this->db->prepare($sql);
             $stmt->bindValue(':customerNum', $customerNum, PDO::PARAM_STR);
             $stmt->bindValue(':customerId', $customerId, PDO::PARAM_STR);
             $stmt->bindValue(':customerName', $customerName, PDO::PARAM_STR);
             $stmt->bindValue(':customerGrade', $customerGrade, PDO::PARAM_STR);
-            $stmt->bindValue(':customerTel', $customerTel, PDO::PARAM_STR);
             $stmt->bindValue(':customerPhone', $customerPhone, PDO::PARAM_STR);
             $stmt->bindValue(':customerEmailAddr', $customerEmailAddr, PDO::PARAM_STR);
             $stmt->bindValue(':zonecode', $zonecode, PDO::PARAM_STR);
@@ -45,17 +44,6 @@ class customerClass extends dbConClass {
             return $customerInfo;
         } else {
             return NULL;
-        }
-    }
-
-    // 고객정보 수정
-    public function updateCustomerInfo($customerNum, $customerId, $customerName, $customerGrade, $customerTel, $customerPhone, $customerEmailAddr, $zonecode, $roadAddr, $jibunAddr, $specificAddr) {
-        try {
-            $this->db->beginTransaction();
-            $sql = "UPDATE customer SET ";
-        } catch (PDOException $e) {
-            $this->db->rollBack();
-            echo "에러 : ".$e->getMessage();
         }
     }
 }
