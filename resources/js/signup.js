@@ -1,40 +1,35 @@
 $(function() {
-    $("#submitBtn").click(function() {
-        var isSignable = true;
 
+    // 아이디 중복체크 실행 여부 확인값 초기화
+    idCheckInit();
+    function idCheckInit() {
+        if (document.getElementById("idIsCheckedOrNot").value == "1") {
+            document.getElementById("idIsCheckedOrNot").value = "0";
+        }
+    }
+
+    $("#submitBtn").click(function() {
+        let isSignable;
         const memberId = document.querySelector('#memberId');
         const memberPwd = document.querySelector('#memberPwd');
         const memberName = document.querySelector('#memberName');
+        const memberGrade = document.querySelector('#memberGrade');
 
-        const elementArr = [
-            memberId, memberPwd, memberName
-        ];
-
-        // 아이디, 비밀번호, 이름 빈칸 체크
-        elementArr.forEach(function(inputTag) {
-            if (inputTag.value == null || inputTag.value == "") {
-                alert(inputTag.placeholder + " 입력하세요.");
-                isSignable = false;
-                return false;
-            }
-        });
-        // 등급 미선택 체크
-        const memberGradeVal = $("#memberGrade option:selected").text();
-        if (memberGradeVal == "선택") {
-            alert("등급을 선택하세요.");
+        if ($("#idIsCheckedOrNot").val() == "0") {
+            alert("아이디 중복체크를 반드시 해주세요.");
             isSignable = false;
             return false;
         }
 
         isSignable = true;
 
-        if (isSignable == true) {
+        if (isSignable) {
 
             const formData = {
                 memberId : memberId.value,
                 memberPwd : memberPwd.value,
                 memberName : memberName.value,
-                memberGrade : memberGradeVal
+                memberGrade : memberGrade.value
             }
 
             $.ajax({
@@ -46,42 +41,49 @@ $(function() {
                     if (data.result == 0) {
                         alert("회원가입 완료");
                         location.replace('../../index.php');
-                    } else if (data.result == 2) {
-                        alert("입력된 값이 없습니다.");
-                    } else {
+                    } else if (data.result == 1) {
                         alert("회원가입 실패. 다시 시도해 주세요.");
+                    }
+                    if (data.result == 'SIGNUP_ERROR') {
+                        alert(data.msg);
                     }
                 },
                 error: function (err) {
                     alert(err);
                 }
             });
+        } else {
+            alert("")
         }
     });
 });
 
 // 아이디 중복 체크
-$('#idcheck').on('click', function() {
-    const memberId = $('#memberId').val();
-    if (memberId == null || memberId == "") {
-        alert("아이디를 입력하세요.");
-        return;
-    }
+function idCheck() {
+    const memberId = $('#memberId');
     $.ajax({
         url: "idCheck.php",
         type: "POST",
         dataType: "json",
-        data: {memberId : memberId},
+        data: {memberId : memberId.val()},
         success: function (data) {
-            console.log(data);
             if (data.result == 0) {
                 alert("사용할 수 없는 아이디.");
-            } else if (data.result == 1) {
+                memberId.focus();
+                $("#idIsCheckedOrNot").val("0");
+            }
+            if (data.result == 1) {
                 alert("사용 가능한 아이디.");
+                $("#idIsCheckedOrNot").val("1");
+            }
+            if (data.result == 'FORMAT_ERROR') {
+                alert(data.msg);
+                memberId.focus();
+                $("#idIsCheckedOrNot").val("0");
             }
         },
-        error: function (err) {
-            alert(err);
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert("error : " + textStatus + "\n" + errorThrown);
         }
     });
-});
+}

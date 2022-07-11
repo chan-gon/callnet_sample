@@ -11,16 +11,17 @@
 <div class="register">
         <h3>회원가입</h3>
         <form>
+            <input type="hidden" id="idIsCheckedOrNot" value="0">
             <div class="flex">
                 <ul class="container">
                     <li class="item center">
                         아이디
                     </li>
                     <li class="item">
-                        <input type="text" id="memberId" name="memberId" placeholder="아이디" required>
+                        <input type="text" id="memberId" name="memberId" placeholder="아이디">
                     </li>
                     <li class="item">
-                        <button class="idcheck" id="idcheck" name="idcheck">중복확인</button>
+                        <button class="idcheck" type="button" onclick="idCheck()">중복확인</button>
                     </li>
                 </ul>
                 <ul class="container">
@@ -28,10 +29,10 @@
                         비밀번호
                     </li>
                     <li class="item">
-                        <input type="password" id="memberPwd" name="memberPwd" placeholder="비밀번호" required>
+                        <input type="password" id="memberPwd" name="memberPwd" placeholder="비밀번호">
                     </li>
                     <li class="item">
-                        
+
                     </li>
                 </ul>
                 <ul class="container">
@@ -39,7 +40,7 @@
                         이름
                     </li>
                     <li class="item">
-                        <input type="text" id="memberName" name="memberName" placeholder="이름" required>
+                        <input type="text" id="memberName" name="memberName" placeholder="이름">
                     </li>
                     <li class="item">
                         
