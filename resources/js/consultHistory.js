@@ -75,6 +75,8 @@ $("#consultHistorySearchBtn").click(function () {
                 for (let i = 0; i < data.result.length; i++) {
                      let tr = document.createElement("tr");
                      tr.setAttribute("id", "consultHistoryRow");
+                     tr.setAttribute("style", "cursor: pointer");
+                     tr.setAttribute("onclick", "getConsultInfo(this)");
                     $.each(data.result[i], function (key, value) {
                         let td = document.createElement("td");
                         td.setAttribute("id", key);
@@ -124,3 +126,20 @@ $("#consultHistoryReset").click(function () {
         $("#consult-history-form")[0].reset();
     }
 });
+
+// 상담이력 호출
+function getConsultInfo(e) {
+    const customerCID = e.children[2].innerHTML;
+    $.ajax({
+        url: "web/getConsultHistory.php",
+        type: "POST",
+        data: {customerCID : customerCID},
+        dataType: "json",
+        success: function (data) {
+            window.open("web/consultInfo.php", "consultInfo", 'width=1550px,height=700px');
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert("error : " + textStatus + "\n" + errorThrown);
+        }
+    });
+}
