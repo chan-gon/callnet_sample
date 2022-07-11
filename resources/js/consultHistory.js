@@ -117,3 +117,13 @@ function convertExcel() {
         });
     }
 };
+
+// 초기화
+$("#consultHistoryReset").click(function () {
+    if (confirm("입력값을 초기화 하시겠습니까?")) {
+        $("#consult-history-form")[0].reset();
+        const saveBtn = window.opener.document.getElementById("customerInfoSaveBtn");
+        saveBtn.setAttribute("value", "고객정보저장");
+        saveBtn.setAttribute("onclick", "saveUserInfo()");
+    }
+});

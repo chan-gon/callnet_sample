@@ -143,3 +143,10 @@ $("#customer-email").change(function () {
         }
     });
 });
+
+// 초기화
+$("#customerInfoReset").click(function () {
+   if (confirm("고객정보 입력값을 초기화 하시겠습니까?")) {
+       $("#customer-info-form")[0].reset();
+   }
+});

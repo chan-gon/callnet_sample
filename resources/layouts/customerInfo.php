@@ -1,5 +1,6 @@
 <div style="padding-left:16px">
     <h3 class="section-main-title" id="section-main-title">&#9654; 고객정보 *  필수입력 사항</h3>
+    <input class="section-main-button" type="button" value="초기화" id="customerInfoReset">
     <input class="section-main-button" type="button" value="검색" id="customer-num-search">
     <input class="section-main-button" id="customerInfoSaveBtn" type="button" value="고객정보저장" onclick="saveUserInfo()">
     <div>
