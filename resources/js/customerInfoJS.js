@@ -96,9 +96,11 @@ function updateUserInfo() {
            dataType: "json",
            success: function (data) {
                if (data.result == 'SUCCESS') {
-                   alert("고객정보 수정 완료.");
+                   alert(data.msg);
                } else if (data.result == 'NOTHING_TO_UPDATE') {
-                   alert("수정할 데이터가 없습니다.");
+                   alert(data.msg);
+               } else if (data.result == 'USER_UPDATE_ERROR') {
+                   alert(data.msg);
                }
            },
             error: function (jqXHR, textStatus, errorThrown) {

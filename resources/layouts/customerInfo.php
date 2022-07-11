@@ -4,6 +4,7 @@
     <input class="section-main-button" id="customerInfoSaveBtn" type="button" value="고객정보저장" onclick="saveUserInfo()">
     <div>
         <form id="customer-info-form">
+            <input id="customer-num" type="hidden">
             <table>
                 <tr>
                     <td class="input-title">* 고객명</td>

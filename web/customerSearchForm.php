@@ -25,7 +25,6 @@
             <td>고객 번호</td>
             <td>고객 ID</td>
             <td>고객 이름</td>
-            <td>고객 전화번호</td>
             <td>고객 휴대폰</td>
             <td>고객 이메일</td>
             <td>고객 등급</td>
@@ -100,38 +99,11 @@
        });
     });
 
-
-/*    const customerNum = window.opener.document.getElementById( "customer-num" ).value;
-    $(document).ready(function () {
-       $.ajax({
-           url: "customerNumSearch.php",
-           type: "POST",
-           data: {customerNum : customerNum},
-           dataType: "json",
-           success: function (data) {
-               if (data.result == 'FAIL') {
-                   $("#notice").html("해당 고객번호의 고객 정보를 찾을 수 없습니다.");
-                   $("#customerInfoTable").remove();
-               } else if (data.result == 'DATA-NOTFOUND') {
-                   $("#notice").html("데이터가 제대로 전송되지 않았습니다.");
-               } else {
-                   $.each(data.result, function (key, value) {
-                        $("#customerInfo").append("<td style='cursor: pointer' onclick='sendCustomerInfo()' id='"+key+"'>" + value +"</td>");
-                   });
-               }
-           },
-           error: function (err) {
-               alert(err);
-           }
-       })
-    });*/
-
     function sendCustomerInfo() {
         const customerNum = document.getElementById("customer_num").innerHTML;
         const customerName = document.getElementById("customer_name").innerHTML;
         const customerId = document.getElementById("customer_id").innerHTML;
         const customerGrade = document.getElementById("customer_grade").innerHTML;
-        const customerTel = document.getElementById("customer_tel").innerHTML;
         const customerPhone = document.getElementById("customer_phone").innerHTML;
 
         const zonecode = document.getElementById("zonecode").innerHTML;
@@ -156,7 +128,6 @@
             window.opener.document.getElementById("customer-grade").selectedIndex = 3;
         }
 
-        window.opener.document.getElementById("customer-tel").value = customerTel;
         window.opener.document.getElementById("customer-phone").value = customerPhone;
         window.opener.document.getElementById("email-input-one").value = customerEmailOne;
         window.opener.document.getElementById("email-input-two").value = customerEmailTwo;
