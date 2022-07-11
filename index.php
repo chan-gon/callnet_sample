@@ -10,7 +10,7 @@
 <body>
     <main id="main-holder">
         <h1 id="login-header">로그인</h1>
-        <form role="form" id="login-form" name="login-form" onsubmit="return checkInput()">
+        <form role="form" id="login-form" name="login-form">
             <input type="text" name="memberId" id="memberId" class="login-form-field" placeholder="아이디" autofocus>
             <input type="password" name="memberPwd" id="memberPwd" class="login-form-field" placeholder="비밀번호">
             <input type="button" value="로그인" id="login-form-submit">
