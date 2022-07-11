@@ -56,14 +56,26 @@
         }
     }
 
+    // 검색 버튼 클릭
     $("#customerSearchBtn").click(function () {
+        customerSearch();
+    });
+
+    // 엔터 키 검색
+    $("#customerId").keypress(function (event) {
+        if (event.which == 13) {
+            customerSearch();
+        }
+    });
+    $("#customerPhone").keypress(function (event) {
+        if (event.which == 13) {
+            customerSearch();
+        }
+    });
+
+    function customerSearch() {
         const customerId = $("#customerId");
         const customerPhone = $("#customerPhone");
-
-        if (customerId.val() == '' && customerPhone.val() == '') {
-            alert("아이디 또는 전화번호를 입력하세요.");
-            return false;
-        }
 
         $.ajax({
             url: "customerSearch.php",
@@ -74,8 +86,12 @@
                 if (data.result == 'NOTHING_TO_SEARCH') {
                     $("*").remove("#customerInfoRow");
                     createNoResultMsg();
-                    alert("정보가 없습니다.");
-                } else {
+                    alert(data.msg);
+                }
+                else if (data.result == 'CUSTOMER_SEARCH_ERROR') {
+                    alert(data.msg);
+                }
+                else {
                     $("#noResult").remove();
                     $("*").remove("#customerInfoRow");
                     for (let i = 0; i < data.result.length; i++) {
@@ -96,8 +112,8 @@
             error: function (jqXHR, textStatus, errorThrown) {
                 alert("error : " + textStatus + "\n" + errorThrown);
             }
-       });
-    });
+        });
+    }
 
     function sendCustomerInfo() {
         const customerNum = document.getElementById("customer_num").innerHTML;
