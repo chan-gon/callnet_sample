@@ -55,7 +55,6 @@ $("#consultRecordSaveBtn").click(function () {
    const customerNum = $("#customerNum");
    const consultDate = $("#consultDate");
    const consultantName = $("#consultantName");
-   const consultRoot = $("input[name='consultRoot']");
    const categoryLarge = $("#categoryLarge option:selected");
    const categoryMedium = $("#categoryMedium option:selected");
    const consultResult = $("#consultResult option:selected");
@@ -69,50 +68,9 @@ $("#consultRecordSaveBtn").click(function () {
        consultRoot : $("input:radio[name='consultRoot']:checked").val(),
        categoryLarge : categoryLarge.text(),
        categoryMedium : categoryMedium.text(),
-       consultResult : consultResult.val(),
+       consultResult : consultResult.text(),
        consultContent : consultContent.val()
    }
-
-    if (customerCID.val() == '') {
-        alert("고객 CID를 입력해주세요.");
-        customerCID.focus();
-        return false;
-    }
-    if (customerNum.val() == '') {
-        alert("고객번호를 입력해주세요.");
-        customerNum.focus();
-        return false;
-    }
-    if (consultDate.val() == '') {
-        alert("상담일자를 선택하세요.");
-        consultDate.focus();
-        return false;
-    }
-    if (consultantName.val() == '') {
-        alert("상담원을 입력하세요.");
-        consultantName.focus();
-        return false;
-    }
-    if (!consultRoot.is(':checked')) {
-        alert("상담경로를 체크하세요.");
-        return false;
-    }
-    if (categoryLarge.text() == '-- 선택 --') {
-        alert("대분류를 선택하세요.");
-        return false;
-    }
-    if (categoryMedium.text() == '-- 선택 --') {
-        alert("중분류를 선택하세요.");
-        return false;
-    }
-    if (consultResult.val() == '') {
-        alert("상담결과를 선택하세요.");
-        return false;
-    }
-    if (consultContent.val().length == 0) {
-        alert("상담내용을 입력하세요.");
-        return false;
-    }
 
     if (customerNumChk()) {
         // 고객번호가 존재하면 상담기록 저장
@@ -125,10 +83,15 @@ $("#consultRecordSaveBtn").click(function () {
                 if (data.result == 'SUCCESS') {
                     alert("상담기록 등록 완료");
                     $("#consult-record-form")[0].reset();
-                } else if (data.result == 'DATA-NOTFOUND') {
-                    alert("데이터가 제대로 전송되지 않았습니다.");
-                } else {
-                    alert("상담기록 등록 실패. 다시 시도해 주세요.");
+                }
+                else if (data.result == 'FAIL') {
+                    alert(data.msg);
+                }
+                else if (data.result == 'DATA-NOTFOUND') {
+                    alert(data.msg);
+                }
+                else if (data.result == 'CONSULT_RECORD_ERROR') {
+                    alert(data.msg);
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {
@@ -140,13 +103,12 @@ $("#consultRecordSaveBtn").click(function () {
         alert("존재하지 않는 고객번호 입니다.");
         customerNum.focus();
     }
-
-
 });
 
 // 고객번호 유무 확인
 function customerNumChk() {
     const customerNum = $("#customerNum").val();
+
     let result;
     $.ajax({
         url: "web/customerNumChk.php",
@@ -159,8 +121,10 @@ function customerNumChk() {
                 result = true;
             } else if (data.result == 'NOT_EXISTED') {
                 result = false;
-            } else {
-                alert("데이터가 제대로 전송되지 않았습니다.");
+            } else if (data.result == 'DATA-NOTFOUND') {
+                alert(data.msg);
+            } else if (data.result == 'CUSTOMER_NUM_ERROR') {
+                alert(data.msg);
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {
