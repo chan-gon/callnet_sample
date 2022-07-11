@@ -148,5 +148,8 @@ $("#customer-email").change(function () {
 $("#customerInfoReset").click(function () {
    if (confirm("고객정보 입력값을 초기화 하시겠습니까?")) {
        $("#customer-info-form")[0].reset();
+       const saveBtn = document.getElementById("customerInfoSaveBtn");
+       saveBtn.setAttribute("value", "고객정보저장");
+       saveBtn.setAttribute("onclick", "saveUserInfo()");
    }
 });
