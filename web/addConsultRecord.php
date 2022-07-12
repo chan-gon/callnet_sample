@@ -6,6 +6,7 @@ if (isset($_POST)) {
      // 입력값 검증
     $customerCID = $_POST['customerCID'];
     $customerNum = $_POST['customerNum'];
+
     $consultDate = $_POST['consultDate'];
     $consultantName = $_POST['consultantName'];
     $consultRoot = $_POST['consultRoot'];
@@ -36,7 +37,7 @@ if (isset($_POST)) {
     }
     else {
         $c = new consultClass();
-        $consulting = $c->addConsultRecord($customerCID, $customerNum, $consultDate, $consultantName, $consultRoot, $categoryLarge, $categoryMedium, $consultResult, $consultContent);
+        $consulting = $c->addConsultRecord($customerCID, $customerNum, $memberNum, $consultDate, $consultantName, $consultRoot, $categoryLarge, $categoryMedium, $consultResult, $consultContent);
         if ($consulting) {
             echo json_encode(array('result'=>'SUCCESS', 'msg'=>'상담기록 등록 완료'));
         } else {

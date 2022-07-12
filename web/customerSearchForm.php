@@ -127,6 +127,7 @@
         const customerEmailTwo = customerEmailArr[1];
 
         window.opener.document.getElementById("customer-num-hidden").value = customerNum;
+        window.opener.document.getElementById("customerNum").value = customerNum;
         window.opener.document.getElementById("customer-name").value = customerName;
 
         window.opener.document.getElementById("customer-phone").value = customerPhone;
@@ -141,8 +142,6 @@
         const saveBtn = window.opener.document.getElementById("customerInfoSaveBtn");
         saveBtn.setAttribute("value", "고객정보수정");
         saveBtn.setAttribute("onclick", "updateUserInfo();");
-        //window.opener.document.getElementById("section-main-title").after(updateBtn);
-
         window.close();
     }
 </script>

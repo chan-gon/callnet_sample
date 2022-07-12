@@ -3,7 +3,7 @@
     <input class="section-main-button" id="consultRecordSaveBtn" type="button" value="상담기록 저장">
     <div>
         <form id="consult-record-form">
-            <input type="hidden" id="member-num-hidden">
+            <input type="hidden" id="member-num-hidden" value="<?php echo $_SESSION['memberNum'] ?>">
             <table>
                 <tr>
                     <td class="input-title">* CID</td>
@@ -12,7 +12,7 @@
                     </td>
                     <td class="input-title">* 고객번호</td>
                     <td>
-                        <input type="text" id="customerNum">
+                        <input type="text" id="customerNum" disabled>
                     </td>
                     <td class="input-title">* 상담일자</td>
                     <td>
