@@ -8,7 +8,7 @@ if (isset($_POST)) {
         $errorMsg = "아이디를 입력하세요.";
         echo json_encode(array("result"=>"FORMAT_ERROR", "msg"=>$errorMsg));
     }
-    else if (!preg_match("((([a-zA-Z]+\d+)|(\d+[a-zA-Z]+))+)", $memberId)) {
+    else if (!preg_match("(^[A-Za-z0-9 ]+$)", $memberId)) {
         $errorMsg = "잘못된 아이디 입력 양식.\n영문+숫자 조합으로 아이디를 입력하세요. Ex) aa77";
         echo json_encode(array("result"=>"FORMAT_ERROR", "msg"=>$errorMsg));
     }

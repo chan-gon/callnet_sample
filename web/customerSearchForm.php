@@ -13,7 +13,7 @@
 <p id="notice"></p>
 <div>
     <form>
-        <input type="text" placeholder="아이디" id="customerId">
+        <input type="text" placeholder="고객명" id="customerName">
         <input type="text" placeholder="전화번호" id="customerPhone">
         <input type="button" id="customerSearchBtn" value="검색">
     </form>
@@ -23,12 +23,9 @@
     <table id="customerInfoTable">
         <tr>
             <td>고객 번호</td>
-            <td>고객 ID</td>
             <td>고객 이름</td>
             <td>고객 휴대폰</td>
             <td>고객 이메일</td>
-            <td>고객 등급</td>
-            <td>고객 등급 진입일</td>
             <td>우편번호</td>
             <td>도로명주소</td>
             <td>지번주소</td>
@@ -62,7 +59,7 @@
     });
 
     // 엔터 키 검색
-    $("#customerId").keypress(function (event) {
+    $("#customerName").keypress(function (event) {
         if (event.which == 13) {
             customerSearch();
         }
@@ -74,13 +71,13 @@
     });
 
     function customerSearch() {
-        const customerId = $("#customerId");
+        const customerName = $("#customerName");
         const customerPhone = $("#customerPhone");
 
         $.ajax({
             url: "customerSearch.php",
             type: "POST",
-            data: {customerId : customerId.val(), customerPhone : customerPhone.val()},
+            data: {customerName : customerName.val(), customerPhone : customerPhone.val()},
             dataType: "json",
             success: function (data) {
                 if (data.result == 'NOTHING_TO_SEARCH') {
@@ -118,8 +115,6 @@
     function sendCustomerInfo() {
         const customerNum = document.getElementById("customer_num").innerHTML;
         const customerName = document.getElementById("customer_name").innerHTML;
-        const customerId = document.getElementById("customer_id").innerHTML;
-        const customerGrade = document.getElementById("customer_grade").innerHTML;
         const customerPhone = document.getElementById("customer_phone").innerHTML;
 
         const zonecode = document.getElementById("zonecode").innerHTML;
@@ -133,16 +128,6 @@
 
         window.opener.document.getElementById("customer-num").value = customerNum;
         window.opener.document.getElementById("customer-name").value = customerName;
-        window.opener.document.getElementById("customer-id").value = customerId;
-
-        // 회원등급 입력값에 따른 option 태그 변경 설정
-        if (customerGrade == '일반') {
-            window.opener.document.getElementById("customer-grade").selectedIndex = 1;
-        } else if (customerGrade == '우수') {
-            window.opener.document.getElementById("customer-grade").selectedIndex = 2;
-        } else {
-            window.opener.document.getElementById("customer-grade").selectedIndex = 3;
-        }
 
         window.opener.document.getElementById("customer-phone").value = customerPhone;
         window.opener.document.getElementById("email-input-one").value = customerEmailOne;

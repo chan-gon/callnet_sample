@@ -12,22 +12,7 @@
                     <td>
                         <input type="text" id="customer-name">
                     </td>
-                    <td class="input-title">* 고객 ID</td>
-                    <td>
-                        <input type="text" id="customer-id">
-                    </td>
-                    <td class="input-title">* 회원등급</td>
-                    <td>
-                        <select id="customer-grade">
-                            <option value="">-- 선택 --</option>
-                            <option value="">일반</option>
-                            <option value="">우수</option>
-                            <option value="">VIP</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="input-title">* 핸드폰</td>
+                    <td class="input-title">* 전화번호</td>
                     <td style="display: flex">
                         <input type="text" id="customer-phone" placeholder="필수 입력 사항">
                         <input type="button" value="&#9743;">
@@ -60,7 +45,7 @@
                     <td colspan="2">
                         <input type="text" placeholder="지번주소" id="jibunAddress">
                     </td>
-                    <td colspan="4">
+                    <td colspan="2">
                         <input type="text" placeholder="상세주소" id="specificAddress">
                     </td>
                 </tr>

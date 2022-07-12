@@ -5,8 +5,6 @@ if (isset($_POST)) {
     
     // 입력값 검증
     $customerName = $_POST['customerName'];
-    $customerId = $_POST['customerId'];
-    $customerGrade = $_POST['customerGrade'];
     $customerPhone = $_POST['customerPhone'];
     $customerEmailAddr = $_POST['customerEmailAddr'];
     $zonecode = $_POST['zonecode'];
@@ -14,12 +12,8 @@ if (isset($_POST)) {
     $jibunAddr = $_POST['jibunAddr'];
     $specificAddr = $_POST['specificAddr'];
 
-    if ($customerName == "" || $customerId == "" || $customerPhone == "" || $customerEmailAddr == "") {
+    if ($customerName == "" || $customerPhone == "" || $customerEmailAddr == "") {
         $errorMsg = "필수입력 사항을 입력하세요.";
-        echo json_encode(array("result"=>"CUSTOMER_INFO_ERROR", "msg"=>$errorMsg));
-    }
-    else if ($customerGrade == "-- 선택 --") {
-        $errorMsg = "회원등급을 선택하세요.";
         echo json_encode(array("result"=>"CUSTOMER_INFO_ERROR", "msg"=>$errorMsg));
     }
     else if (!preg_match("(^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$)", $customerEmailAddr)) {
@@ -36,7 +30,7 @@ if (isset($_POST)) {
     }
     else {
         $c = new customerClass();
-        $customer = $c->addCustomerInfo($customerNum, $customerId, $customerName, $customerGrade, $customerPhone, $customerEmailAddr, $zonecode, $roadAddr, $jibunAddr, $specificAddr);
+        $customer = $c->addCustomerInfo($customerNum, $customerName, $customerPhone, $customerEmailAddr, $zonecode, $roadAddr, $jibunAddr, $specificAddr);
         if ($customer) {
             // 고객정보 등록 성공
             echo json_encode(array('result'=>'SUCCESS', 'msg'=>'고객정보 등록 완료.'));

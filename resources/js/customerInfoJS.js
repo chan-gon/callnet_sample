@@ -3,9 +3,7 @@ const only_number = /[^0-9]/g; // 숫자만 입력
 
 // 고객정보 저장
 function saveUserInfo() {
-    const customerId = $("#customer-id");
     const customerName = $("#customer-name");
-    const customerGrade = $("#customer-grade option:selected");
     const customerPhone = $("#customer-phone");
     const customerEmailAddr = $("#email-input-one");
     const customerEmailDomain = $("#email-input-two");
@@ -15,10 +13,8 @@ function saveUserInfo() {
     const specificAddr = $("#specificAddress");
 
     const formData = {
-        customerNum : generateYearMonth() + customerPhone.val().replace(only_number, "").substring(3),
-        customerId :customerId.val(),
+        customerNum : Math.random().toString(36).substring(2,11), //36진수 난수 생성
         customerName : customerName.val(),
-        customerGrade : customerGrade.text(),
         customerPhone : customerPhone.val().replace(only_number, ""),
         customerEmailAddr : customerEmailAddr.val() + "@" + customerEmailDomain.val(),
         zonecode : zonecode.val(),
@@ -52,20 +48,11 @@ function saveUserInfo() {
         });
 }
 
-function generateYearMonth() {
-    const now = new Date();
-    const year = now.getFullYear().toString().substring(2);
-    const month = now.getMonth()+1;
-    return year + "_" +month + "_";
-}
-
 function updateUserInfo() {
     if (confirm("고객정보를 수정하시겠습니까?")) {
 
         const customerNum = $("#customer-num");
-        const customerId = $("#customer-id");
         const customerName = $("#customer-name");
-        const customerGrade = $("#customer-grade option:selected");
         const customerTel = $("#customer-tel");
         const customerPhone = $("#customer-phone");
         const customerEmailAddr = $("#email-input-one");
@@ -77,9 +64,7 @@ function updateUserInfo() {
 
         const formData = {
             customerNum : customerNum.val(),
-            customerId :customerId.val(),
             customerName : customerName.val(),
-            customerGrade : customerGrade.text(),
             customerTel : customerTel.val(),
             customerPhone : customerPhone.val(),
             customerEmailAddr : customerEmailAddr.val() + "@" + customerEmailDomain.val(),

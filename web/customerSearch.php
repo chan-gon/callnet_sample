@@ -5,20 +5,20 @@
 require_once '../config.php';
 $pdo = new PDO(dsn);
 
-$customerId = $_POST['customerId'];
+$customerName = $_POST['customerName'];
 $customerPhone = $_POST['customerPhone'];
 
 try {
-    if ($customerId == "" && $customerPhone == "") {
-        $errorMsg = "아이디 또는 전화번호를 입력하세요.";
+    if ($customerName == "" && $customerPhone == "") {
+        $errorMsg = "고객명 또는 전화번호를 입력하세요.";
         echo json_encode(array("result"=>"CUSTOMER_SEARCH_ERROR", "msg"=>$errorMsg));
     }
     else {
         $sql = "SELECT * FROM customer WHERE";
 
         $conditions = array();
-        if (!empty($customerId)) {
-            $conditions[] = " customer_id = '$customerId' AND";
+        if (!empty($customerName)) {
+            $conditions[] = " customer_name = '$customerName' AND";
         }
         if (!empty($customerPhone)) {
             $conditions[] = " customer_phone = '$customerPhone' AND";

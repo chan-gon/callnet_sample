@@ -6,9 +6,7 @@ require_once '../config.php';
 $pdo = new PDO(dsn);
 
 $customerNum = $_POST['customerNum'];
-$customerId = $_POST['customerId'];
 $customerName = $_POST['customerName'];
-$customerGrade = $_POST['customerGrade'];
 $customerTel = $_POST['customerTel'];
 $customerPhone = $_POST['customerPhone'];
 $customerEmailAddr = $_POST['customerEmailAddr'];
@@ -20,12 +18,8 @@ $specificAddr = $_POST['specificAddr'];
 try {
 
     // 입력값 검증
-    if ($customerName == "" || $customerId == "" || $customerPhone == "" || $customerEmailAddr == "") {
+    if ($customerName == "" || $customerPhone == "" || $customerEmailAddr == "") {
         $errorMsg = "필수입력 사항을 입력하세요.";
-        echo json_encode(array("result"=>"USER_UPDATE_ERROR", "msg"=>$errorMsg));
-    }
-    else if ($customerGrade == "-- 선택 --") {
-        $errorMsg = "회원등급을 선택하세요.";
         echo json_encode(array("result"=>"USER_UPDATE_ERROR", "msg"=>$errorMsg));
     }
     else if (!preg_match("(^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$)", $customerEmailAddr)) {
@@ -42,14 +36,8 @@ try {
     }
     else {
         $conditions = array();
-        if (!empty($customerId)) {
-            $conditions[] = "customer_id = '$customerId', ";
-        }
         if (!empty($customerName)) {
             $conditions[] = "customer_name = '$customerName', ";
-        }
-        if (!empty($customerGrade)) {
-            $conditions[] = "customer_grade = '$customerGrade', ";
         }
         if (!empty($customerTel)) {
             $conditions[] = "customer_tel = '$customerTel', ";
