@@ -19,7 +19,7 @@
                     </td>
                     <td class="input-title">* 상담원</td>
                     <td>
-                        <input type="text" id="consultantName">
+                        <input type="text" id="consultantName" value="<?php echo $_SESSION['memberName'] ?>" disabled>
                     </td>
                     <td class="input-title">상담경로</td>
                     <td>

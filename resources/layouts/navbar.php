@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(!isset($_SESSION['member_id'])){ //if login in session is not set
+if(!isset($_SESSION['memberId'])){ //if login in session is not set
     header("Location: /index.php");
 }
 ?>

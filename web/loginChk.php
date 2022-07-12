@@ -22,7 +22,8 @@ if (isset($_POST)) {
             if (!isset($_SESSION)) {
                 session_start();
             }
-            $_SESSION['member_id'] = $member['member_id'];
+            $_SESSION['memberId'] = $member['member_id'];
+            $_SESSION['memberName'] = $member['member_name'];
             echo json_encode(array('result'=>'0', 'msg'=>'로그인 성공'));
         } else {
             echo json_encode(array('result'=>'1', 'msg'=>'존재하지 않는 사용자'));

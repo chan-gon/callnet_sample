@@ -26,29 +26,6 @@ function catLarge(e) {
     }
 }
 
-/*
-function catMedium(e) {
-    const a = ["취소처리"];
-    const b = [""];
-    const c = ["교환", "반품"];
-    const categorySmall = document.getElementById("categorySmall");
-
-    let resp = null;
-    if (e.value ==  "0") {
-        resp = a;
-    }
-
-    categorySmall.options.length = 0;
-    for (i in resp) {
-        let opt = document.createElement("option");
-        opt.value = resp[i];
-        opt.innerHTML = resp[i];
-        opt.setAttribute("value", i);
-        categorySmall.appendChild(opt);
-    }
-
-}*/
-
 $("#consultRecordSaveBtn").click(function () {
 
    const customerCID = $("#customerCID");
