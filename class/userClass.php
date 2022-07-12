@@ -13,7 +13,7 @@ class userClass extends dbConClass {
     }
 
     // 회원가입
-    public function signUpUser($memberId, $memberPwd, $memberName, $memberGrade) {
+    public function signUpUser($memberNum, $memberId, $memberPwd, $memberName, $memberGrade) {
         $encrypted_pwd = password_hash($memberPwd, PASSWORD_DEFAULT);
         try {
             /*
@@ -22,8 +22,9 @@ class userClass extends dbConClass {
              *  */
             $this->db->beginTransaction();
             $sql = "INSERT INTO member(member_num, member_id, member_pwd, member_name, member_grade)
-                    VALUES(gen_random_uuid(), :memberId, :memberPwd, :memberName, :memberGrade)";
+                    VALUES(:memberNum, :memberId, :memberPwd, :memberName, :memberGrade)";
             $stmt = $this->db->prepare($sql);
+            $stmt->bindValue(':memberNum', $memberNum, PDO::PARAM_STR);
             $stmt->bindValue(':memberId', $memberId, PDO::PARAM_STR);
             $stmt->bindValue(':memberPwd', $encrypted_pwd, PDO::PARAM_STR);
             $stmt->bindValue(':memberName', $memberName, PDO::PARAM_STR);

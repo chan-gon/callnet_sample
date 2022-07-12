@@ -3,6 +3,7 @@
     <input class="section-main-button" id="consultRecordSaveBtn" type="button" value="상담기록 저장">
     <div>
         <form id="consult-record-form">
+            <input type="hidden" id="member-num-hidden">
             <table>
                 <tr>
                     <td class="input-title">* CID</td>
@@ -21,7 +22,7 @@
                     <td>
                         <input type="text" id="consultantName" value="<?php echo $_SESSION['memberName'] ?>" disabled>
                     </td>
-                    <td class="input-title">상담경로</td>
+                    <td class="input-title">* 상담경로</td>
                     <td>
                         <input type="radio" name="consultRoot" value="IN">IN
                         <input type="radio" name="consultRoot" value="OUT">OUT

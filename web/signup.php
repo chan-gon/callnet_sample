@@ -4,6 +4,7 @@ if (isset($_POST)) {
     require_once '../config.php';
 
     // 입력값 검증
+    $memberNum = $_POST['memberNum'];
     $memberId = $_POST['memberId'];
     $memberPwd = $_POST['memberPwd'];
     $memberName = $_POST['memberName'];
@@ -21,8 +22,8 @@ if (isset($_POST)) {
         $errorMsg = "아이디는 최소 4글자 이상 입력해주세요.";
         echo json_encode(array("result"=>"SIGNUP_ERROR", "msg"=>$errorMsg));
     }
-    if (!preg_match("(^[A-Za-z0-9 ]+$)", $memberId)) {
-        $errorMsg = "잘못된 아이디 입력 양식.\n영문+숫자 조합으로 아이디를 입력하세요. Ex) aa77";
+    if (!preg_match("(^[a-z]+$)", $memberId)) {
+        $errorMsg = "잘못된 아이디 입력 양식.\n4~10자리 사이의 영문 소문자만 가능합니다. Ex) callnet";
         echo json_encode(array("result"=>"SIGNUP_ERROR", "msg"=>$errorMsg));
     }
     else if ($memberPwd == "") {
@@ -42,7 +43,7 @@ if (isset($_POST)) {
     }
     else {
         $c = new userClass();
-        $member = $c->signUpUser($memberId, $memberPwd, $memberName, $memberGrade);
+        $member = $c->signUpUser($memberNum, $memberId, $memberPwd, $memberName, $memberGrade);
         if ($member) { // 회원 등록 성공
             if (!isset($_SESSION)) {
                 session_start();

@@ -126,7 +126,7 @@
         const customerEmailOne = customerEmailArr[0];
         const customerEmailTwo = customerEmailArr[1];
 
-        window.opener.document.getElementById("customer-num").value = customerNum;
+        window.opener.document.getElementById("customer-num-hidden").value = customerNum;
         window.opener.document.getElementById("customer-name").value = customerName;
 
         window.opener.document.getElementById("customer-phone").value = customerPhone;

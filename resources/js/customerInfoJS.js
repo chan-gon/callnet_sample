@@ -51,7 +51,7 @@ function saveUserInfo() {
 function updateUserInfo() {
     if (confirm("고객정보를 수정하시겠습니까?")) {
 
-        const customerNum = $("#customer-num");
+        const customerNum = $("#customer-num-hidden");
         const customerName = $("#customer-name");
         const customerTel = $("#customer-tel");
         const customerPhone = $("#customer-phone");

@@ -24,14 +24,13 @@ $(function() {
         isSignable = true;
 
         if (isSignable) {
-
             const formData = {
+                memberNum : Math.random().toString(36).substring(2,11), //36진수 난수 생성
                 memberId : memberId.value,
                 memberPwd : memberPwd.value,
                 memberName : memberName.value,
                 memberGrade : memberGrade.value
             }
-
             $.ajax({
                 url: "signup.php",
                 type: "POST",
