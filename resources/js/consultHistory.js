@@ -124,6 +124,8 @@ function convertExcel() {
 $("#consultHistoryReset").click(function () {
     if (confirm("상담이력 검색 입력값을 초기화 하시겠습니까?")) {
         $("#consult-history-form")[0].reset();
+        $("*").remove("#consultHistoryRow");
+        createNoResultMsg();
     }
 });
 
