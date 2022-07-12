@@ -7,7 +7,7 @@ function createNoResultMsg() {
     if (searchResult.children.length == 0) {
         let td = document.createElement("td");
         td.innerHTML = "- NO RESULTS FOUND -";
-        td.setAttribute("colspan", "9");
+        td.setAttribute("colspan", "10");
         td.setAttribute("id", "noResult");
         searchResult.appendChild(td);
     }
@@ -130,13 +130,23 @@ $("#consultHistoryReset").click(function () {
 // 상담이력 호출
 function getConsultInfo(e) {
     const customerCID = e.children[2].innerHTML;
+    const childWin = window.open("web/consultHistoryInfo.php", "consultInfo", 'width=1550px,height=700px');
     $.ajax({
-        url: "web/getConsultHistory.php",
+        url: "web/getConsultHistoryByNum.php",
         type: "POST",
         data: {customerCID : customerCID},
         dataType: "json",
         success: function (data) {
-            window.open("web/consultInfo.php", "consultInfo", 'width=1550px,height=700px');
+            for (let i = 0; i < data.result.length; i++) {
+                let tr = document.createElement("tr");
+                $.each(data.result[i], function (key, value) {
+                   let td = document.createElement("td");
+                   td.setAttribute("id", key);
+                   td.innerHTML = value;
+                   tr.appendChild(td);
+                });
+                $("#temp-invisible-table").append(tr);
+            }
         },
         error: function (jqXHR, textStatus, errorThrown) {
             alert("error : " + textStatus + "\n" + errorThrown);

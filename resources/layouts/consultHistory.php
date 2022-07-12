@@ -67,8 +67,12 @@
                     <td>중분류</td>
                     <td>상담결과</td>
                     <td>상담원</td>
+                    <td style="text-overflow: ellipsis; white-space: nowrap;">상담내용</td>
                 </tr>
                 <tr id="search-result-area"></tr>
+            </table>
+            <table id="temp-invisible-table" style="display: none">
+
             </table>
         </form>
     </div>
