@@ -1,12 +1,13 @@
 <?php
 class consultClass extends dbConClass {
     // 상담기록 등록
-    public function addConsultRecord($customerCID, $customerNum, $memberNum, $consultDate, $consultantName, $consultRoot, $categoryLarge, $categoryMedium, $consultResult, $consultContent) {
+    public function addConsultRecord($consultNum, $customerCID, $customerNum, $memberNum, $consultDate, $consultantName, $consultRoot, $categoryLarge, $categoryMedium, $consultResult, $consultContent) {
         try {
             $this->db->beginTransaction();
-            $sql = "INSERT INTO consulting(consulting_date, consultant_name, consulting_root, category_large, category_medium, consulting_result, consulting_content, customer_cid, customer_num, member_num)
-                    VALUES(:consultDate, :consultantName, :consultRoot, :categoryLarge, :categoryMedium, :consultResult, :consultContent, :customerCID, :customerNum, :memberNum)";
+            $sql = "INSERT INTO consulting(consulting_date, consultant_name, consulting_root, category_large, category_medium, consulting_result, consulting_content, customer_cid, customer_num, member_num, consult_num)
+                    VALUES(:consultDate, :consultantName, :consultRoot, :categoryLarge, :categoryMedium, :consultResult, :consultContent, :customerCID, :customerNum, :memberNum, :consultNum)";
             $stmt = $this->db->prepare($sql);
+            $stmt->bindValue(':consultNum', $consultNum, PDO::PARAM_STR);
             $stmt->bindValue(':customerCID', $customerCID, PDO::PARAM_STR);
             $stmt->bindValue(':customerNum', $customerNum, PDO::PARAM_STR);
             $stmt->bindValue(':memberNum', $memberNum, PDO::PARAM_STR);

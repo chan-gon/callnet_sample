@@ -39,6 +39,7 @@ $("#consultRecordSaveBtn").click(function () {
    const consultContent = $("#consultContent");
 
    const formData = {
+       consultNum : Math.random().toString(36).substring(2,11), //36진수 난수 생성
        customerCID : customerCID.val(),
        customerNum : customerNum.val(),
        memberNum : memberNum.val(),
