@@ -201,6 +201,10 @@
                        window.opener.document.getElementsByClassName("section-four-table")[0].append(tr);
                    }
                }
+               else {
+                   $("*", opener.document).remove("#consultHistoryRow");
+                   window.opener.createNoResultMsg();
+               }
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert("error : " + textStatus + "\n" + errorThrown);
