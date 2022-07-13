@@ -53,7 +53,7 @@
     const categoryLarge = opener.$("#temp-invisible-table").find("#category_large").text();
     const categoryMedium = opener.$("#temp-invisible-table").find("#category_medium").text();
     const consultResult = opener.$("#temp-invisible-table").find("#consulting_result").text();
-    const consultantName = opener.$("#temp-invisible-table").find("#consulting_rep_name").text();
+    const consultantName = opener.$("#temp-invisible-table").find("#consultant_name").text();
     const consultContent = opener.$("#temp-invisible-table").find("#consulting_content").text();
 
     $("#consultRoot").text(consultRoot);

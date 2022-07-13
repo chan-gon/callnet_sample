@@ -168,9 +168,26 @@
                        tr.setAttribute("onclick", "getConsultInfo(this)");
                        $.each(data.result[i], function (key, value) {
                            let td = document.createElement("td");
-                           td.setAttribute("id", key);
-                           td.innerHTML = value;
-                           tr.appendChild(td);
+                           if (key == 'consult_num') { // consult_num 보이지 않게 처리
+                               let td_hidden = document.createElement("td");
+                               td_hidden.setAttribute("style", "display: none");
+                               td_hidden.setAttribute("id", key);
+                               td_hidden.innerHTML = value;
+                               tr.appendChild(td_hidden);
+                           }
+                           else if (key == 'customer_num') {
+                               let td_hidden = document.createElement("td");
+                               td_hidden.setAttribute("style", "display: none");
+                               td_hidden.setAttribute("id", key);
+                               td_hidden.innerHTML = value;
+                               tr.appendChild(td_hidden);
+                           }
+                           else {
+                               td.setAttribute("id", key);
+                               td.innerHTML = value;
+                               tr.appendChild(td);
+                           }
+
                        });
                        window.opener.document.getElementsByClassName("section-four-table")[0].append(tr);
                    }

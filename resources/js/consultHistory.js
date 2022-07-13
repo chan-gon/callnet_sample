@@ -79,9 +79,25 @@ $("#consultHistorySearchBtn").click(function () {
                      tr.setAttribute("onclick", "getConsultInfo(this)");
                     $.each(data.result[i], function (key, value) {
                         let td = document.createElement("td");
-                        td.setAttribute("id", key);
-                        td.innerHTML = value;
-                        tr.appendChild(td);
+                        if (key == 'consult_num') { // consult_num 보이지 않게 처리
+                            let td_hidden = document.createElement("td");
+                            td_hidden.setAttribute("style", "display: none");
+                            td_hidden.setAttribute("id", key);
+                            td_hidden.innerHTML = value;
+                            tr.appendChild(td_hidden);
+                        }
+                        else if (key == 'customer_num') {
+                            let td_hidden = document.createElement("td");
+                            td_hidden.setAttribute("style", "display: none");
+                            td_hidden.setAttribute("id", key);
+                            td_hidden.innerHTML = value;
+                            tr.appendChild(td_hidden);
+                        }
+                        else {
+                            td.setAttribute("id", key);
+                            td.innerHTML = value;
+                            tr.appendChild(td);
+                        }
                     });
                     $(".section-four-table>tbody:last").append(tr);
                 }
@@ -131,23 +147,29 @@ $("#consultHistoryReset").click(function () {
 
 // 상담이력 호출
 function getConsultInfo(e) {
-    const customerCID = e.children[2].innerHTML;
-    const childWin = window.open("web/consultHistoryInfo.php", "consultInfo", 'width=1550px,height=700px');
+    const consultNum = e.children[10].innerHTML;
+    const customerNum = e.children[11].innerHTML;
+    const childWin = window.open("web/consultHistoryInfoPage.php", "consultInfo", 'width=1550px,height=700px');
     $.ajax({
-        url: "web/getConsultHistoryByCID.php",
+        url: "web/getSingleConsultHistory.php",
         type: "POST",
-        data: {customerCID : customerCID},
+        data: {customerNum : customerNum, consultNum : consultNum},
         dataType: "json",
         success: function (data) {
-            for (let i = 0; i < data.result.length; i++) {
-                let tr = document.createElement("tr");
-                $.each(data.result[i], function (key, value) {
-                   let td = document.createElement("td");
-                   td.setAttribute("id", key);
-                   td.innerHTML = value;
-                   tr.appendChild(td);
-                });
-                $("#temp-invisible-table").append(tr);
+            if (data.msg = 'SUCCESS') {
+                console.log(data.result);
+                for (let i = 0; i < data.result.length; i++) {
+                    let tr = document.createElement("tr");
+                    $.each(data.result[i], function (key, value) {
+                        let td = document.createElement("td");
+                        td.setAttribute("id", key);
+                        td.innerHTML = value;
+                        tr.appendChild(td);
+                    });
+                    $("#temp-invisible-table").append(tr);
+                }
+            } else if (data.msg = 'DATA-NOTFOUND') {
+                alert("조회된 데이터가 없습니다. 다시 시도해 주세요.");
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {
