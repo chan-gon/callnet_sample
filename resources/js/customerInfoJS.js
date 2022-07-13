@@ -99,7 +99,7 @@ function updateUserInfo() {
 
 // 고객정보 고객코드 검색
 $("#customer-num-search").click(function () {
-    window.open("../../web/customerSearchForm.php", "customerInfo", 'width=1550px,height=700px');
+    window.open("../../web/customerSearchForm.php", "customerInfo", 'width=1200px,height=500px');
 });
 
 // 고객정보 주소 검색
