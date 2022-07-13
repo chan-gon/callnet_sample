@@ -1,13 +1,16 @@
 <?php
 class consultClass extends dbConClass {
     // 상담기록 등록
-    public function addConsultRecord($consultNum, $customerCID, $customerNum, $memberNum, $consultDate, $consultantName, $consultRoot, $categoryLarge, $categoryMedium, $consultResult, $consultContent) {
+    public function addConsultRecord($consultNum, $customerName, $customerPhone, $customerEmail, $customerCID, $customerNum, $memberNum, $consultDate, $consultantName, $consultRoot, $categoryLarge, $categoryMedium, $consultResult, $consultContent) {
         try {
             $this->db->beginTransaction();
-            $sql = "INSERT INTO consulting(consulting_date, consultant_name, consulting_root, category_large, category_medium, consulting_result, consulting_content, customer_cid, customer_num, member_num, consult_num)
-                    VALUES(:consultDate, :consultantName, :consultRoot, :categoryLarge, :categoryMedium, :consultResult, :consultContent, :customerCID, :customerNum, :memberNum, :consultNum)";
+            $sql = "INSERT INTO consulting(consulting_date, consultant_name, consulting_root, category_large, category_medium, consulting_result, consulting_content, customer_cid, customer_num, member_num, consult_num, customer_name, customer_phone, customer_email)
+                    VALUES(:consultDate, :consultantName, :consultRoot, :categoryLarge, :categoryMedium, :consultResult, :consultContent, :customerCID, :customerNum, :memberNum, :consultNum, :customerName, :customerPhone, :customerEmail)";
             $stmt = $this->db->prepare($sql);
             $stmt->bindValue(':consultNum', $consultNum, PDO::PARAM_STR);
+            $stmt->bindValue(':customerName', $customerName, PDO::PARAM_STR);
+            $stmt->bindValue(':customerPhone', $customerPhone, PDO::PARAM_STR);
+            $stmt->bindValue(':customerEmail', $customerEmail, PDO::PARAM_STR);
             $stmt->bindValue(':customerCID', $customerCID, PDO::PARAM_STR);
             $stmt->bindValue(':customerNum', $customerNum, PDO::PARAM_STR);
             $stmt->bindValue(':memberNum', $memberNum, PDO::PARAM_STR);

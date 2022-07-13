@@ -10,10 +10,22 @@
         table, td{
             border: 1px solid black;
         }
+        table {
+            width: calc(100% - 1em);
+        }
+        tr:first-child {
+            background: #D5D8DC;
+            text-align: center;
+        }
+        textarea {
+            width: calc(100% - 0.4em);
+            resize: none;
+        }
     </style>
 </head>
 <body>
 <h1>상담이력 세부 조회</h1>
+<form id="ttt">
     <table id="consultHistoryInfoTable">
         <tr style="background: #D5D8DC">
             <td>상담경로</td>
@@ -25,9 +37,8 @@
             <td>대분류</td>
             <td>중분류</td>
             <td>상담결과</td>
-            <td>상담내용</td>
         </tr>
-        <tr>
+        <tr id="consult-data-row">
             <td id="consultRoot"></td>
             <td id="customerName"></td>
             <td id="customerCID"></td>
@@ -37,9 +48,20 @@
             <td id="categoryLarge"></td>
             <td id="categoryMedium"></td>
             <td id="consultResult"></td>
-            <td id="consultContent"></td>
         </tr>
     </table>
+    <br/>
+    <table>
+        <tr>
+            <td>상담내용</td>
+        </tr>
+        <tr>
+            <td colspan="11">
+                <textarea rows="10" id="consultContent" readonly></textarea>
+            </td>
+        </tr>
+    </table>
+</form>
     <br>
     <input type="button" value="닫기" onclick="window.close()">
 </body>
@@ -66,6 +88,5 @@
     $("#categoryMedium").text(categoryMedium);
     $("#consultResult").text(consultResult);
     $("#consultContent").text(consultContent);
-
 </script>
 </html>

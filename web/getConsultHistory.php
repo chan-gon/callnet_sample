@@ -14,7 +14,7 @@
 require_once '../config.php';
 $pdo = new PDO(dsn);
 
-$sql = "SELECT a.customer_name, b.consulting_root, b.customer_cid, a.customer_phone, b.consulting_date, b.category_large, b.category_medium, b.consulting_result, b.consultant_name, b.consulting_content, b.consult_num, b.customer_num
+$sql = "SELECT b.customer_name, b.customer_phone, b.customer_email, b.consulting_root, b.customer_cid,  b.consulting_date, b.category_large, b.category_medium, b.consulting_result, b.consultant_name, b.consult_num, b.customer_num
                 FROM customer a JOIN consulting b ON a.customer_num = b.customer_num WHERE a.customer_num IS NOT NULL";
 
 $dateFrom = $_POST['consultDateFrom'];

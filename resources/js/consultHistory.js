@@ -74,6 +74,7 @@ $("#consultHistorySearchBtn").click(function () {
                 $("*").remove("#consultHistoryRow");
                 for (let i = 0; i < data.result.length; i++) {
                      let tr = document.createElement("tr");
+                    tr.setAttribute("title", "클릭하면 상담 세부 내용을 확인할 수 있습니다.");
                      tr.setAttribute("id", "consultHistoryRow");
                      tr.setAttribute("style", "cursor: pointer");
                      tr.setAttribute("onclick", "getConsultInfo(this)");
@@ -149,7 +150,7 @@ $("#consultHistoryReset").click(function () {
 function getConsultInfo(e) {
     const consultNum = e.children[10].innerHTML;
     const customerNum = e.children[11].innerHTML;
-    const childWin = window.open("web/consultHistoryInfoPage.php", "consultInfo", 'width=1550px,height=700px');
+    window.open("web/consultHistoryInfoPage.php", "consultInfo", 'width=1550px,height=700px');
     $.ajax({
         url: "web/getSingleConsultHistory.php",
         type: "POST",
@@ -157,9 +158,11 @@ function getConsultInfo(e) {
         dataType: "json",
         success: function (data) {
             if (data.msg = 'SUCCESS') {
-                console.log(data.result);
+                // 데이터를 단 건 조회하기 위해 기존 호출 데이터 tr은 제거
+                $("#row").remove();
                 for (let i = 0; i < data.result.length; i++) {
                     let tr = document.createElement("tr");
+                    tr.setAttribute("id", "row");
                     $.each(data.result[i], function (key, value) {
                         let td = document.createElement("td");
                         td.setAttribute("id", key);

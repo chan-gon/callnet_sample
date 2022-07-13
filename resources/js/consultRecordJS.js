@@ -29,10 +29,15 @@ function catLarge(e) {
 $("#consultRecordSaveBtn").click(function () {
 
    const customerCID = $("#customerCID");
+
    const customerNum = $("#customerNum");
+   const customerName = $("#customerName");
+   const customerPhone = $("#customerPhone");
+   const customerEmail = $("#customerEmail");
+    const consultantName = $("#consultantName");
+
    const memberNum = $("#member-num-hidden");
    const consultDate = $("#consultDate");
-   const consultantName = $("#consultantName");
    const categoryLarge = $("#categoryLarge option:selected");
    const categoryMedium = $("#categoryMedium option:selected");
    const consultResult = $("#consultResult option:selected");
@@ -41,6 +46,9 @@ $("#consultRecordSaveBtn").click(function () {
    const formData = {
        consultNum : Math.random().toString(36).substring(2,11), //36진수 난수 생성
        customerCID : customerCID.val(),
+       customerName : customerName.val(),
+       customerPhone : customerPhone.val(),
+       customerEmail : customerEmail.val(),
        customerNum : customerNum.val(),
        memberNum : memberNum.val(),
        consultDate : consultDate.val(),

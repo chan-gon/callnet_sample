@@ -10,28 +10,34 @@
                     <td>
                         <input type="text" id="customerCID">
                     </td>
-                    <td class="input-title">* 고객번호</td>
-                    <td>
-                        <input type="text" id="customerNum" disabled>
-                    </td>
-                    <td class="input-title">* 상담일자</td>
-                    <td>
-                        <input type="date" id="consultDate">
-                    </td>
+                </tr>
+                <tr>
                     <td class="input-title">* 상담원</td>
                     <td>
                         <input type="text" id="consultantName" value="<?php echo $_SESSION['memberName'] ?>" disabled>
                     </td>
-                    <td class="input-title">* 상담경로</td>
+                    <td class="input-title">* 고객번호</td>
                     <td>
-                        <input type="radio" name="consultRoot" value="IN">IN
-                        <input type="radio" name="consultRoot" value="OUT">OUT
-                        <input type="radio" name="consultRoot" value="홈페이지">홈페이지
-                        <input type="radio" name="consultRoot" value="매장">매장
-                        <input type="radio" name="consultRoot" value="기타">기타
+                        <input type="text" id="customerNum" disabled>
+                    </td>
+                    <td class="input-title">* 고객명</td>
+                    <td>
+                        <input type="text" id="customerName" disabled>
+                    </td>
+                    <td class="input-title">* 고객HP</td>
+                    <td>
+                        <input type="text" id="customerPhone" disabled>
+                    </td>
+                    <td class="input-title">* 고객 이메일</td>
+                    <td>
+                        <input type="text" id="customerEmail" disabled>
                     </td>
                 </tr>
                 <tr>
+                    <td class="input-title">* 상담일자</td>
+                    <td>
+                        <input type="date" id="consultDate">
+                    </td>
                     <td class="input-title">* 대분류</td>
                     <td>
                         <select id="categoryLarge" onchange="catLarge(this)">
@@ -54,6 +60,14 @@
                             <option>보류</option>
                             <option>완료</option>
                         </select>
+                    </td>
+                    <td class="input-title">* 상담경로</td>
+                    <td>
+                        <input type="radio" name="consultRoot" value="IN">IN
+                        <input type="radio" name="consultRoot" value="OUT">OUT
+                        <input type="radio" name="consultRoot" value="홈페이지">홈페이지
+                        <input type="radio" name="consultRoot" value="매장">매장
+                        <input type="radio" name="consultRoot" value="기타">기타
                     </td>
                 </tr>
                 <tr>

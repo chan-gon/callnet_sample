@@ -126,8 +126,8 @@
         const customerEmailOne = customerEmailArr[0];
         const customerEmailTwo = customerEmailArr[1];
 
+        // 고객정보 값 세팅
         window.opener.document.getElementById("customer-num-hidden").value = customerNum;
-        window.opener.document.getElementById("customerNum").value = customerNum;
         window.opener.document.getElementById("customer-name").value = customerName;
 
         window.opener.document.getElementById("customer-phone").value = customerPhone;
@@ -137,6 +137,12 @@
         window.opener.document.getElementById("roadAddress").value = roadAddr;
         window.opener.document.getElementById("jibunAddress").value = jibunAddr;
         window.opener.document.getElementById("specificAddress").value = specificAddr;
+
+        // 상담기록 값 세팅
+        window.opener.document.getElementById("customerNum").value = customerNum;
+        window.opener.document.getElementById("customerName").value = customerName;
+        window.opener.document.getElementById("customerPhone").value = customerPhone;
+        window.opener.document.getElementById("customerEmail").value = customerEmailOne+"@"+customerEmailTwo;
 
         // 고객정보입력>고객정보수정으로 버튼 상태 변경
         const saveBtn = window.opener.document.getElementById("customerInfoSaveBtn");
@@ -150,6 +156,9 @@
         //window.close();
     }
 
+    /*
+    고객정보 검색 윈도우의 출력된 고객 정보를 클릭하면 상담이력을 조회해서 출력하는 함수
+     */
     function getConsultHistoryByCustomerNum() {
         const customerNum = window.opener.document.getElementById("customer-num-hidden");
         $.ajax({
@@ -158,11 +167,12 @@
            data: {customerNum : customerNum.value},
            dataType: "json",
             success: function (data) {
-               if (data.msg = 'SUCCESS') {
+               if (data.msg == 'SUCCESS') {
                    $("#noResult", opener.document).remove();
                    $("*", opener.document).remove("#consultHistoryRow");
                    for (let i = 0; i < data.result.length; i++) {
                        let tr = document.createElement("tr");
+                       tr.setAttribute("title", "클릭하면 상담 세부 내용을 확인할 수 있습니다.");
                        tr.setAttribute("id", "consultHistoryRow");
                        tr.setAttribute("style", "cursor: pointer");
                        tr.setAttribute("onclick", "getConsultInfo(this)");
@@ -187,12 +197,9 @@
                                td.innerHTML = value;
                                tr.appendChild(td);
                            }
-
                        });
                        window.opener.document.getElementsByClassName("section-four-table")[0].append(tr);
                    }
-               } else {
-                   window.opener.createNoResultMsg();
                }
             },
             error: function (jqXHR, textStatus, errorThrown) {
