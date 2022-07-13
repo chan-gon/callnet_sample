@@ -142,7 +142,46 @@
         const saveBtn = window.opener.document.getElementById("customerInfoSaveBtn");
         saveBtn.setAttribute("value", "고객정보수정");
         saveBtn.setAttribute("onclick", "updateUserInfo();");
-        window.close();
+
+        // 해당 고객의 상담이력 호출
+        getConsultHistoryByCustomerNum();
+
+        // 화면 닫기
+        //window.close();
+    }
+
+    function getConsultHistoryByCustomerNum() {
+        const customerNum = window.opener.document.getElementById("customer-num-hidden");
+        $.ajax({
+           url: "getConsultHistoryByCustomerNum.php",
+           type: "POST",
+           data: {customerNum : customerNum.value},
+           dataType: "json",
+            success: function (data) {
+               if (data.msg = 'SUCCESS') {
+                   $("#noResult", opener.document).remove();
+                   $("*", opener.document).remove("#consultHistoryRow");
+                   for (let i = 0; i < data.result.length; i++) {
+                       let tr = document.createElement("tr");
+                       tr.setAttribute("id", "consultHistoryRow");
+                       tr.setAttribute("style", "cursor: pointer");
+                       tr.setAttribute("onclick", "getConsultInfo(this)");
+                       $.each(data.result[i], function (key, value) {
+                           let td = document.createElement("td");
+                           td.setAttribute("id", key);
+                           td.innerHTML = value;
+                           tr.appendChild(td);
+                       });
+                       window.opener.document.getElementsByClassName("section-four-table")[0].append(tr);
+                   }
+               } else {
+                   window.opener.createNoResultMsg();
+               }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert("error : " + textStatus + "\n" + errorThrown);
+            }
+        });
     }
 </script>
 </body>

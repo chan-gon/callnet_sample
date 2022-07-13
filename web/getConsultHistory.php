@@ -14,7 +14,7 @@
 require_once '../config.php';
 $pdo = new PDO(dsn);
 
-$sql = "SELECT b.consulting_root, a.customer_name, b.customer_cid, a.customer_phone, b.consulting_date, b.category_large, b.category_medium, b.consulting_result, b.consulting_rep_name, b.consulting_content
+$sql = "SELECT b.consulting_root, a.customer_name, b.customer_cid, a.customer_phone, b.consulting_date, b.category_large, b.category_medium, b.consulting_result, b.consultant_name, b.consulting_content
                 FROM customer a JOIN consulting b ON a.customer_num = b.customer_num WHERE a.customer_id IS NOT NULL";
 
 $dateFrom = $_POST['consultDateFrom'];
@@ -37,7 +37,7 @@ if (!empty($name)) {
     $sql .= " AND b.customer_name = '$name'";
 }
 if (!empty($consultantName)) {
-    $sql .= " AND b.consulting_rep_name = '$consultantName'";
+    $sql .= " AND b.consultant_name = '$consultantName'";
 }
 if (!empty($root)) {
     $sql .= " AND b.consulting_root = '$root'";

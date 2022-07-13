@@ -134,7 +134,7 @@ function getConsultInfo(e) {
     const customerCID = e.children[2].innerHTML;
     const childWin = window.open("web/consultHistoryInfo.php", "consultInfo", 'width=1550px,height=700px');
     $.ajax({
-        url: "web/getConsultHistoryByNum.php",
+        url: "web/getConsultHistoryByCID.php",
         type: "POST",
         data: {customerCID : customerCID},
         dataType: "json",
