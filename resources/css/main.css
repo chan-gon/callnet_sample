@@ -90,6 +90,7 @@ select {
 
 textarea {
     width: 100%;
+    resize: none;
 }
 
 .section-four-table {
