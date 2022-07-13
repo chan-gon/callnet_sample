@@ -72,6 +72,9 @@ $("#consultRecordSaveBtn").click(function () {
                else if (data.result == 'DATA-NOTFOUND') {
                    alert(data.msg);
                }
+               else if (data.result == 'CONSULT_RECORD_ERROR') {
+                   alert(data.msg);
+               }
            },
            error: function (jqXHR, textStatus, errorThrown) {
                alert("error : " + textStatus + "\n" + errorThrown);
