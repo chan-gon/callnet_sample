@@ -55,27 +55,28 @@
 
     // 검색 버튼 클릭
     $("#customerSearchBtn").click(function () {
-        customerSearch();
+        getCustomerByNameOrPhone();
     });
 
-    // 엔터 키 검색
+    // 엔터 키 검색(이름)
     $("#customerName").keypress(function (event) {
         if (event.which == 13) {
-            customerSearch();
+            getCustomerByNameOrPhone();
         }
     });
+    // 엔터 키 검색(전화번호)
     $("#customerPhone").keypress(function (event) {
         if (event.which == 13) {
-            customerSearch();
+            getCustomerByNameOrPhone();
         }
     });
-
-    function customerSearch() {
+    // 고객정보 검색
+    function getCustomerByNameOrPhone() {
         const customerName = $("#customerName");
         const customerPhone = $("#customerPhone");
 
         $.ajax({
-            url: "customerSearch.php",
+            url: "getCustomerByNameOrPhone.php",
             type: "POST",
             data: {customerName : customerName.val(), customerPhone : customerPhone.val()},
             dataType: "json",
@@ -94,7 +95,7 @@
                     for (let i = 0; i < data.result.length; i++) {
                         let tr = document.createElement("tr");
                         tr.setAttribute("id", "customerInfoRow");
-                        tr.setAttribute("onclick", "sendCustomerInfo()");
+                        tr.setAttribute("onclick", "sendCustomerInfo(this)");
                         tr.setAttribute("style", "cursor: pointer");
                         $.each(data.result[i], function (key, value) {
                             let td = document.createElement("td");
@@ -112,45 +113,50 @@
         });
     }
 
-    function sendCustomerInfo() {
-        const customerNum = document.getElementById("customer_num").innerHTML;
-        const customerName = document.getElementById("customer_name").innerHTML;
-        const customerPhone = document.getElementById("customer_phone").innerHTML;
+    // 고객정보 전송(고객정보/상담기록/상담이력)
+    function sendCustomerInfo(e) {
+        const customerNum = e.children[0].innerHTML;
+        $.ajax({
+           url: "getCustomerByNum.php",
+           type: "POST",
+           data: {customerNum : customerNum},
+           dataType: "json",
+           success: function (data) {
+               if (data.msg === 'SUCCESS') {
+                   // 고객정보 필드에 값 세팅
+                   window.opener.document.getElementById("customer-num-hidden").value = data.result[0].customer_num;
+                   window.opener.document.getElementById("customer-name").value = data.result[0].customer_name;
+                   window.opener.document.getElementById("customer-phone").value = data.result[0].customer_phone;
+                   // 이메일 주소 @ 기준으로 분리
+                   const temp = data.result[0].customer_email;
+                   const emailAddr = temp.split('@');
+                   window.opener.document.getElementById("email-input-one").value = emailAddr[0];
+                   window.opener.document.getElementById("email-input-two").value = emailAddr[1];
+                   window.opener.document.getElementById("zonecode").value = data.result[0].zonecode;
+                   window.opener.document.getElementById("roadAddress").value = data.result[0].road_addr;
+                   window.opener.document.getElementById("jibunAddress").value = data.result[0].jibun_addr;
+                   window.opener.document.getElementById("specificAddress").value = data.result[0].specific_addr;
+                   // 고객정보저장 버튼을 고객정보수정으로 버튼 상태 변경
+                   const saveBtn = window.opener.document.getElementById("customerInfoSaveBtn");
+                   saveBtn.setAttribute("value", "고객정보수정");
+                   saveBtn.setAttribute("onclick", "updateUserInfo();");
 
-        const zonecode = document.getElementById("zonecode").innerHTML;
-        const roadAddr = document.getElementById("road_addr").innerHTML;
-        const jibunAddr = document.getElementById("jibun_addr").innerHTML;
-        const specificAddr = document.getElementById("specific_addr").innerHTML;
+                   // 상담기록 필드에 값 세팅
+                   window.opener.document.getElementById("customerNum").value = data.result[0].customer_num;
+                   window.opener.document.getElementById("customerName").value = data.result[0].customer_name;
+                   window.opener.document.getElementById("customerPhone").value = data.result[0].customer_phone;
+                   window.opener.document.getElementById("customerEmail").value = data.result[0].customer_email;
 
-        const customerEmailArr = document.getElementById("customer_email").innerHTML.split('@');
-        const customerEmailOne = customerEmailArr[0];
-        const customerEmailTwo = customerEmailArr[1];
-
-        // 고객정보 값 세팅
-        window.opener.document.getElementById("customer-num-hidden").value = customerNum;
-        window.opener.document.getElementById("customer-name").value = customerName;
-
-        window.opener.document.getElementById("customer-phone").value = customerPhone;
-        window.opener.document.getElementById("email-input-one").value = customerEmailOne;
-        window.opener.document.getElementById("email-input-two").value = customerEmailTwo;
-        window.opener.document.getElementById("zonecode").value = zonecode;
-        window.opener.document.getElementById("roadAddress").value = roadAddr;
-        window.opener.document.getElementById("jibunAddress").value = jibunAddr;
-        window.opener.document.getElementById("specificAddress").value = specificAddr;
-
-        // 상담기록 값 세팅
-        window.opener.document.getElementById("customerNum").value = customerNum;
-        window.opener.document.getElementById("customerName").value = customerName;
-        window.opener.document.getElementById("customerPhone").value = customerPhone;
-        window.opener.document.getElementById("customerEmail").value = customerEmailOne+"@"+customerEmailTwo;
-
-        // 고객정보입력>고객정보수정으로 버튼 상태 변경
-        const saveBtn = window.opener.document.getElementById("customerInfoSaveBtn");
-        saveBtn.setAttribute("value", "고객정보수정");
-        saveBtn.setAttribute("onclick", "updateUserInfo();");
-
-        // 해당 고객의 상담이력 호출
-        getConsultHistoryByCustomerNum();
+                   // 선택 고객의 상담이력 호출
+                   getConsultHistoryByCustomerNum();
+               } else {
+                    alert("에러 발생. 다시 시도해 주세요.");
+               }
+           },
+           error: function (jqXHR, textStatus, errorThrown) {
+               alert("error : " + textStatus + "\n" + errorThrown);
+           }
+        });
 
         // 화면 닫기
         //window.close();

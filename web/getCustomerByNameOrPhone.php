@@ -17,11 +17,11 @@ try {
         $sql = "SELECT * FROM customer WHERE";
 
         $conditions = array();
-        if (!empty($customerName)) {
-            $conditions[] = " customer_name = '$customerName' AND";
+        if (!is_null($customerName)) {
+            $conditions[] = " customer_name LIKE '%$customerName%' AND";
         }
-        if (!empty($customerPhone)) {
-            $conditions[] = " customer_phone = '$customerPhone' AND";
+        if (!is_null($customerPhone)) {
+            $conditions[] = " customer_phone LIKE '%$customerPhone%' AND";
         }
 
         // 조건이 하나만 있는 경우
