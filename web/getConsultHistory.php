@@ -51,7 +51,7 @@ if (!empty($categoryMedium)) {
 if (!empty($consultResult)) {
     $sql .= " AND b.consulting_result = '$consultResult'";
 }
-
+$sql .= " ORDER BY b.consulting_date";
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
