@@ -12,6 +12,7 @@
         }
         table {
             width: calc(100% - 1em);
+            text-align: center;
         }
         tr:first-child {
             background: #D5D8DC;
@@ -28,26 +29,29 @@
 <form id="ttt">
     <table id="consultHistoryInfoTable">
         <tr style="background: #D5D8DC">
-            <td>상담경로</td>
+            
             <td>고객명</td>
-            <td>고객 CID</td>
             <td>고객 연락처</td>
-            <td>상담원</td>
+            <td>고객 이메일</td>
+            <td>상담경로</td>
+            <td>CID</td>
             <td>상담일자</td>
             <td>대분류</td>
             <td>중분류</td>
             <td>상담결과</td>
+            <td>상담원</td>
         </tr>
         <tr id="consult-data-row">
-            <td id="consultRoot"></td>
             <td id="customerName"></td>
-            <td id="customerCID"></td>
             <td id="customerPhone"></td>
-            <td id="consultantName"></td>
+            <td id="customerEmail"></td>
+            <td id="consultRoot"></td>
+            <td id="customerCID"></td>
             <td id="consultDate"></td>
             <td id="categoryLarge"></td>
             <td id="categoryMedium"></td>
             <td id="consultResult"></td>
+            <td id="consultantName"></td>
         </tr>
     </table>
     <br/>
@@ -70,6 +74,7 @@
     const consultRoot = opener.$("#temp-invisible-table").find("#consulting_root").text();
     const customerName = opener.$("#temp-invisible-table").find("#customer_name").text();
     const customerCID = opener.$("#temp-invisible-table").find("#customer_cid").text();
+    const customerEmail = opener.$("#temp-invisible-table").find("#customer_email").text();
     const customerPhone = opener.$("#temp-invisible-table").find("#customer_phone").text();
     const consultDate = opener.$("#temp-invisible-table").find("#consulting_date").text();
     const categoryLarge = opener.$("#temp-invisible-table").find("#category_large").text();
@@ -81,6 +86,7 @@
     $("#consultRoot").text(consultRoot);
     $("#customerName").text(customerName);
     $("#customerCID").text(customerCID);
+    $("#customerEmail").text(customerEmail);
     $("#customerPhone").text(customerPhone);
     $("#consultantName").text(consultantName);
     $("#consultDate").text(consultDate);
