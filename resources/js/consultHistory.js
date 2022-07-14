@@ -1,10 +1,13 @@
+/*
+    상담이력 NO RESULTS FOUND 메시지 출력
+ */
 $(function () {
     createNoResultMsg();
 });
 
 function createNoResultMsg() {
     let searchResult = document.getElementById("search-result-area");
-    if (searchResult.children.length == 0) {
+    if (searchResult.children.length === 0) {
         let td = document.createElement("td");
         td.innerHTML = "- NO RESULTS FOUND -";
         td.setAttribute("colspan", "10");
@@ -13,6 +16,9 @@ function createNoResultMsg() {
     }
 }
 
+/*
+    상담이력 대분류-중분류
+ */
 function categorySort(e) {
     const a = ["-- 선택 --", "배송지연", "배송지변경", "배송오류", "기타"];
     const b = ["-- 선택 --", "현금영수증", "세금계산서", "결제수단", "결제오류", "기타"];
@@ -20,13 +26,13 @@ function categorySort(e) {
     const categoryMedium = $("#consult-history-form").find("#categoryMedium")[0];
 
     let resp = null;
-    if (e.value == "a") {
+    if (e.value === "a") {
         resp = a;
-    } else if (e.value == "b") {
+    } else if (e.value === "b") {
         resp = b;
-    } else if (e.value == "c") {
+    } else if (e.value === "c") {
         resp = c;
-    } else if (e.value == "d") {
+    } else if (e.value === "d") {
         resp = "";
     }
 
@@ -41,6 +47,9 @@ function categorySort(e) {
     }
 }
 
+/*
+    상담이력 조회
+ */
 $("#consultHistorySearchBtn").click(function () {
     const consultDateFrom = $('#consult-history-form').find("#consultDateFrom");
     const consultDateTo = $('#consult-history-form').find("#consultDateTo");
@@ -80,14 +89,14 @@ $("#consultHistorySearchBtn").click(function () {
                      tr.setAttribute("onclick", "getConsultInfo(this)");
                     $.each(data.result[i], function (key, value) {
                         let td = document.createElement("td");
-                        if (key == 'consult_num') { // consult_num 보이지 않게 처리
+                        if (key === 'consult_num') { // consult_num 보이지 않게 처리
                             let td_hidden = document.createElement("td");
                             td_hidden.setAttribute("style", "display: none");
                             td_hidden.setAttribute("id", key);
                             td_hidden.innerHTML = value;
                             tr.appendChild(td_hidden);
                         }
-                        else if (key == 'customer_num') {
+                        else if (key === 'customer_num') {
                             let td_hidden = document.createElement("td");
                             td_hidden.setAttribute("style", "display: none");
                             td_hidden.setAttribute("id", key);
@@ -118,9 +127,11 @@ $("#consultHistorySearchBtn").click(function () {
     });
 });
 
-// 엑셀 변환
+/*
+    엑셀 변환
+ */
 function convertExcel() {
-    if ($("#consultHistoryRow").length == 0) {
+    if ($("#consultHistoryRow").length === 0) {
         alert("변환할 데이터가 없습니다.");
         return false;
     } else {
@@ -137,7 +148,9 @@ function convertExcel() {
     }
 };
 
-// 초기화
+/*
+    상담이력 초기화
+ */
 $("#consultHistoryReset").click(function () {
     if (confirm("상담이력 검색 입력값을 초기화 하시겠습니까?")) {
         $("#consult-history-form")[0].reset();
@@ -146,7 +159,10 @@ $("#consultHistoryReset").click(function () {
     }
 });
 
-// 상담이력 호출
+/*
+    상담이력 개별 호출
+    출력된 전체 상담 이력 중 하나를 클릭-호출하는 것
+ */
 function getConsultInfo(e) {
     const consultNum = e.children[10].innerHTML;
     const customerNum = e.children[11].innerHTML;
@@ -157,7 +173,7 @@ function getConsultInfo(e) {
         data: {customerNum : customerNum, consultNum : consultNum},
         dataType: "json",
         success: function (data) {
-            if (data.msg = 'SUCCESS') {
+            if (data.msg === 'SUCCESS') {
                 // 데이터를 단 건 조회하기 위해 기존 호출 데이터 tr은 제거
                 $("#row").remove();
                 for (let i = 0; i < data.result.length; i++) {
@@ -171,7 +187,7 @@ function getConsultInfo(e) {
                     });
                     $("#temp-invisible-table").append(tr);
                 }
-            } else if (data.msg = 'DATA-NOTFOUND') {
+            } else if (data.msg === 'DATA-NOTFOUND') {
                 alert("조회된 데이터가 없습니다. 다시 시도해 주세요.");
             }
         },
