@@ -33,12 +33,42 @@ if(empty($_GET["rowcount"])) {
 }
 $perpageresult = $perPage->getAllPageLinks($_GET["rowcount"], $paginationlink);
 $output = '';
+$output .= "<table>
+<tr id='menu'>
+    <td id='empty-space'>&nbsp</td>
+    <td>고객명</td>
+    <td>고객 연락처</td>
+    <td>고객 이메일</td>
+    <td>상담경로</td>
+    <td>CID</td>
+    <td>상담일자</td>
+    <td>대분류</td>
+    <td>중분류</td>
+    <td>상담결과</td>
+    <td>상담원</td>
+</tr>";
+
 foreach($result as $k=>$v) {
-    $output .= '<div class="question"><input type="hidden" id="rowcount" name="rowcount" value="' . $_GET["rowcount"] . '" />' . $result[$k]["customer_name"] . '</div>';
-    $output .= '<div class="answer">' . $result[$k]["consulting_date"] . '</div>';
+    $output .= "<tr>
+       <td id='empty-space'>&nbsp</td>
+       <td>".$result[$k]['customer_name']."</td>
+       <td>".$result[$k]['customer_phone']."</td>
+       <td>".$result[$k]['customer_email']."</td>
+       <td>".$result[$k]['consulting_root']."</td>
+       <td>".$result[$k]['customer_cid']."</td>
+       <td>".$result[$k]['consulting_date']."</td>
+       <td>".$result[$k]['category_large']."</td>
+       <td>".$result[$k]['category_medium']."</td>
+       <td>".$result[$k]['consulting_result']."</td>
+       <td>".$result[$k]['consultant_name']."</td>
+    </tr>";
+
+    $output .= '<div class="question"><input type="hidden" id="rowcount" name="rowcount" value="' . $_GET["rowcount"] . '" /></div>';
 }
+$output .= '</table>';
 if(!empty($perpageresult)) {
-    $output .= '<div id="pagination">' . $perpageresult . '</div>';
+    $output .= $perpageresult .'<div id="pagination"></div>';
 }
+
 print $output;
 ?>
