@@ -106,6 +106,7 @@ $("#consultHistorySearchBtn").click(function () {
                         }
                     });
                     $(".section-four-table>tbody:last").append(tr);
+                    getPagination("web/getPagination.php");
                 }
             } else {
                 if ($("#consultHistoryRow").length > 0) {
@@ -178,4 +179,23 @@ function getConsultInfo(e) {
             alert("error : " + textStatus + "\n" + errorThrown);
         }
     });
+}
+
+// 페이징(Pagination)
+function getPagination(url) {
+    const rowNums = $(".section-four-table").find('tr[id=consultHistoryRow]').length;
+    if (rowNums > 5) {
+        const executedQuery = document.getElementById("sql-hidden").value;
+        $.ajax({
+            url: url,
+            type: "GET",
+            data: {rowCount : $("#rowcount").val(), executedQuery : executedQuery},
+            success: function (data) {
+                $("#pagination-result").html(data);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert("error : " + textStatus + "\n" + errorThrown);
+            }
+        });
+    }
 }

@@ -105,3 +105,7 @@ textarea {
 .input-title {
     background: #D5D8DC;
 }
+
+/* Pagination */
+.current {background: #bccfd8;}
+.link {padding: 10px 15px;background: transparent;border:#bccfd8 1px solid;border-left:0px;cursor:pointer;color:#607d8b}

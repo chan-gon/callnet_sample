@@ -77,5 +77,9 @@
         <form id="form-excel" action="../../web/getExcel.php" method="post">
             <input type="hidden" id="sql-hidden" name="sql-hidden">
         </form>
+        <!-- 페이징(Pagination) -->
+        <div id="pagination-result">
+            <input type="hidden" name="rowcount" id="rowcount" />
+        </div>
     </div>
 </div>
