@@ -55,7 +55,7 @@
                 </tr>
             </table>
         </form>
-        <form id="consult-history-search" action="../../web/excel.php" method="post">
+        <form id="consult-history-search">
             <table class="section-four-table">
                 <tr>
                     <td>고객명</td>
@@ -72,6 +72,10 @@
                 <tr id="search-result-area"></tr>
             </table>
             <table id="temp-invisible-table" style="display: none"></table>
+        </form>
+        <!-- 엑셀 변환용 form 태그 -->
+        <form id="form-excel" action="../../web/getExcel.php" method="post">
+            <input type="hidden" id="sql-hidden" name="sql-hidden">
         </form>
     </div>
 </div>

@@ -1,6 +1,4 @@
-/*
-    상담이력 NO RESULTS FOUND 메시지 출력
- */
+// 상담이력 NO RESULTS FOUND 메시지 출력
 $(function () {
     createNoResultMsg();
 });
@@ -16,9 +14,7 @@ function createNoResultMsg() {
     }
 }
 
-/*
-    상담이력 대분류-중분류
- */
+// 상담이력 대분류-중분류
 function categorySort(e) {
     const a = ["-- 선택 --", "배송지연", "배송지변경", "배송오류", "기타"];
     const b = ["-- 선택 --", "현금영수증", "세금계산서", "결제수단", "결제오류", "기타"];
@@ -47,9 +43,7 @@ function categorySort(e) {
     }
 }
 
-/*
-    상담이력 조회
- */
+// 상담이력 조회
 $("#consultHistorySearchBtn").click(function () {
     const consultDateFrom = $('#consult-history-form').find("#consultDateFrom");
     const consultDateTo = $('#consult-history-form').find("#consultDateTo");
@@ -81,9 +75,10 @@ $("#consultHistorySearchBtn").click(function () {
             if (data.msg == 'SUCCESS') {
                 $("#noResult").remove();
                 $("*").remove("#consultHistoryRow");
+                $("#sql-hidden").val(data.sql);
                 for (let i = 0; i < data.result.length; i++) {
                      let tr = document.createElement("tr");
-                    tr.setAttribute("title", "클릭하면 상담 세부 내용을 확인할 수 있습니다.");
+                     tr.setAttribute("title", "클릭하면 상담 세부 내용을 확인할 수 있습니다.");
                      tr.setAttribute("id", "consultHistoryRow");
                      tr.setAttribute("style", "cursor: pointer");
                      tr.setAttribute("onclick", "getConsultInfo(this)");
@@ -105,6 +100,7 @@ $("#consultHistorySearchBtn").click(function () {
                         }
                         else {
                             td.setAttribute("id", key);
+                            td.setAttribute("name", key);
                             td.innerHTML = value;
                             tr.appendChild(td);
                         }
@@ -127,30 +123,17 @@ $("#consultHistorySearchBtn").click(function () {
     });
 });
 
-/*
-    엑셀 변환
- */
+// 엑셀 변환
 function convertExcel() {
     if ($("#consultHistoryRow").length === 0) {
         alert("변환할 데이터가 없습니다.");
         return false;
     } else {
-        const currentTime = new Date().toISOString().split('T')[0];
-        $(".section-four-table").table2excel({
-            exclude: ".noExl",
-            name: "Excel Document Name",
-            filename: "상담이력_" + currentTime +'.xls', //확장자를 여기서 붙여줘야한다.
-            fileext: ".xls",
-            exclude_img: true,
-            exclude_links: true,
-            exclude_inputs: true
-        });
+        document.getElementById("form-excel").submit();
     }
 };
 
-/*
-    상담이력 초기화
- */
+// 상담이력 초기화
 $("#consultHistoryReset").click(function () {
     if (confirm("상담이력 검색 입력값을 초기화 하시겠습니까?")) {
         $("#consult-history-form")[0].reset();

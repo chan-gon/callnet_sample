@@ -1,16 +1,4 @@
 <?php
-//extract($_POST);
-//if (isset($_POST)) {
-//    require_once '../config.php';
-//    $c = new consultClass();
-//    $consultHistory = $c->getConsultHistory($consultDateFrom, $consultDateTo, $customerCID, $customerName, $consultRoot, $categoryLarge, $categoryMedium, $consultResult);
-//    if ($consultHistory) {
-//        echo json_encode(array('result'=>$consultHistory, 'msg'=>'SUCCESS'));
-//    } else {
-//        echo json_encode(array('result'=>NULL, 'msg'=>'DATA-NOTFOUND'));
-//    }
-//}
-
 require_once '../config.php';
 $pdo = new PDO(dsn);
 
@@ -56,7 +44,7 @@ $stmt = $pdo->prepare($sql);
 $stmt->execute();
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 if ($result) {
-    echo json_encode(array('result'=>$result, 'msg'=>'SUCCESS'));
+    echo json_encode(array('result'=>$result, 'msg'=>'SUCCESS', 'sql'=>$sql));
 } else {
     echo json_encode(array('result'=>NULL, 'msg'=>'DATA-NOTFOUND'));
 }
