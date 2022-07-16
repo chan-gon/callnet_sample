@@ -23,19 +23,18 @@ $stmt->execute();
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 // row_count
-$sql_count = "SELECT count(*) AS count FROM consulting";
+$sql_count = $executedQuery;
 $stmt = $pdo->prepare($sql_count);
 $stmt->execute();
-$row_count = $stmt->fetch();
+$row_count = $stmt->rowCount();
 
 if(empty($_GET["rowcount"])) {
-    $_GET["rowcount"] = $row_count['count'];
+    $_GET["rowcount"] = $row_count;
 }
 $perpageresult = $perPage->getAllPageLinks($_GET["rowcount"], $paginationlink);
 $output = '';
 $output .= "<table>
 <tr id='menu'>
-    <td id='empty-space'>&nbsp</td>
     <td>고객명</td>
     <td>고객 연락처</td>
     <td>고객 이메일</td>
@@ -50,7 +49,6 @@ $output .= "<table>
 
 foreach($result as $k=>$v) {
     $output .= "<tr>
-       <td id='empty-space'>&nbsp</td>
        <td>".$result[$k]['customer_name']."</td>
        <td>".$result[$k]['customer_phone']."</td>
        <td>".$result[$k]['customer_email']."</td>

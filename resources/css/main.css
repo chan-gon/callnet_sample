@@ -107,5 +107,5 @@ textarea {
 }
 
 /* Pagination */
-.current {background: #bccfd8;}
+.link[name=current]{background: #bccfd8;}
 .link {padding: 10px 15px;background: transparent;border:#bccfd8 1px solid;border-left:0px;cursor:pointer;color:#607d8b}

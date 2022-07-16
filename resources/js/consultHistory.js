@@ -1,6 +1,6 @@
 // 상담이력 NO RESULTS FOUND 메시지 출력
 $(function () {
-    createNoResultMsg();
+    //createNoResultMsg();
 });
 
 function createNoResultMsg() {
@@ -73,9 +73,13 @@ $("#consultHistorySearchBtn").click(function () {
         dataType: "json",
         success: function (data) {
             if (data.msg == 'SUCCESS') {
+                $("#noResult").remove();
+                $("#sql-hidden").val(data.sql);
+                getPagination("web/getPagination.php");
+
                 // $("#noResult").remove();
                 // $("*").remove("#consultHistoryRow");
-                $("#sql-hidden").val(data.sql);
+
                 // for (let i = 0; i < data.result.length; i++) {
                 //      let tr = document.createElement("tr");
                 //      tr.setAttribute("title", "클릭하면 상담 세부 내용을 확인할 수 있습니다.");
@@ -108,7 +112,7 @@ $("#consultHistorySearchBtn").click(function () {
                 //     $(".section-four-table>tbody:last").append(tr);
                 //     getPagination("web/getPagination.php");
                 // }
-                getPagination("web/getPagination.php");
+
             } else {
                 if ($("#consultHistoryRow").length > 0) {
                     alert("상담이력 정보가 존재하지 않습니다.");
