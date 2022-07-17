@@ -108,4 +108,5 @@ textarea {
 
 /* Pagination */
 .link[name=current]{background: #bccfd8;}
-.link {padding: 10px 15px;background: transparent;border:#bccfd8 1px solid;border-left:0px;cursor:pointer;color:#607d8b}
+.link {padding: 10px 15px;background: transparent;border:#bccfd8 1px solid;cursor:pointer;color:#607d8b}
+#pagination-list {text-align: center; margin: 50px 0 50px 0;}

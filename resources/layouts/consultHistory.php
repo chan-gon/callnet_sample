@@ -73,6 +73,7 @@
             </table>
             <table id="temp-invisible-table" style="display: none"></table>
         </form>-->
+        <table id="temp-invisible-table" style="display: none"></table>
         <!-- 엑셀 변환용 form 태그 -->
         <form id="form-excel" action="../../web/getExcel.php" method="post">
             <input type="hidden" id="sql-hidden" name="sql-hidden">

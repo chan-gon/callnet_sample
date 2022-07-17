@@ -33,7 +33,13 @@ if(empty($_GET["rowcount"])) {
 }
 $perpageresult = $perPage->getAllPageLinks($_GET["rowcount"], $paginationlink);
 $output = '';
-$output .= "<table>
+$output .= "
+<style>
+#menu {background: #D5D8DC; font-weight: bold; text-align: center;}
+tr {cursor: pointer}
+
+</style>
+<table>
 <tr id='menu'>
     <td>고객명</td>
     <td>고객 연락처</td>
@@ -48,7 +54,7 @@ $output .= "<table>
 </tr>";
 
 foreach($result as $k=>$v) {
-    $output .= "<tr>
+    $output .= "<tr id='consultHistoryRow' onclick='getConsultInfo(this)' title='클릭하면 상담 세부 내용을 확인할 수 있습니다.'>
        <td>".$result[$k]['customer_name']."</td>
        <td>".$result[$k]['customer_phone']."</td>
        <td>".$result[$k]['customer_email']."</td>
@@ -59,6 +65,8 @@ foreach($result as $k=>$v) {
        <td>".$result[$k]['category_medium']."</td>
        <td>".$result[$k]['consulting_result']."</td>
        <td>".$result[$k]['consultant_name']."</td>
+       <td id='consult_num' style='display: none'>".$result[$k]['consult_num']."</td>
+       <td id='customer_num' style='display: none'>".$result[$k]['customer_num']."</td>
     </tr>";
 
     $output .= '<div class="question"><input type="hidden" id="rowcount" name="rowcount" value="' . $_GET["rowcount"] . '" /></div>';

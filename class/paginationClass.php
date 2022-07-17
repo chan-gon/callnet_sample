@@ -7,7 +7,7 @@ class PerPage {
     }
 
     function getAllPageLinks($count,$href) {
-        $output = '';
+        $output = '<div id="pagination-list">';
         if(!isset($_GET["page"])) $_GET["page"] = 1;
         if($this->perpage != 0)
             $pages  = ceil($count/$this->perpage);
@@ -54,7 +54,7 @@ class PerPage {
 
 
         }
-        return $output;
+        return $output .'</div>';
     }
 }
 ?>
