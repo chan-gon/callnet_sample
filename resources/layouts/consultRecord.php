@@ -1,4 +1,4 @@
-<div style="padding-left:16px">
+<div>
     <h3 class="section-main-title">&#9654; 상담기록 *  필수입력 사항</h3>
     <input class="section-main-button" id="consultRecordSaveBtn" type="button" value="상담기록 저장">
     <div>

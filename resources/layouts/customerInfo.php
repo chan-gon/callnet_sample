@@ -1,10 +1,11 @@
-<div style="padding-left:16px">
+<div>
     <h3 class="section-main-title" id="section-main-title">&#9654; 고객정보 *  필수입력 사항</h3>
     <input class="section-main-button" type="button" value="초기화" id="customerInfoReset">
     <input class="section-main-button" type="button" value="검색" id="customer-num-search">
     <input class="section-main-button" id="customerInfoSaveBtn" type="button" value="고객정보저장" onclick="saveUserInfo()">
     <div>
         <form id="customer-info-form">
+            <!-- 고객정보 검색 시 고객번호 저장용으로 사용됨. 고객정보 수정 시 필요 -->
             <input id="customer-num-hidden" type="hidden">
             <table>
                 <tr>

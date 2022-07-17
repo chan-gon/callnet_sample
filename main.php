@@ -1,15 +1,17 @@
     <!-- navbar -->
     <?php require_once(dirname(__FILE__) . '/resources/layouts/navbar.php'); ?>
 
-    <div class="main-container">
-        <!-- 고객정보 -->
-        <?php require_once(dirname(__FILE__) . '/resources/layouts/customerInfo.php'); ?>
+    <div class="outer-container">
+        <div class="inner-container">
+            <!-- 고객정보 -->
+            <?php require_once(dirname(__FILE__) . '/resources/layouts/customerInfo.php'); ?>
 
-        <!-- 상담기록 -->
-        <?php require_once(dirname(__FILE__) . '/resources/layouts/consultRecord.php'); ?>
+            <!-- 상담기록 -->
+            <?php require_once(dirname(__FILE__) . '/resources/layouts/consultRecord.php'); ?>
 
-        <!-- 상담이력 -->
-        <?php require_once(dirname(__FILE__) . '/resources/layouts/consultHistory.php'); ?>
+            <!-- 상담이력 -->
+            <?php require_once(dirname(__FILE__) . '/resources/layouts/consultHistory.php'); ?>
+        </div>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

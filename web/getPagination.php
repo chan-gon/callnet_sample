@@ -35,12 +35,11 @@ $perpageresult = $perPage->getAllPageLinks($_GET["rowcount"], $paginationlink);
 $output = '';
 $output .= "
 <style>
-#menu {background: #D5D8DC; font-weight: bold; text-align: center;}
+tr[name=column-name] {background: #D5D8DC; font-weight: bold; text-align: center;}
 tr {cursor: pointer}
-
 </style>
 <table>
-<tr id='menu'>
+<tr id='consultHistoryRow' name='column-name'>
     <td>고객명</td>
     <td>고객 연락처</td>
     <td>고객 이메일</td>

@@ -49,11 +49,15 @@ body {
 }
 
 /* 메인 */
-.main-container {
+.outer-container {
     display: grid;
     border: 1px solid black;
     border-radius: 30px;
     margin: 10px 10px 10px 10px;
+}
+
+.inner-container {
+    margin: 0 0 0 10px;
 }
 
 table {
@@ -110,3 +114,4 @@ textarea {
 .link[name=current]{background: #bccfd8;}
 .link {padding: 10px 15px;background: transparent;border:#bccfd8 1px solid;cursor:pointer;color:#607d8b}
 #pagination-list {text-align: center; margin: 50px 0 50px 0;}
+#pagination-result {margin-bottom: 20px}

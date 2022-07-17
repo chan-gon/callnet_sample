@@ -44,7 +44,7 @@ $stmt = $pdo->prepare($sql);
 $stmt->execute();
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 if ($result) {
-    echo json_encode(array('result'=>$result, 'msg'=>'SUCCESS', 'sql'=>$sql));
+    echo json_encode(array('msg'=>'SUCCESS', 'sql'=>$sql));
 } else {
     echo json_encode(array('result'=>NULL, 'msg'=>'DATA-NOTFOUND'));
 }
