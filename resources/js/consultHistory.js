@@ -115,21 +115,23 @@ $("#consultHistorySearchBtn").click(function () {
 
 // 엑셀 변환
 function convertExcel() {
-    document.getElementById("form-excel").submit();
-
-    // if ($("#consultHistoryRow").length === 0) {
-    //     alert("변환할 데이터가 없습니다.");
-    //     return false;
-    // } else {
-    //     document.getElementById("form-excel").submit();
-    // }
+    const trNums = $("#pagination-result > table > tbody > tr").length;
+    if (trNums === 0) {
+        alert("변환할 데이터가 없습니다.");
+        return false;
+    } else {
+        document.getElementById("form-excel").submit();
+    }
 };
 
 // 상담이력 초기화
 $("#consultHistoryReset").click(function () {
     if (confirm("상담이력 검색 입력값을 초기화 하시겠습니까?")) {
+        // 상담이력 입력 폼 초기화
         $("#consult-history-form")[0].reset();
+        // 출력 테이블 및 페이징 리스트 삭제
         $("*").remove("#consultHistoryRow");
+        $("#pagination-list").remove();
     }
 });
 
