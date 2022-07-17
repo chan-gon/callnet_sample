@@ -38,21 +38,6 @@
 <input type="button" value="닫기" onclick="window.close()">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-    $(function () {
-        createNoResultMsg();
-    });
-
-    function createNoResultMsg() {
-        let searchResult = document.getElementById("searchResult");
-        if (searchResult.children.length == 0) {
-            let td = document.createElement("td");
-            td.innerHTML = "- NO RESULTS FOUND -";
-            td.setAttribute("colspan", "12");
-            td.setAttribute("id", "noResult");
-            searchResult.appendChild(td);
-        }
-    }
-
     // 검색 버튼 클릭
     $("#customerSearchBtn").click(function () {
         getCustomerByNameOrPhone();
@@ -83,7 +68,6 @@
             success: function (data) {
                 if (data.result == 'NOTHING_TO_SEARCH') {
                     $("*").remove("#customerInfoRow");
-                    createNoResultMsg();
                     alert(data.msg);
                 }
                 else if (data.result == 'CUSTOMER_SEARCH_ERROR') {
@@ -176,41 +160,60 @@
                if (data.msg == 'SUCCESS') {
                    $("#noResult", opener.document).remove();
                    $("*", opener.document).remove("#consultHistoryRow");
-                   for (let i = 0; i < data.result.length; i++) {
-                       let tr = document.createElement("tr");
-                       tr.setAttribute("title", "클릭하면 상담 세부 내용을 확인할 수 있습니다.");
-                       tr.setAttribute("id", "consultHistoryRow");
-                       tr.setAttribute("style", "cursor: pointer");
-                       tr.setAttribute("onclick", "getConsultInfo(this)");
-                       $.each(data.result[i], function (key, value) {
-                           let td = document.createElement("td");
-                           if (key == 'consult_num') { // consult_num 보이지 않게 처리
-                               let td_hidden = document.createElement("td");
-                               td_hidden.setAttribute("style", "display: none");
-                               td_hidden.setAttribute("id", key);
-                               td_hidden.innerHTML = value;
-                               tr.appendChild(td_hidden);
-                           }
-                           else if (key == 'customer_num') {
-                               let td_hidden = document.createElement("td");
-                               td_hidden.setAttribute("style", "display: none");
-                               td_hidden.setAttribute("id", key);
-                               td_hidden.innerHTML = value;
-                               tr.appendChild(td_hidden);
-                           }
-                           else {
-                               td.setAttribute("id", key);
-                               td.innerHTML = value;
-                               tr.appendChild(td);
-                           }
-                       });
-                       window.opener.document.getElementsByClassName("section-four-table")[0].append(tr);
-                   }
+                   window.opener.document.getElementById("sql-hidden").value = data.sql;
+                   getPagination("getPagination.php");
+
+                   // for (let i = 0; i < data.result.length; i++) {
+                   //     let tr = document.createElement("tr");
+                   //     tr.setAttribute("title", "클릭하면 상담 세부 내용을 확인할 수 있습니다.");
+                   //     tr.setAttribute("id", "consultHistoryRow");
+                   //     tr.setAttribute("style", "cursor: pointer");
+                   //     tr.setAttribute("onclick", "getConsultInfo(this)");
+                   //     $.each(data.result[i], function (key, value) {
+                   //         let td = document.createElement("td");
+                   //         if (key == 'consult_num') { // consult_num 보이지 않게 처리
+                   //             let td_hidden = document.createElement("td");
+                   //             td_hidden.setAttribute("style", "display: none");
+                   //             td_hidden.setAttribute("id", key);
+                   //             td_hidden.innerHTML = value;
+                   //             tr.appendChild(td_hidden);
+                   //         }
+                   //         else if (key == 'customer_num') {
+                   //             let td_hidden = document.createElement("td");
+                   //             td_hidden.setAttribute("style", "display: none");
+                   //             td_hidden.setAttribute("id", key);
+                   //             td_hidden.innerHTML = value;
+                   //             tr.appendChild(td_hidden);
+                   //         }
+                   //         else {
+                   //             td.setAttribute("id", key);
+                   //             td.innerHTML = value;
+                   //             tr.appendChild(td);
+                   //         }
+                   //     });
+                   //     window.opener.document.getElementsByClassName("section-four-table")[0].append(tr);
+                   // }
                }
                else {
                    $("*", opener.document).remove("#consultHistoryRow");
-                   window.opener.createNoResultMsg();
+                   $("#pagination-list", opener.document).remove();
                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert("error : " + textStatus + "\n" + errorThrown);
+            }
+        });
+    }
+
+    // 페이징(Pagination)
+    function getPagination(url) {
+        const executedQuery = window.opener.document.getElementById("sql-hidden").value;
+        $.ajax({
+            url: url,
+            type: "GET",
+            data: {rowCount : $("#rowcount").val(), executedQuery : executedQuery},
+            success: function (data) {
+                $("#pagination-result", opener.document).html(data);
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert("error : " + textStatus + "\n" + errorThrown);

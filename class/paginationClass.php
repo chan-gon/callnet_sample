@@ -7,7 +7,7 @@ class PerPage {
     }
 
     function getAllPageLinks($count,$href) {
-        $output = '';
+        $output = '<div id="pagination-list">';
         if(!isset($_GET["page"])) $_GET["page"] = 1;
         if($this->perpage != 0)
             $pages  = ceil($count/$this->perpage);
@@ -20,7 +20,7 @@ class PerPage {
 
             if(($_GET["page"]-3)>0) {
                 if($_GET["page"] == 1)
-                    $output = $output . '<span id=1 class="link current">1</span>';
+                    $output = $output . '<span id=1 class="link" name="current">1</span>';
                 else
                     $output = $output . '<a class="link" onclick="getPagination(\'' . $href . '1\')" >1</a>';
             }
@@ -32,7 +32,7 @@ class PerPage {
                 if($i<1) continue;
                 if($i>$pages) break;
                 if($_GET["page"] == $i)
-                    $output = $output . '<span id='.$i.' class="link current">'.$i.'</span>';
+                    $output = $output . '<span id='.$i.' class="link" name="current">'.$i.'</span>';
                 else
                     $output = $output . '<a class="link" onclick="getPagination(\'' . $href . $i . '\')" >'.$i.'</a>';
             }
@@ -42,7 +42,7 @@ class PerPage {
             }
             if(($pages-($_GET["page"]+2))>0) {
                 if($_GET["page"] == $pages)
-                    $output = $output . '<span id=' . ($pages) .' class="link current">' . ($pages) .'</span>';
+                    $output = $output . '<span id=' . ($pages) .' class="link" name="current">' . ($pages) .'</span>';
                 else
                     $output = $output . '<a class="link" onclick="getPagination(\'' . $href .  ($pages) .'\')" >' . ($pages) .'</a>';
             }
@@ -54,7 +54,7 @@ class PerPage {
 
 
         }
-        return $output;
+        return $output .'</div>';
     }
 }
 ?>

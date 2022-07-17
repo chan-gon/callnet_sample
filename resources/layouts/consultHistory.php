@@ -1,4 +1,4 @@
-<div style="padding-left:16px">
+<div>
     <h3 class="section-main-title">&#9654; 상담이력</h3>
     <input class="section-main-button" id="consultHistoryReset" type="button" value="초기화">
     <input class="section-main-button" id="consultHistorySearchBtn" type="button" value="조회">
@@ -55,7 +55,7 @@
                 </tr>
             </table>
         </form>
-        <form id="consult-history-search">
+        <!--<form id="consult-history-search">
             <table class="section-four-table">
                 <tr>
                     <td>고객명</td>
@@ -72,7 +72,8 @@
                 <tr id="search-result-area"></tr>
             </table>
             <table id="temp-invisible-table" style="display: none"></table>
-        </form>
+        </form>-->
+        <table id="temp-invisible-table" style="display: none"></table>
         <!-- 엑셀 변환용 form 태그 -->
         <form id="form-excel" action="../../web/getExcel.php" method="post">
             <input type="hidden" id="sql-hidden" name="sql-hidden">

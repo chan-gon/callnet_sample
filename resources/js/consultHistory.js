@@ -1,19 +1,3 @@
-// 상담이력 NO RESULTS FOUND 메시지 출력
-$(function () {
-    createNoResultMsg();
-});
-
-function createNoResultMsg() {
-    let searchResult = document.getElementById("search-result-area");
-    if (searchResult.children.length === 0) {
-        let td = document.createElement("td");
-        td.innerHTML = "- NO RESULTS FOUND -";
-        td.setAttribute("colspan", "10");
-        td.setAttribute("id", "noResult");
-        searchResult.appendChild(td);
-    }
-}
-
 // 상담이력 대분류-중분류
 function categorySort(e) {
     const a = ["-- 선택 --", "배송지연", "배송지변경", "배송오류", "기타"];
@@ -74,45 +58,50 @@ $("#consultHistorySearchBtn").click(function () {
         success: function (data) {
             if (data.msg == 'SUCCESS') {
                 $("#noResult").remove();
-                $("*").remove("#consultHistoryRow");
                 $("#sql-hidden").val(data.sql);
-                for (let i = 0; i < data.result.length; i++) {
-                     let tr = document.createElement("tr");
-                     tr.setAttribute("title", "클릭하면 상담 세부 내용을 확인할 수 있습니다.");
-                     tr.setAttribute("id", "consultHistoryRow");
-                     tr.setAttribute("style", "cursor: pointer");
-                     tr.setAttribute("onclick", "getConsultInfo(this)");
-                    $.each(data.result[i], function (key, value) {
-                        let td = document.createElement("td");
-                        if (key === 'consult_num') { // consult_num 보이지 않게 처리
-                            let td_hidden = document.createElement("td");
-                            td_hidden.setAttribute("style", "display: none");
-                            td_hidden.setAttribute("id", key);
-                            td_hidden.innerHTML = value;
-                            tr.appendChild(td_hidden);
-                        }
-                        else if (key === 'customer_num') {
-                            let td_hidden = document.createElement("td");
-                            td_hidden.setAttribute("style", "display: none");
-                            td_hidden.setAttribute("id", key);
-                            td_hidden.innerHTML = value;
-                            tr.appendChild(td_hidden);
-                        }
-                        else {
-                            td.setAttribute("id", key);
-                            td.setAttribute("name", key);
-                            td.innerHTML = value;
-                            tr.appendChild(td);
-                        }
-                    });
-                    $(".section-four-table>tbody:last").append(tr);
-                    getPagination("web/getPagination.php");
-                }
+                getPagination("web/getPagination.php");
+
+                // $("#noResult").remove();
+                // $("*").remove("#consultHistoryRow");
+
+                // for (let i = 0; i < data.result.length; i++) {
+                //      let tr = document.createElement("tr");
+                //      tr.setAttribute("title", "클릭하면 상담 세부 내용을 확인할 수 있습니다.");
+                //      tr.setAttribute("id", "consultHistoryRow");
+                //      tr.setAttribute("style", "cursor: pointer");
+                //      tr.setAttribute("onclick", "getConsultInfo(this)");
+                //     $.each(data.result[i], function (key, value) {
+                //         let td = document.createElement("td");
+                //         if (key === 'consult_num') { // consult_num 보이지 않게 처리
+                //             let td_hidden = document.createElement("td");
+                //             td_hidden.setAttribute("style", "display: none");
+                //             td_hidden.setAttribute("id", key);
+                //             td_hidden.innerHTML = value;
+                //             tr.appendChild(td_hidden);
+                //         }
+                //         else if (key === 'customer_num') {
+                //             let td_hidden = document.createElement("td");
+                //             td_hidden.setAttribute("style", "display: none");
+                //             td_hidden.setAttribute("id", key);
+                //             td_hidden.innerHTML = value;
+                //             tr.appendChild(td_hidden);
+                //         }
+                //         else {
+                //             td.setAttribute("id", key);
+                //             td.setAttribute("name", key);
+                //             td.innerHTML = value;
+                //             tr.appendChild(td);
+                //         }
+                //     });
+                //     $(".section-four-table>tbody:last").append(tr);
+                //     getPagination("web/getPagination.php");
+                // }
+
             } else {
                 if ($("#consultHistoryRow").length > 0) {
                     alert("상담이력 정보가 존재하지 않습니다.");
                     $("*").remove("#consultHistoryRow");
-                    createNoResultMsg();
+                    $("#pagination-list").remove();
                 } else {
                     alert("상담이력 정보가 존재하지 않습니다.");
                 }
@@ -126,12 +115,14 @@ $("#consultHistorySearchBtn").click(function () {
 
 // 엑셀 변환
 function convertExcel() {
-    if ($("#consultHistoryRow").length === 0) {
-        alert("변환할 데이터가 없습니다.");
-        return false;
-    } else {
-        document.getElementById("form-excel").submit();
-    }
+    document.getElementById("form-excel").submit();
+
+    // if ($("#consultHistoryRow").length === 0) {
+    //     alert("변환할 데이터가 없습니다.");
+    //     return false;
+    // } else {
+    //     document.getElementById("form-excel").submit();
+    // }
 };
 
 // 상담이력 초기화
@@ -139,7 +130,6 @@ $("#consultHistoryReset").click(function () {
     if (confirm("상담이력 검색 입력값을 초기화 하시겠습니까?")) {
         $("#consult-history-form")[0].reset();
         $("*").remove("#consultHistoryRow");
-        createNoResultMsg();
     }
 });
 
@@ -183,19 +173,16 @@ function getConsultInfo(e) {
 
 // 페이징(Pagination)
 function getPagination(url) {
-    const rowNums = $(".section-four-table").find('tr[id=consultHistoryRow]').length;
-    if (rowNums > 5) {
-        const executedQuery = document.getElementById("sql-hidden").value;
-        $.ajax({
-            url: url,
-            type: "GET",
-            data: {rowCount : $("#rowcount").val(), executedQuery : executedQuery},
-            success: function (data) {
-                $("#pagination-result").html(data);
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                alert("error : " + textStatus + "\n" + errorThrown);
-            }
-        });
-    }
+    const executedQuery = document.getElementById("sql-hidden").value;
+    $.ajax({
+        url: url,
+        type: "GET",
+        data: {rowCount : $("#rowcount").val(), executedQuery : executedQuery},
+        success: function (data) {
+            $("#pagination-result").html(data);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert("error : " + textStatus + "\n" + errorThrown);
+        }
+    });
 }
