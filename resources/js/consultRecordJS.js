@@ -73,7 +73,7 @@ $("#consultRecordSaveBtn").click(function () {
            success: function (data) {
                if (data.result == 'SUCCESS') {
                    alert("상담기록 등록 완료");
-                   $("#consult-record-form")[0].reset();
+
                }
                else if (data.result == 'FAIL') {
                    alert(data.msg);
@@ -90,4 +90,10 @@ $("#consultRecordSaveBtn").click(function () {
            }
        });
    }
+});
+
+$("#consultRecordReset").click(function () {
+    if (confirm("상담기록을 초기화 하시겠습니까?")) {
+        $("#consult-record-form")[0].reset();
+    }
 });

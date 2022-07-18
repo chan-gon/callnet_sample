@@ -19,13 +19,13 @@ if (!empty($dateFrom) && !empty($dateTo)) {
     $sql .= " AND b.consulting_date BETWEEN '$dateFrom' AND '$dateTo'";
 }
 if (!empty($cid)) {
-    $sql .= " AND b.customer_cid = '$cid'";
+    $sql .= " AND b.customer_cid LIKE '%$cid%'";
 }
 if (!empty($name)) {
-    $sql .= " AND b.customer_name = '$name'";
+    $sql .= " AND b.customer_name LIKE '%$name%'";
 }
 if (!empty($consultantName)) {
-    $sql .= " AND b.consultant_name = '$consultantName'";
+    $sql .= " AND b.consultant_name LIKE '%$consultantName%'";
 }
 if (!empty($root)) {
     $sql .= " AND b.consulting_root = '$root'";
