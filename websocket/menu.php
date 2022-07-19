@@ -3,7 +3,7 @@
 <?//require_once "./inc/common/common.php";?> <!-- 세션 체크 함수 -->
 <?//require_once "./inc/common/cn_function.php";?> <!-- 자주 사용하는 함수 모음 -->
 
-<?php require_once "db_ubigen.php" ?>
+<?php require_once "db_ubigen.php"; ?>
 <?php
 //현재날짜를 계산한다(YYYY-MM-DD HH:MM:SS)
 $datetemp = date("Y-m-d");
@@ -88,15 +88,15 @@ $AgtAuth	= $_SESSION['AgtAuth'];
 				  <table class="menu-table">
                     <tr>&nbsp;&nbsp;&nbsp;
 <form name="fm">
-	<input type="hidden" size="30"id="session_id" name="session_id" value="<?php $_SESSION['session_id']?>">
+	<input type="hidden" size="30"id="session_id" name="session_id" value="<?php echo $_SESSION['session_id'];?>">
 	<input type="hidden" name="logintype" value="0">
 	<input type="hidden" name="popchk" value="">
 	<input type="hidden" name="iogubun" value="">
 	<input type="hidden" name="SdCallTime" value="">
-	<input type="hidden" name="AgtID" value="<?php $_SESSION['AgtID']?>">
-	<input type="hidden" name="CtiID" value="<?php $_SESSION['CtiID']?>">
-	<input type="hidden" name="AgtName" value="<?php $_SESSION['AgtName']?>">
-	<input type="hidden" name="AgtIntel" value="<?php $_SESSION['AgtIntel']?>">
+	<input type="hidden" name="AgtID" value="<?php echo $_SESSION['AgtID'];?>">
+	<input type="hidden" name="CtiID" value="<?php echo $_SESSION['AgtID'];?>">
+	<input type="hidden" name="AgtName" value="<?php echo $_SESSION['AgtName'];?>">
+	<input type="hidden" name="AgtIntel" value="<?php echo $_SESSION['AgtIntel'];?>">
  
                       <td><b style = 'font-size:10pt;'>&nbsp;&nbsp;전화번호</b>&nbsp;&nbsp;</td>
 					  <td><input style ='font-size:10pt;'type="text" id="telno" name="telno" value=""></td>
