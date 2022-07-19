@@ -18,11 +18,10 @@ function loginProc() {
         data: {memberId : memberId, memberPwd : memberPwd},
         dataType: "json",
         success: function (data) {
-            console.log(data);
-            if (data.result == 0) {
+            if (data.result == 'SUCCESS') {
                 alert(data.msg);
                 location.replace('../main.php');
-            } else if (data.result == 1) {
+            } else if (data.result == 'FAIL') {
                 alert(data.msg);
             } else if (data.result == 'LOGIN_ERROR') {
                 alert(data.msg);
