@@ -65,7 +65,7 @@ SEND CUST DATA : rec-1001
 */
 function doConnect_rec(arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8)
 {
-	var addr = "ws://192.168.1.24:7301"; //WebSocket 접속 IP. Port는 고정 IP는 접속정보에 따라 변경필요.
+	var addr = "ws://192.168.1.9:8534"; //WebSocket 접속 IP. Port는 고정 IP는 접속정보에 따라 변경필요.
 	
 	ws_rec = new WebSocket(addr);
 
@@ -215,7 +215,7 @@ Body 값에 생성될 파일명 필요. 이후 300KB 초과시 동일파일명 �
 */
 function doConnect_selrec(arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9)
 {
-	var addr = "ws://192.168.1.24:7301"; //WebSocket 접속 IP. Port는 고정 IP는 접속정보에 따라 변경필요.
+	var addr = "ws://192.168.1.9:8534"; //WebSocket 접속 IP. Port는 고정 IP는 접속정보에 따라 변경필요.
 
 	ws_rec = new WebSocket(addr);
 

@@ -21,7 +21,8 @@ function clockDisplay() {
         seconds = "0" + seconds;
     }
 
-    parent.menuFrame.document.all["divclock"].innerHTML = "통화시간 : " + hours + ":" + minutes + ":" + seconds;
+    // parent.menuFrame.document.all["divclock"].innerHTML = "통화시간 : " + hours + ":" + minutes + ":" + seconds;
+    document.getElementById("divclock").innerHTML = "통화시간 : " + hours + ":" + minutes + ":" + seconds;
 
     // 메인 프레임의 상담내역 부분에 통화시간 입력
     document.fm.SdCallTime.value = hours + ":" + minutes + ":" + seconds;
@@ -139,6 +140,7 @@ document.addEventListener( "DOMContentLoaded", function(event) {
     document.getElementById("btDisConn").onclick = function()
     {
         var ctid = document.fm.CtiID.value;
+
         var ctintel = document.fm.AgtIntel.value;
         var ctssid = document.fm.session_id.value;
 
@@ -295,7 +297,9 @@ function Ctilogin()
     var ctintel = document.fm.AgtIntel.value;
     var ctssid = document.fm.session_id.value;
     var ctltype = document.fm.logintype.value;
-    document.getElementById("status").value = "로그인 시도" + "\n" + document.getElementById("status").value;
+    //document.getElementById("status").value = "로그인 시도" + "\n" + document.getElementById("status").value;
+    document.getElementById("status").value = "로그인 시도";
+    //$("#status").append("로그인 시도");
     doConnect(ctid,ctintel,ctssid,ctltype);
 }
 
@@ -1379,7 +1383,7 @@ function action_status_Incomingcall(val1, val2) {
     document.getElementById("status").value = "CID: " + replaced_szCid + "\n" + document.getElementById("status").value;
     document.getElementById("status").value = "DNIS: " + replaced_szDnis + "\n" + document.getElementById("status").value;
 
-    window.open("./incall.php?cid="+replaced_szCid+"&dnis="+replaced_szDnis,"popwindow", "width=900, height=500px,left=200px, menubar=no,status=no,scrollbars=no,center=yes");
+    window.open("websocket/incall.php?cid="+replaced_szCid+"&dnis="+replaced_szDnis,"popwindow", "width=900, height=500px,left=200px, menubar=no,status=no,scrollbars=no,center=yes");
 
     var a = document.getElementById("btMakecall"); // 전화걸기 버튼 OFF
     a.disabled = true;

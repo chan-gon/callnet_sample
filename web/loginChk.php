@@ -36,7 +36,7 @@ if (isset($_POST)) {
             $_SESSION['AgtName'] = $data['agtname'];
             $_SESSION['AgtAuth'] = $data['agtauth'];
             $_SESSION['AgtIntel'] = $data['agtctiid'];
-            $_SESSION['session_id'] = $member['agtid'];
+            $_SESSION['session_id'] = rand(); // 세션 아이디는 중복되지 않는 임의의 숫자를 생성하는 방식으로 지정
 
             $_SESSION['memberId'] = $member['member_id'];
             $_SESSION['memberName'] = $member['member_name'];

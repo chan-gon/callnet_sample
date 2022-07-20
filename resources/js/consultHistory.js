@@ -116,10 +116,26 @@ $("#consultHistorySearchBtn").click(function () {
 // 엑셀 변환
 function convertExcel() {
     const trNums = $("#pagination-result > table > tbody > tr").length;
+    const query = $("#sql-hidden").val();
     if (trNums === 0) {
         alert("변환할 데이터가 없습니다.");
         return false;
     } else {
+        $.ajax({
+           url: "web/getExcel.php",
+           type: "POST",
+           data: {'sql-hidden' : query},
+            dataType: "html",
+            success: function (data) {
+               console.log(data);
+
+            },
+            error: function (err) {
+
+            }
+        });
+
+
         document.getElementById("form-excel").submit();
     }
 };
@@ -131,6 +147,7 @@ $("#consultHistoryReset").click(function () {
         $("#consult-history-form")[0].reset();
         // 출력 테이블 및 페이징 리스트 삭제
         $("*").remove("#consultHistoryRow");
+        $("#pagination-table").remove();
         $("#pagination-list").remove();
     }
 });

@@ -1,7 +1,7 @@
 function catLarge(e) {
-    const a = ["-- 선택 --", "배송지연", "배송지변경", "배송오류", "기타"];
-    const b = ["-- 선택 --", "현금영수증", "세금계산서", "결제수단", "결제오류", "기타"];
-    const c = ["-- 선택 --", "반품절차", "교환절차", "환불절차", "반품취소", "교환취소", "환불취소", "기타"];
+    const a = ["-- 선택 --", "배송지연", "배송지변경", "배송오류"];
+    const b = ["-- 선택 --", "현금영수증", "세금계산서", "결제수단", "결제오류"];
+    const c = ["-- 선택 --", "반품절차", "교환절차", "환불절차", "반품취소", "교환취소", "환불취소"];
     const categoryMedium = document.getElementById("categoryMedium");
 
     let resp = null;
@@ -11,8 +11,6 @@ function catLarge(e) {
         resp = b;
     } else if (e.value == "c") {
         resp = c;
-    } else if (e.value == "d") {
-        resp = "";
     }
 
     categoryMedium.options.length = 0;

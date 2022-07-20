@@ -104,6 +104,9 @@ function doConnect(id,intel,sid,ltype)
 		var szResult = eventData.substring(48,52);
 		var szReqStatus = eventData.slice(-4);
 		var szReqStatus2 = eventData.slice(-2);
+
+		console.log('replaced_szCid = ' + eventData.substring(92,122).trim());
+		console.log('replaced_szDnis = ' + eventData.substring(168,184).trim());
 		
 		/*
 		Error-Message 처리
@@ -366,7 +369,7 @@ function doConnect(id,intel,sid,ltype)
 	ws.onclose = function()
 	{
 
-		//CtiLogout();
+		CtiLogout();
 
 	};
 

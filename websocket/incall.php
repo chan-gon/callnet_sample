@@ -1,6 +1,6 @@
 ﻿<?session_start();?>
-<?include "./inc/db/db.php"; $ipcc_db = db_connect();?>
-<?include "./inc/common/cn_function.php"; ?>
+<?//include "./inc/db/db.php"; $ipcc_db = db_connect();?>
+<?//include "./inc/common/cn_function.php"; ?>
 
 <?
 $datetemp = date("Ymd");
@@ -25,17 +25,13 @@ switch ($pre_dnis) {
 
 ?>
 
-
-
-
 <html>
 <head>
 <title>전화가 왔습니다</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<script src="../../inc/js/sy.js"></script>
-<link rel="stylesheet" href="../../inc/css/common.css" type="text/css">
-<script language="javascript">
-<!--
+<!--<script src="../../inc/js/sy.js"></script>-->
+<!--<link rel="stylesheet" href="../../inc/css/common.css" type="text/css">-->
+<script>
 /*
 	var nTimer = null;
 
@@ -54,22 +50,22 @@ switch ($pre_dnis) {
 		//alert(returnValue);
 		window.close();
 	}
-//-->
 </script>
 </head>
 <body>
-	<table width="550" border="0" cellpadding="0" cellspacing="0">
+	<table>
 		<tr>
-			<td height="40" bgcolor="#cccccc" align="center" colspan="2"><font size="4" face="굴림"><b> <?=$dnis?> <?=ConvertTel($cid)?> &nbsp; 전화가 왔습니다.</b></font></td>
+<!--			<td height="40" bgcolor="#cccccc" align="center" colspan="2"><font size="4" face="굴림"><b> --><?//=//$dnis?><!-- --><?//=ConvertTel($cid)?><!-- &nbsp; 전화가 왔습니다.</b></font></td>-->
+            <td height="40" colspan="2"><b><?=ConvertTel($cid)?> &nbsp; 전화가 왔습니다.</b></td>
 		</tr>
 		<tr>
-			<td height="10" align="center" colspan="2"></td>
+			<td height="10" colspan="2"></td>
 		</tr>
 		<tr>
-			<td height="100" align="center" colspan="2"><img src="./image/km35_1637313.jpg"></td>
+			<td height="100" colspan="2"><img src="./image/km35_1637313.jpg"></td>
 		</tr>
 		<tr>
-			<td height="10" align="center" colspan="2"></td>
+			<td height="10" colspan="2"></td>
 		</tr>
 		<!--tr>
 			<td width="40%" height="30" align="right"><font size="2"><b>발신 번호 :</b></font><br></td>
@@ -81,18 +77,18 @@ switch ($pre_dnis) {
 			</td>
 		</tr-->
 	</table>
-	<table width="550" border="0" cellpadding="0" cellspacing="1" bgcolor="#A3C6D7">
-		<tr bgcolor="#EEF5F8">
-			<td width="7%" align="center" height="22">NO</td>
-			<td width="23%" align="center">고객명</td>
-			<td width="21%" align="center">전화번호</td>
-			<td width="21%" align="center">핸드폰번호</td>
-			<td width="14%" align="center">선 택</td>
+	<table>
+		<tr>
+			<td>NO</td>
+			<td>고객명</td>
+			<td>전화번호</td>
+			<td>핸드폰번호</td>
+			<td>선 택</td>
 <?
 if ($cid == ""){
 		$new_id = "NON";
 ?>
-		<tr bgcolor="#FFFFFF" onMouseOver="this.style.backgroundColor='#E7E7E7'" onMouseOut="this.style.backgroundColor='#FFFFFF'" style="cursor:hand" align="center">
+		<tr onMouseOver="this.style.backgroundColor='#E7E7E7'" onMouseOut="this.style.backgroundColor='#FFFFFF'" style="cursor:hand" align="center">
 			<td height="25" colspan="4"><?=ConvertTel($cid)?>는 등록되지 않은 번호입니다. 확인을 눌러주세요.</td>
 			<td ><input type="button" name="btn_daegi_cancel" value="확 인" class="btnType1" onClick="windowOnClose('<?=$new_id?>')" style="height:22px;width=60px;"></td>
 		</tr>
@@ -126,7 +122,7 @@ if ($cid == ""){
 		$cust_hp = $data["cust_hp"];
 
 ?>
-		<tr bgcolor="#FFFFFF" onMouseOver="this.style.backgroundColor='#E7E7E7'" onMouseOut="this.style.backgroundColor='#FFFFFF'" style="cursor:hand" align="center">
+		<tr onMouseOver="this.style.backgroundColor='#E7E7E7'" onMouseOut="this.style.backgroundColor='#FFFFFF'" style="cursor:hand" align="center">
 			<td height="25"><?=$n?></td>
 			<td><?=$cust_name?></td>
 			<td><?=ConvertTel($cust_tel)?></td>
