@@ -121,22 +121,23 @@ function convertExcel() {
         alert("변환할 데이터가 없습니다.");
         return false;
     } else {
-        $.ajax({
-           url: "web/getExcel.php",
-           type: "POST",
-           data: {'sql-hidden' : query},
-            dataType: "html",
-            success: function (data) {
-               console.log(data);
+        // $.ajax({
+        //    url: "web/getExcel.php",
+        //    type: "POST",
+        //    data: {'sql-hidden' : query},
+        //     dataType: "html",
+        //     success: function (data) {
+        //        console.log(data);
+        //
+        //     },
+        //     error: function (err) {
+        //
+        //     }
+        // });
 
-            },
-            error: function (err) {
+        // document.getElementById("form-excel").submit();
 
-            }
-        });
-
-
-        document.getElementById("form-excel").submit();
+        window.open('web/getExcel.php');
     }
 };
 
