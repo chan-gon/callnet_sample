@@ -215,7 +215,11 @@ Body 값에 생성될 파일명 필요. 이후 300KB 초과시 동일파일명 �
 */
 function doConnect_selrec(arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9)
 {
-	var addr = "ws://192.168.1.9:8534"; //WebSocket 접속 IP. Port는 고정 IP는 접속정보에 따라 변경필요.
+	/*
+		WebSocket 접속 IP. Port는 고정 IP는 접속정보에 따라 변경필요.
+		녹취 DB의 recording_env 테이블의 websock_port 컬럼의 값과 동일하게 설정.
+	 */
+	var addr = "ws://192.168.1.9:7301";
 
 	ws_rec = new WebSocket(addr);
 
